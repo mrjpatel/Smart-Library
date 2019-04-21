@@ -4,6 +4,7 @@ import sys
 
 from console_login import ConsoleLogin
 from reception_pi_menu import ReceptionPiMenu
+from console_register import ConsoleRegister
 
 
 def main(argv):
@@ -16,6 +17,7 @@ def main(argv):
 
     # define menu handlers
     menu_handlers = [
+        ConsoleRegister(db_location),
         ConsoleLogin(db_location)
     ]
     # display menu, get selection, and run

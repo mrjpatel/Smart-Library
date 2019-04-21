@@ -1,20 +1,15 @@
+from aes_cryptography import AESCryptography
+
+
 class UserCredential:
     def __init__(self, username, password):
         self.username = username
         self.__password = password
+        self.cypher = AESCryptography()
 
     def get_encrypted_password(self):
-        # TODO: encrypt password
-        cyphetext = self.__password
-        return cyphetext
-    
-    def is_compare_cyphertext(self, cyphertext):
-        # TODO: set key
-        plaintext = UserCredential.decrypt_password(cyphertext, "key")
-        return self.__password == plaintext
+        return self.cypher.encrypt(self.__password)
 
-    @staticmethod
-    def decrypt_password(cyphertext, key):
-        # TODO: decrypt password
-        plaintext = cyphertext
-        return plaintext
+    def is_compare_cyphertext(self, cyphertext):
+        plaintext = self.cypher.decrypt(cyphertext)
+        return self.__password == plaintext

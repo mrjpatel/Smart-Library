@@ -11,7 +11,7 @@ class UserCredential:
     def is_compare_cyphertext(self, cyphertext):
         # TODO: set key
         plaintext = UserCredential.decrypt_password(cyphertext, "key")
-        return cyphertext == plaintext
+        return self.__password == plaintext
 
     @staticmethod
     def decrypt_password(cyphertext, key):

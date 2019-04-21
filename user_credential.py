@@ -1,13 +1,20 @@
 class UserCredential:
     def __init__(self, username, password):
         self.username = username
-        self.password = password
+        self.__password = password
 
     def get_encrypted_password(self):
         # TODO: encrypt password
-        return self.password
+        cyphetext = self.__password
+        return cyphetext
     
+    def is_compare_cyphertext(self, cyphertext):
+        # TODO: set key
+        plaintext = UserCredential.decrypt_password(cyphertext, "key")
+        return cyphertext == plaintext
+
     @staticmethod
-    def decrypt_password(cyphertext):
+    def decrypt_password(cyphertext, key):
         # TODO: decrypt password
-        return cyphertext
+        plaintext = cyphertext
+        return plaintext

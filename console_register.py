@@ -1,5 +1,6 @@
 import re
 
+from user_credential import UserCredential
 from menu_handler import MenuHandler
 
 
@@ -10,11 +11,17 @@ class ConsoleRegister(MenuHandler):
 
     def invoke(self):
         print("Register an account\n")
+        # get user details
         username = self.get_username()
         password = self.get_password()
         first_name = self.get_first_name()
         last_name = self.get_last_name()
         email = self.get_email()
+
+        # create new user
+        credentials = UserCredential(username, password)
+        self.db.insert_user(credentials, first_name, last_name, email)
+        print("Successfully registered!")
 
     def get_username(self):
         is_valid_username = False
@@ -25,6 +32,10 @@ class ConsoleRegister(MenuHandler):
             is_valid_username = user_regex.match(username) is not None
             if not is_valid_username:
                 print("{} is not a valid username".format(username))
+            # check if username already exists in the system
+            if self.db.is_username_exists(username):
+                is_valid_username = False
+                print("The username {} already exists".format(username))
         return username
 
     def get_password(self):

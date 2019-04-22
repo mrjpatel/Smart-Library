@@ -75,3 +75,16 @@ class LMSUserDatabase:
         encrypted_password = user["encrypted_password"]
         is_valid = credentials.is_compare_cyphertext(encrypted_password)
         return user if is_valid else None
+
+    def is_username_exists(self, username):
+        # prepare statement
+        select = """SELECT * FROM lms_user
+                    WHERE username = :username;"""
+        # sanitize inputs
+        data = {
+            "username": username
+        }
+        # check if username returns any records
+        with sqlite3.connect(self.db) as conn:
+            c = conn.cursor()
+            return c.execute(select, data).fetchone() is not None

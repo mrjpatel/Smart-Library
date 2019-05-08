@@ -7,9 +7,28 @@ class ConsoleLogin(MenuHandler):
         self.display_text = "Log in"
 
     def invoke(self):
-        # TODO: handle logging in
-        print("LOGGING IN...")
+        print("Log in to the LMS\n")
+        username = self.get_username()
+        password = self.get_password()
+        credentials = UserCredential(username, password)
+        user = self.validate_credentials(credentials)
+        if user is None:
+            print("Invalid credentials")
+            return
+        else:
+            # TODO connect to master pi
+            print("LOGGED IN")
+            print(user)
 
     def validate_credentials(self, credentials):
-        # TODO: check credentials against database
-        return True
+        return self.db.get_user(credentials)
+
+    def get_username(self):
+        print("Username: ", end="")
+        username = input().strip()
+        return username
+    
+    def get_password(self):
+        print("Password: ", end="")
+        password = input().strip()
+        return password

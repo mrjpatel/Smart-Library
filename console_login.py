@@ -24,11 +24,21 @@ class ConsoleLogin(MenuHandler):
         return self.db.get_user(credentials)
 
     def get_username(self):
-        print("Username: ", end="")
-        username = input().strip()
+        is_valid_username = False
+        while not is_valid_username:
+            print("Username: ", end="")
+            username = input().strip()
+            is_valid_username = username != ""
+            if not is_valid_username:
+                print("Please enter a username")
         return username
     
     def get_password(self):
-        print("Password: ", end="")
-        password = input().strip()
+        is_valid_password = False
+        while not is_valid_password:
+            print("Password: ", end="")
+            password = input().strip()
+            is_valid_password = password != ""
+            if not is_valid_password:
+                print("Please enter a password")
         return password

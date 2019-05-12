@@ -1,3 +1,5 @@
+import socket
+
 from menu_handler import MenuHandler
 from user_credential import UserCredential
 
@@ -15,10 +17,9 @@ class ConsoleLogin(MenuHandler):
         if user is None:
             print("Invalid credentials")
             return
-        else:
-            # TODO connect to master pi
-            print("LOGGED IN")
-            print(user)
+
+        # authenticated, connect to master pi
+        self.connect_to_master_pi(user)
 
     def validate_credentials(self, credentials):
         return self.db.get_user(credentials)
@@ -42,3 +43,12 @@ class ConsoleLogin(MenuHandler):
             if not is_valid_password:
                 print("Please enter a password")
         return password
+
+    def connect_to_master_pi(self, user):
+        # TODO: remove hardcoded destination
+        dest = ("", 32674)
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            print("Connecting to Master Pi on {}:{}...".format(*dest))
+            s.connect(dest)
+            print("Logging in as user {}".format(user["username"]))
+            # TODO: send user to master pi, handle log outs

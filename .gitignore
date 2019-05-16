@@ -141,3 +141,5 @@ pip-selfcheck.json
 # sqlite3
 *.db
 *.db-journal
+*.jpg
+*code-workspace

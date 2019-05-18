@@ -54,5 +54,5 @@ class ConsoleLogin(MenuHandler):
             serial_user = pickle.dumps(user)
             s.send(serial_user)
             print("Logging in as user {}".format(user["username"]))
-            logout_message = pickle.loads(s.recv(1024))
-            print(logout_message)
+            logout_message = s.recv(1024)
+            print(b"{}".format(logout_message))

@@ -4,7 +4,7 @@ class MasterPiMenu:
         self.user = user
 
     def display_menu(self):
-        print("\nWelcome {}!".format(""))
+        print("\nWelcome {}!".format(user["first_name"]))
         for i, h in enumerate(self.menu_handlers):
             # iterate through handlers and display menu text
             print("\t{}. {}".format(i+1, h.get_display_text()))

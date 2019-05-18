@@ -13,12 +13,14 @@ def main():
 
         # listen for connections
         while True:
+            print("Waiting for Reception Pi...")
             client_conn, client_addr = s.accept()
             with client_conn as cc:
                 print("Reception Pi connected at {}:{}".format(*client_addr))
                 serial_data = cc.recv(1024)
                 user = pickle.loads(serial_data)
                 print("User: {}".format(user))
+                cc.sendall(b"Successfully Logged Out")
                 
 
 if __name__ == "__main__":

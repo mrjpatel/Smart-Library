@@ -47,11 +47,12 @@ class ConsoleLogin(MenuHandler):
 
     def connect_to_master_pi(self, user):
         # TODO: remove hardcoded destination
-        dest = ("192.186.1.25", 32674)
+        dest = ("localhost", 32674)
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             print("Connecting to Master Pi on {}:{}...".format(*dest))
             s.connect(dest)
             serial_user = pickle.dumps(user)
             s.send(serial_user)
             print("Logging in as user {}".format(user["username"]))
-            # TODO: send user to master pi, handle log outs
+            logout_message = pickle.loads(s.recv(1024))
+            print(logout_message)

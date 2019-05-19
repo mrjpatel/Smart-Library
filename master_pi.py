@@ -71,7 +71,7 @@ class MasterPi:
         if not db_user:
             db.add_user(user)
         else:
-            user["user_id"] = db_user[0]["user_id"]
+            user["user_id"] = db_user[0][0]
             db.update_user(user)
 
     @staticmethod

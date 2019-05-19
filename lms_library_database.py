@@ -84,7 +84,8 @@ class LMSLibraryDatabase:
                         first_name,
                         last_name,
                         email
-                    ) VALUES (
+                    ) OUTPUT Inserted.user_id
+                    VALUES (
                         %(username)s,
                         %(first_name)s,
                         %(last_name)s,
@@ -157,7 +158,7 @@ class LMSLibraryDatabase:
             if connection.is_connected():
                 cursor = connection.cursor()
                 cursor.execute(query, params)
-                cursor.commit()
+                connection.commit()
         except Error as e :
             print ("Error while connecting to MySQL", e)
         finally:

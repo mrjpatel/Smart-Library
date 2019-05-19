@@ -1,10 +1,11 @@
 CREATE TABLE IF NOT EXISTS LmsUser (
     user_id INTEGER NOT NULL auto_increment,
-    username TEXT NOT NULL,
+    username NVARCHAR(256) NOT NULL,
     first_name TEXT NOT NULL,
     last_name TEXT NOT NULL,
     email TEXT NOT NULL,
     CONSTRAINT PK_LmsUser PRIMARY KEY (user_id)
+    CONSTRAINT UN_UserName unique (username)
 );
 
 create table Book (

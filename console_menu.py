@@ -1,10 +1,10 @@
-class MasterPiMenu:
-    def __init__(self, menu_handlers, user):
+class ConsoleMenu:
+    def __init__(self, menu_handlers, message):
         self.menu_handlers = menu_handlers
-        self.user = user
+        self.message = message
 
     def display_menu(self):
-        print("\nWelcome {}!".format(self.user["first_name"]))
+        print("\n{}".format(self.message))
         for i, h in enumerate(self.menu_handlers):
             # iterate through handlers and display menu text
             print("\t{}. {}".format(i+1, h.get_display_text()))
@@ -22,7 +22,7 @@ class MasterPiMenu:
                 print("{} is not a valid option".format(str_option))
                 continue
             # input is a number, check ranges
-            option = int(str_option.strip())
+            option = int(str_option)
             if option == 0:
                 # option 0 is exit
                 print("Goodbye!")

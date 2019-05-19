@@ -25,23 +25,23 @@ class ConsoleBorrowBook(MenuHandler):
         # input is a number
         book_id = int(str_input)
         # check if book exists
-        book_item = self.db.query_book_by_id(book_id)
+        book_item = self.db.query_book_by_id(book_id)[0]
         if not book_item:
             print("Book with ID {} does not exist!".format(book_id))
             return
         book = dict()
         # convert to book dict
-        for key, value in LMSLibraryDatabase.book_schema, book_item:
+        for key, value in zip(LMSLibraryDatabase.book_schema, book_item):
             book[key] = value
         # check if book is borrowed
-        if self.is_borrowed(book_id):
+        if self.is_borrowed(book):
             print("Book with ID {} is currently borrowed!".format(book_id))
             return
         self.borrow_book(book)
     
     def is_borrowed(self, book):
         # makes call to db to get borrowed record
-        borrowed = self.db.query_borrowed_book(book[0], "borrowed")
+        borrowed = self.db.query_borrowed_book(book["BookID"], "borrowed")
         if not borrowed:
             return False
         else:

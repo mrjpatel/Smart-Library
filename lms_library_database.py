@@ -4,7 +4,7 @@ import json
 
 
 class LMSLibraryDatabase:
-    book_schema = ["BookID","Title","Author","Publish Date"]
+    book_schema = ["BookID","Title","Author","PublishDate"]
     user_schema = ["username", "first_name", "last_name", "email"]
 
     def __init__(self, db_settings_file):

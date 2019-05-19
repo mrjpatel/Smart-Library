@@ -48,6 +48,12 @@ class ConsoleLogin(MenuHandler):
     def connect_to_master_pi(self, user):
         # TODO: remove hardcoded destination
         dest = ("localhost", 32674)
+
+        # remove password from dict
+        if "encrypted_password" in user:
+            del user["encrypted_password"]
+        
+        # Connect to master pi
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             print("Connecting to Master Pi on {}:{}...".format(*dest))
             s.connect(dest)

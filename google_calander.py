@@ -2,32 +2,22 @@ import datetime
 import pickle
 import os.path
 from googleapiclient.discovery import build
-from google_auth_oauthlib.flow import InstalledAppFlow
-from google.auth.transport.requests import Request
-
+from httplib2 import Http
+from oauth2client import file, client, tools
 
 class GoogleCalanderAPI:
     # scope for the api access
     SCOPES = ['https://www.googleapis.com/auth/calendar']
-    creds = None
+    store = file.Storage("token.json")
+    creds = store.get()
 
     @classmethod
     def update_creds(cls):
-        if os.path.exists('token.pickle'):
-            with open('token.pickle', 'rb') as token:
-                cls.creds = pickle.load(token)
         # If there are no (valid) credentials available, let the user log in.
         if not cls.creds or not cls.creds.valid:
-            if cls.creds and cls.creds.expired and cls.creds.refresh_token:
-                cls.creds.refresh(Request())
-            else:
-                flow = InstalledAppFlow.from_client_secrets_file(
-                    'credentials.json', cls.SCOPES)
-                cls.creds = flow.run_local_server()
-            # Save the credentials for the next run
-            with open('token.pickle', 'wb') as token:
-                pickle.dump(cls.creds, token)
-        cls.service = build('calendar', 'v3', credentials=cls.creds)
+            flow = client.flow_from_clientsecrets("credentials.json", cls.SCOPES)
+            cls.creds = tools.run_flow(flow, cls.store)
+        cls.service = build("calendar", "v3", http=cls.creds.authorize(Http()))
     
     @classmethod
     def create_due_event(cls, due_date, book, user):

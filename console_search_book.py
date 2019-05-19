@@ -55,7 +55,7 @@ class SearchByAuthor(MenuHandler):
         if not str_option:
             print("Invalid Input!")
             return
-        print(self.db.query_book_by_author(str_option))
+        ConsoleSearchBook.display_books(self.db.query_book_by_author(str_option))
 
 
 class SearchByName(MenuHandler):

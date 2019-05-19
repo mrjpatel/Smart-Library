@@ -26,31 +26,34 @@ class ConsoleBorrowBook(MenuHandler):
         # input is a number
         book_id = int(str_input)
         # check if book exists
-        if not self.db.query_book_by_id(book_id):
+        book = self.db.query_book_by_id(book_id)
+        if not book:
             print("Book with ID {} does not exist!".format(book_id))
             return
         # check if book is borrowed
         if self.is_borrowed(book_id):
             print("Book with ID {} is currently borrowed!".format(book_id))
             return
-        self.borrow_book(book_id)
+        self.borrow_book(book)
     
-    def is_borrowed(self, book_id):
+    def is_borrowed(self, book):
         # makes call to db to get borrowed record
-        borrowed = self.db.query_borrowed_book(book_id, "borrowed")
+        borrowed = self.db.query_borrowed_book(book[0], "borrowed")
         if not borrowed:
             return False
         else:
             return True
     
-    def borrow_book(self, book_id):
+    def borrow_book(self, book):
         today = datetime.now()
         due_date = today + timedelta(days=self.max_borrow_days)
         self.db.insert_borrowed_book(
             self.username,
-            book_id,
+            book[0],
             today,
             due_date,
         )
+
+        # TODO Google Calander API
 
 

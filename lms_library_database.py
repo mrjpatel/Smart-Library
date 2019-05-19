@@ -4,6 +4,8 @@ import json
 
 
 class LMSLibraryDatabase:
+    book_schema = ["BookID","Title","Author","Publish Date"]
+
     def __init__(self, db_settings_file):
         with open(db_settings_file) as json_file:  
             data = json.load(json_file)
@@ -38,6 +40,28 @@ class LMSLibraryDatabase:
         # sanitize inputs    
         params = {
             "author": author
+        }
+        # executre query
+        return self.__run_query(query, params)
+    
+    def query_book_by_title(self, title):
+        # prepare statement
+        query = """SELECT * FROM Book
+                    WHERE Title = %(title)s;"""
+        # sanitize inputs    
+        params = {
+            "title": title
+        }
+        # executre query
+        return self.__run_query(query, params)
+
+    def query_book_by_publish_date(self, publish_date):
+        # prepare statement
+        query = """SELECT * FROM Book
+                    WHERE PublishedDate = %(publish_date)s;"""
+        # sanitize inputs    
+        params = {
+            "publish_date": publish_date
         }
         # executre query
         return self.__run_query(query, params)

@@ -29,7 +29,7 @@ class ConsoleBorrowBook(MenuHandler):
     def is_borrowed(book_id):
         # makes call to db to get borrowed record
         borrowed = db.query_borrowed_book(book_id)
-        if is not borrowed:
+        if not borrowed:
             return True
         else:
             return False

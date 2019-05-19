@@ -144,7 +144,7 @@ class LMSLibraryDatabase:
     
     def insert_borrowed_book(self, username, book_id, borrow_date, due_date):
         # prepare statement
-        query = """INSERT INTO BorrowedBook (
+        query = """INSERT INTO BookBorrowed (
                         LmsUsername,
                         BookID,
                         Status,
@@ -155,7 +155,7 @@ class LMSLibraryDatabase:
                         %(book_id)s,
                         %(status)s,
                         %(borrow_date)s,
-                        %(due_date)s,
+                        %(due_date)s
                     );"""
         # sanitize inputs    
         params = {

@@ -44,7 +44,7 @@ class ConsoleBorrowBook(MenuHandler):
             return True
     
     def borrow_book(self, book_id):
-        today = datetime.datetime.now()
+        today = datetime.now()
         due_date = today + timedelta(days=self.max_borrow_days)
         self.db.insert_borrowed_book(
             self.username,
@@ -52,5 +52,5 @@ class ConsoleBorrowBook(MenuHandler):
             today,
             due_date,
         )
-        
+
 

@@ -5,6 +5,7 @@ import json
 
 class LMSLibraryDatabase:
     book_schema = ["BookID","Title","Author","Publish Date"]
+    user_schema = ["username", "first_name", "last_name", "email"]
 
     def __init__(self, db_settings_file):
         with open(db_settings_file) as json_file:  

@@ -3,16 +3,15 @@ from datetime import timedelta
 
 from lms_library_database import LMSLibraryDatabase
 from menu_handler import MenuHandler
-from console_menu import ConsoleMenu
-from prettytable import PrettyTable
+from google_calander import GoogleCalanderAPI
 
 class ConsoleBorrowBook(MenuHandler):
     max_borrow_days = 7
 
-    def __init__(self, database, username):
+    def __init__(self, database, user):
         self.db = LMSLibraryDatabase(database)
         self.display_text = "Borrow Book(s)"
-        self.username = username
+        self.user = user
 
     def invoke(self):
         print("\nEnter BookID to borrow: ", end="")
@@ -26,10 +25,14 @@ class ConsoleBorrowBook(MenuHandler):
         # input is a number
         book_id = int(str_input)
         # check if book exists
-        book = self.db.query_book_by_id(book_id)
+        book_item = self.db.query_book_by_id(book_id)
+        book = dict()
         if not book:
             print("Book with ID {} does not exist!".format(book_id))
             return
+        # convert to book dict
+        for key, value in LMSLibraryDatabase.book_schema, book_item:
+            book[key] = value
         # check if book is borrowed
         if self.is_borrowed(book_id):
             print("Book with ID {} is currently borrowed!".format(book_id))
@@ -48,12 +51,11 @@ class ConsoleBorrowBook(MenuHandler):
         today = datetime.now()
         due_date = today + timedelta(days=self.max_borrow_days)
         self.db.insert_borrowed_book(
-            self.username,
-            book[0],
+            self.user["username"],
+            book["BookID"],
             today,
             due_date,
         )
-
-        # TODO Google Calander API
+        GoogleCalanderAPI.create_due_event(due_date, book, self.user)
 
 

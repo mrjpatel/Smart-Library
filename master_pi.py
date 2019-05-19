@@ -44,7 +44,7 @@ class MasterPi:
                         # define menu handlers
                         menu_handlers = [
                             ConsoleSearchBook(db_details_file),
-                            ConsoleBorrowBook(db_details_file, user["username"])
+                            ConsoleBorrowBook(db_details_file, user)
                         ]
 
                         # display menu, get selection, and run

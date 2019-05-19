@@ -98,7 +98,7 @@ class LMSLibraryDatabase:
             "email": user["email"]
         }
         # executre query
-        self.__run_query(query, params)
+        self.__run_update(query, params)
 
     def update_user(self, user):
         # prepare statement
@@ -117,7 +117,7 @@ class LMSLibraryDatabase:
             "user_id": user["user_id"]
         }
         # executre query
-        self.__run_query(query, params)
+        self.__run_update(query, params)
 
     def __run_query(self, query, params):
         result = ""
@@ -134,6 +134,30 @@ class LMSLibraryDatabase:
                 cursor = connection.cursor()
                 cursor.execute(query, params)
                 result = cursor.fetchall()
+        except Error as e :
+            print ("Error while connecting to MySQL", e)
+        finally:
+            # Close database connection.
+            if(connection.is_connected()):
+                cursor.close()
+                connection.close()
+                return(result)
+    
+    def __run_update(self, query, params):
+        result = ""
+        try:
+            # Open connection
+            connection = mysql.connector.connect(
+                host=self.__host,
+                database=self.__database,
+                user=self.__user,
+                password=self.__password
+            )
+            # Run Query and commit
+            if connection.is_connected():
+                cursor = connection.cursor()
+                cursor.execute(query, params)
+                cursor.commit()
         except Error as e :
             print ("Error while connecting to MySQL", e)
         finally:

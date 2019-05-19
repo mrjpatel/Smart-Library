@@ -6,6 +6,7 @@ import json
 
 from console_menu import ConsoleMenu
 from console_search_book import ConsoleSearchBook
+from console_borrow_book import ConsoleBorrowBook
 from lms_library_database import LMSLibraryDatabase 
 
 class MasterPi:
@@ -14,10 +15,6 @@ class MasterPi:
         # Load DB details from json
         db_details_file = "lms_library_config.json"
 
-        # define menu handlers
-        menu_handlers = [
-            ConsoleSearchBook(db_details_file)
-        ]
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             # bind to port
             addr = ("", 32674)
@@ -43,6 +40,12 @@ class MasterPi:
                             cc.sendall(b"Invalid User Details recieved")
                             continue
                         MasterPi.update_or_add_user(db_details_file, user)
+
+                        # define menu handlers
+                        menu_handlers = [
+                            ConsoleSearchBook(db_details_file),
+                            ConsoleBorrowBook(db_details_file, user["username"])
+                        ]
 
                         # display menu, get selection, and run
                         is_exit = False

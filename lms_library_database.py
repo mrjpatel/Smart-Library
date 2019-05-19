@@ -84,8 +84,7 @@ class LMSLibraryDatabase:
                         first_name,
                         last_name,
                         email
-                    ) OUTPUT Inserted.user_id
-                    VALUES (
+                    ) VALUES (
                         %(username)s,
                         %(first_name)s,
                         %(last_name)s,

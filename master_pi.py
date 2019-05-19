@@ -70,6 +70,8 @@ class MasterPi:
         db_user = db.get_user(user["username"])
         if not db_user:
             db.add_user(user)
+            db_user = db.get_user(user["username"])
+            user["user_id"] = db_user[0][0]
         else:
             user["user_id"] = db_user[0][0]
             db.update_user(user)

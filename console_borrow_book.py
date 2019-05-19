@@ -26,9 +26,9 @@ class ConsoleBorrowBook(MenuHandler):
         book_id = int(str_input)
         print("Book is: {}".format(self.is_borrowed(book_id)))
     
-    def is_borrowed(book_id):
+    def is_borrowed(self, book_id):
         # makes call to db to get borrowed record
-        borrowed = db.query_borrowed_book(book_id)
+        borrowed = self.db.query_borrowed_book(book_id, "borrowed")
         if not borrowed:
             return True
         else:

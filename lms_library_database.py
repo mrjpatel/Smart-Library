@@ -117,13 +117,16 @@ class LMSLibraryDatabase:
         # executre query
         self.__run_update(query, params)
 
-    def query_borrowed_book(self, book_id):
+    def query_borrowed_book(self, book_id, status):
         # prepare statement
         query = """SELECT * FROM BookBorrowed
-                    WHERE BookID = %(book_id)s;"""
+                    WHERE BookID = %(book_id)s
+                    AND Status = %(status)s
+                    ;"""
         # sanitize inputs    
         params = {
             "book_id": book_id
+            "status": status
         }
         # executre query
         return self.__run_query(query, params)

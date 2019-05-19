@@ -52,6 +52,7 @@ def main():
         except KeyboardInterrupt:
             print("Keyboard Interrupt detected, shutting down...")
         finally:
+            s.shutdown(socket.SHUT_RDWR)
             s.close()
                 
 

@@ -106,7 +106,7 @@ class LMSLibraryDatabase:
                         first_name = %(first_name)s,
                         last_name = %(last_name)s,
                         email = %(email)s
-                    WHERE username = %(username)s);"""
+                    WHERE username = %(username)s;"""
         # sanitize inputs    
         params = {
             "username": user["username"],

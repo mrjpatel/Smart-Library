@@ -22,28 +22,31 @@ def main():
         s.listen()
         print("Listening on {}:{}...".format(*addr))
 
-        # listen for connections
-        while True:
-            print("Waiting for Reception Pi...")
-            client_conn, client_addr = s.accept()
-            with client_conn as cc:
-                print("Reception Pi connected at {}:{}".format(*client_addr))
-                # recieve user data
-                serial_data = cc.recv(1024)
-                user = pickle.loads(serial_data)
+        try:
+            # listen for connections
+            while True:
+                print("Waiting for Reception Pi...")
+                client_conn, client_addr = s.accept()
+                with client_conn as cc:
+                    print("Reception Pi connected at {}:{}".format(*client_addr))
+                    # recieve user data
+                    serial_data = cc.recv(1024)
+                    user = pickle.loads(serial_data)
 
-                # display menu, get selection, and run
-                is_exit = False
-                while not is_exit:
-                    menu = ConsoleMenu(
-                        menu_handlers,
-                        "Master Pi Menu: Welcome {}!".format(user["first_name"])
-                    )
-                    menu.display_menu()
-                    is_exit = menu.prompt_and_invoke_option()
-                print("Goodbye!")
+                    # display menu, get selection, and run
+                    is_exit = False
+                    while not is_exit:
+                        menu = ConsoleMenu(
+                            menu_handlers,
+                            "Master Pi Menu: Welcome {}!".format(user["first_name"])
+                        )
+                        menu.display_menu()
+                        is_exit = menu.prompt_and_invoke_option()
+                    print("Goodbye!")
 
-                cc.sendall(b"Successfully Logged Out")
+                    cc.sendall(b"Successfully Logged Out")
+        finally:
+            s.close()
                 
 
 if __name__ == "__main__":

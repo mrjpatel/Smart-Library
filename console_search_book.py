@@ -37,7 +37,7 @@ class SearchByAuthor(MenuHandler):
         self.display_text = "Search by Author"
 
     def invoke(self):
-        print("\nEnter Author Name ", end="")
+        print("\nEnter Author Name: ", end="")
         # get option from user, and strip whitespace
         str_option = input().strip()
         if not str_option:

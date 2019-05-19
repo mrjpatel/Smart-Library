@@ -43,7 +43,6 @@ class LMSLibraryDatabase:
         return self.__run_query(query, params)
 
     def __run_query(self, query, params):
-        result = ""
         try:
             # Open connection
             connection = mysql.connector.connect(
@@ -58,6 +57,7 @@ class LMSLibraryDatabase:
                 cursor = connection.cursor()
                 cursor.execute(query, params)
                 result = cursor.fetchall()
+                print(result)
         except Error as e :
             print ("Error while connecting to MySQL", e)
         finally:

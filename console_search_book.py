@@ -1,6 +1,7 @@
 from lms_library_database import LMSLibraryDatabase
 from menu_handler import MenuHandler
 from console_menu import ConsoleMenu
+from prettytable import PrettyTable
 
 class ConsoleSearchBook(MenuHandler):
 
@@ -27,8 +28,19 @@ class ConsoleSearchBook(MenuHandler):
             is_exit = menu.prompt_and_invoke_option()
     
     @staticmethod
-    def display_resulsts(results):
-        pass
+    def display_books(results):
+        # Check if result is blank
+        if not results:
+            print("No Books found!!")
+            return
+        # construct table and print
+        book_schema = ["BookID","Title","Author","Publish Date"]
+        table = PrettyTable()
+        table.field_names = book_schema
+        for result in results:
+            table.add_row(result)
+        print(table)
+
         
 
 class SearchByAuthor(MenuHandler):
@@ -43,7 +55,7 @@ class SearchByAuthor(MenuHandler):
         if not str_option:
             print("Invalid Input!")
             return
-        self.db.query_book_by_author(str_option)
+        print(self.db.query_book_by_author(str_option))
 
 
 class SearchByName(MenuHandler):

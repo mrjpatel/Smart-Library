@@ -52,7 +52,7 @@ def main():
         except KeyboardInterrupt:
             print("Keyboard Interrupt detected, shutting down...")
         finally:
-            s.shutdown()
+            s.close()
                 
 
 if __name__ == "__main__":

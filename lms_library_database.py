@@ -69,7 +69,7 @@ class LMSLibraryDatabase:
     def get_user(self, username):
         # prepare statement
         query = """SELECT * FROM LmsUser
-                    WHERE username = ;"""
+                    WHERE username = %(username)s;"""
         # sanitize inputs    
         params = {
             "username": username

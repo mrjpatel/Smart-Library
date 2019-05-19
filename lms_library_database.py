@@ -103,18 +103,16 @@ class LMSLibraryDatabase:
     def update_user(self, user):
         # prepare statement
         query = """UPDATE LmsUser SET
-                        username = %(username)s,
                         first_name = %(first_name)s,
                         last_name = %(last_name)s,
                         email = %(email)s
-                    WHERE user_id = %(user_id)s);"""
+                    WHERE username = %(username)s);"""
         # sanitize inputs    
         params = {
             "username": user["username"],
             "first_name": user["first_name"],
             "last_name": user["last_name"],
-            "email": user["email"],
-            "user_id": user["user_id"]
+            "email": user["email"]
         }
         # executre query
         self.__run_update(query, params)

@@ -120,6 +120,7 @@ class LMSLibraryDatabase:
         self.__run_query(query, params)
 
     def __run_query(self, query, params):
+        result = ""
         try:
             # Open connection
             connection = mysql.connector.connect(

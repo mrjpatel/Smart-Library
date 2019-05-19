@@ -15,7 +15,7 @@ class GoogleCalanderAPI:
     def update_creds(cls):
         # If there are no (valid) credentials available, let the user log in.
         if not cls.creds or not cls.creds.valid:
-            flow = client.flow_from_clientsecrets(service_file="credentials.json", cls.SCOPES)
+            flow = client.flow_from_clientsecrets("credentials.json", cls.SCOPES)
             cls.creds = tools.run_flow(flow, cls.store)
         cls.service = build("calendar", "v3", http=cls.creds.authorize(Http()))
     

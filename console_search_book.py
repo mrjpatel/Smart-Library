@@ -1,4 +1,3 @@
-from master_menu_handler import MasterMenuHandler
 from lms_library_database import LMSLibraryDatabase
 from menu_handler import MenuHandler
 from console_menu import ConsoleMenu

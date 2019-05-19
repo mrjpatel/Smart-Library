@@ -26,10 +26,10 @@ class ConsoleBorrowBook(MenuHandler):
         book_id = int(str_input)
         # check if book exists
         book_item = self.db.query_book_by_id(book_id)
-        book = dict()
-        if not book:
+        if not book_item:
             print("Book with ID {} does not exist!".format(book_id))
             return
+        book = dict()
         # convert to book dict
         for key, value in LMSLibraryDatabase.book_schema, book_item:
             book[key] = value

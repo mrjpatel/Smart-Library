@@ -125,7 +125,7 @@ class LMSLibraryDatabase:
                     ;"""
         # sanitize inputs    
         params = {
-            "book_id": book_id
+            "book_id": book_id,
             "status": status
         }
         # executre query

@@ -31,7 +31,18 @@ class LMSLibraryDatabase:
         except Error as e :
             print ("Error while connecting to MySQL", e)
 
-    def __run_query(self, query):
+    def query_book_by_author(self, author):
+        # prepare statement
+        query = """SELECT * FROM Book
+                    WHERE username = %s;"""
+        # sanitize inputs    
+        params = (
+            author
+        )
+        # executre query
+        return self.__run_query(query, params)
+
+    def __run_query(self, query, params):
         result = ""
         try:
             # Open connection

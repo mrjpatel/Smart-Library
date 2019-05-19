@@ -37,7 +37,7 @@ def main():
                 while not is_exit:
                     menu = ConsoleMenu(
                         menu_handlers,
-                        "Welcome {}!".format(user["first_name"])
+                        "Master Pi Menu: Welcome {}!".format(user["first_name"])
                     )
                     menu.display_menu()
                     is_exit = menu.prompt_and_invoke_option()

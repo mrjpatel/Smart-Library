@@ -11,7 +11,6 @@ class ConsoleSearchBook(MenuHandler):
     def invoke(self):
         # set menu handlers
         menu_handlers = [
-            SearchByISBN(self.db),
             SearchByAuthor(self.db),
             SearchByName(self.db),
             SearchByPublishedDate(self.db)
@@ -30,16 +29,7 @@ class ConsoleSearchBook(MenuHandler):
     @staticmethod
     def display_resulsts(results):
         pass
-
-
-class SearchByISBN(MenuHandler):
-    def __init__(self, database):
-        self.db = database
-        self.display_text = "Search by ISBN"
-
-    def invoke(self):
-        pass
-
+        
 
 class SearchByAuthor(MenuHandler):
     def __init__(self, database):
@@ -47,7 +37,13 @@ class SearchByAuthor(MenuHandler):
         self.display_text = "Search by Author"
 
     def invoke(self):
-        pass
+        print("\nEnter Author Name ", end="")
+        # get option from user, and strip whitespace
+        str_option = input().strip()
+        if not str_option:
+            print("Invalid Input!")
+            return
+        self.db.query_book_by_author(str_option)
 
 
 class SearchByName(MenuHandler):

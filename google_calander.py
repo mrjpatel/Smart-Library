@@ -2,40 +2,28 @@ import datetime
 import pickle
 import os.path
 from googleapiclient.discovery import build
-from google_auth_oauthlib.flow import InstalledAppFlow
-from google.auth.transport.requests import Request
+from httplib2 import Http
+from oauth2client import file, client, tools
 
 class GoogleCalanderAPI:
     # scope for the api access
     SCOPES = ['https://www.googleapis.com/auth/calendar']
-    creds = None
+    store = file.Storage("token.json")
+    creds = store.get()
 
     @classmethod
     def update_creds(cls):
-        """Shows basic usage of the Google Calendar API.
-        Prints the start and name of the next 10 events on the user's calendar.
-        """
-        cls.creds = None
-        # The file token.pickle stores the user's access and refresh tokens, and is
-        # created automatically when the authorization flow completes for the first
-        # time.
-        if os.path.exists('token.pickle'):
-            with open('token.pickle', 'rb') as token:
-                cls.creds = pickle.load(token)
         # If there are no (valid) credentials available, let the user log in.
         if not cls.creds or not cls.creds.valid:
-            if cls.creds and cls.creds.expired and cls.creds.refresh_token:
-                cls.creds.refresh(Request())
-            else:
-                flow = InstalledAppFlow.from_client_secrets_file(
-                    'credentials.json', cls.SCOPES)
-                cls.creds = flow.run_local_server()
-            # Save the credentials for the next run
-            with open('token.pickle', 'wb') as token:
-                pickle.dump(cls.creds, token)
+            flow = client.flow_from_clientsecrets("credentials.json", cls.SCOPES)
+            cls.creds = tools.run_flow(flow, cls.store)
+        cls.service = build("calendar", "v3", http=cls.creds.authorize(Http()))
     
     @classmethod
     def create_due_event(cls, due_date, book, user):
+        str_due_date = due_date.strftime("%Y-%m-%d")
+        time_start = "{}T06:00:00+10:00".format(str_due_date)
+        time_end = "{}T07:00:00+10:00".format(str_due_date)
         summary = 'Return Book with ID: {}'.format(book["BookID"])
         description = '{} {} borrowed {} and is due!'.format(
             user["first_name"],
@@ -43,22 +31,30 @@ class GoogleCalanderAPI:
             book["Title"]
         )
         event = {
-            'summary': summary,
-            'description': description,
-            'start': {
-                'date': due_date
+            "summary": summary,
+            "description": description,
+            "start": {
+                "dateTime": time_start,
+                "timeZone": "Australia/Melbourne",
             },
-            'end': {
-                'date': due_date
+            "end": {
+                "dateTime": time_end,
+                "timeZone": "Australia/Melbourne",
             },
-            'attendees': [
-                {'email': user["email"]}
-            ]
+            "attendees": [
+                {"email": user["email"]}
+            ],
+            "reminders": {
+                "useDefault": False,
+                "overrides": [
+                    { "method": "email", "minutes": 5 },
+                    { "method": "popup", "minutes": 10 },
+                ],
+            }
         }
         cls.update_creds()
-        service = build('calendar', 'v3', credentials=cls.creds)
 
-        event = service.events().insert(
+        event = cls.service.events().insert(
             calendarId='primary',
             body=event
         ).execute()

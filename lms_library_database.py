@@ -65,6 +65,59 @@ class LMSLibraryDatabase:
         }
         # executre query
         return self.__run_query(query, params)
+    
+    def get_user(self, username):
+        # prepare statement
+        query = """SELECT * FROM LmsUser
+                    WHERE username = ;"""
+        # sanitize inputs    
+        params = {
+            "username": username
+        }
+        # executre query
+        return self.__run_query(query, params)
+    
+    def add_user(self, user):
+        # prepare statement
+        query = """INSERT INTO LmsUser (
+                        username,
+                        first_name,
+                        last_name,
+                        email
+                    ) VALUES (
+                        %(username)s,
+                        %(first_name)s,
+                        %(last_name)s,
+                        %(email)s
+                    );"""
+        # sanitize inputs    
+        params = {
+            "username": user["username"],
+            "first_name": user["first_name"],
+            "last_name": user["last_name"],
+            "email": user["email"]
+        }
+        # executre query
+        self.__run_query(query, params)
+
+    def update_user(self, user):
+        # prepare statement
+        query = """UPDATE LmsUser SET
+                        username = %(username)s,
+                        first_name = %(first_name)s,
+                        last_name = %(last_name)s,
+                        email = %(email)s
+                    WHERE user_id = %(user_id)s);"""
+        # sanitize inputs    
+        params = {
+            "username": user["username"],
+            "first_name": user["first_name"],
+            "last_name": user["last_name"],
+            "email": user["email"],
+            "user_id": user["user_id"]
+        }
+        # executre query
+        self.__run_query(query, params)
 
     def __run_query(self, query, params):
         try:

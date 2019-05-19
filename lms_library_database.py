@@ -34,7 +34,7 @@ class LMSLibraryDatabase:
     def query_book_by_author(self, author):
         # prepare statement
         query = """SELECT * FROM Book
-                    WHERE username = %(author)s;"""
+                    WHERE Author = %(author)s;"""
         # sanitize inputs    
         params = {
             "author": author

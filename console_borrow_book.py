@@ -21,7 +21,7 @@ class ConsoleBorrowBook(MenuHandler):
         if (not str_input.isdigit()):
             # input not a number
             print("{} is not a valid BookID".format(str_input))
-            continue
+            return
         # input is a number
         book_id = int(str_input)
         print("Book is: {}".format(self.is_borrowed(book_id)))

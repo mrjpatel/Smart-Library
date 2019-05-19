@@ -31,7 +31,7 @@ class ConsoleSearchBook(MenuHandler):
     def display_books(results):
         # Check if result is blank
         if not results:
-            print("No Books found!!")
+            print("\nNo Books found!!")
             return
         # construct table and print
         book_schema = ["BookID","Title","Author","Publish Date"]
@@ -39,7 +39,7 @@ class ConsoleSearchBook(MenuHandler):
         table.field_names = book_schema
         for result in results:
             table.add_row(result)
-        print(table)
+        print("\n{}".format(table))
 
         
 

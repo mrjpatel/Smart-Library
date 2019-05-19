@@ -51,13 +51,11 @@ class LMSLibraryDatabase:
                 user=self.__user,
                 password=self.__password
             )
-
             # Run Query
             if connection.is_connected():
                 cursor = connection.cursor()
                 cursor.execute(query, params)
                 result = cursor.fetchall()
-                print(result)
         except Error as e :
             print ("Error while connecting to MySQL", e)
         finally:

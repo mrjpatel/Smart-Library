@@ -25,7 +25,6 @@ class ConsoleMenu:
             option = int(str_option)
             if option == 0:
                 # option 0 is exit
-                print("Goodbye!")
                 return True
             elif option > len(self.menu_handlers):
                 # option doesn't have a defined handler

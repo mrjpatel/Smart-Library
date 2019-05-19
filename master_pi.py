@@ -41,6 +41,7 @@ def main():
                     )
                     menu.display_menu()
                     is_exit = menu.prompt_and_invoke_option()
+                print("Goodbye!")
 
                 cc.sendall(b"Successfully Logged Out")
                 

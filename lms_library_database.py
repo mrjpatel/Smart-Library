@@ -33,6 +33,17 @@ class LMSLibraryDatabase:
         except Error as e :
             print ("Error while connecting to MySQL", e)
 
+    def query_book_by_id(self, book_id):
+        # prepare statement
+        query = """SELECT * FROM Book
+                    WHERE BookID = %(book_id)s;"""
+        # sanitize inputs    
+        params = {
+            "book_id": book_id
+        }
+        # executre query
+        return self.__run_query(query, params)
+    
     def query_book_by_author(self, author):
         # prepare statement
         query = """SELECT * FROM Book
@@ -130,6 +141,32 @@ class LMSLibraryDatabase:
         }
         # executre query
         return self.__run_query(query, params)
+    
+    def insert_borrowed_book(self, username, book_id, borrow_date, due_date):
+        # prepare statement
+        query = """INSERT INTO BorrowedBook (
+                        LmsUsername,
+                        BookID,
+                        Status,
+                        BorrowedDate,
+                        DueDate
+                    ) VALUES (
+                        %(username)s,
+                        %(book_id)s,
+                        %(status)s,
+                        %(borrow_date)s,
+                        %(due_date)s,
+                    );"""
+        # sanitize inputs    
+        params = {
+            "username": username,
+            "book_id": book_id,
+            "status": "borrowed",
+            "borrow_date": borrow_date,
+            "due_date": due_date,
+        }
+        # executre query
+        self.__run_update(query, params)
 
     def __run_query(self, query, params):
         result = ""

@@ -20,6 +20,7 @@ create table BookBorrowed (
     BookID int not null,
     Status enum ('borrowed', 'returned'),
     BorrowedDate date not null,
+    DueDate date not null,
     ReturnedDate date null,
     constraint PK_BookBorrowed primary key (BookBorrowedID),
     constraint FK_BookBorrowed_LmsUser foreign key (LmsUsername) references LmsUser (username),

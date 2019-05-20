@@ -6,6 +6,7 @@ from menu_handler import MenuHandler
 from console_menu import ConsoleMenu
 from prettytable import PrettyTable
 
+
 class ConsoleSearchBook(MenuHandler):
 
     def __init__(self, database):
@@ -29,7 +30,7 @@ class ConsoleSearchBook(MenuHandler):
             )
             menu.display_menu()
             is_exit = menu.prompt_and_invoke_option()
-    
+
     @staticmethod
     def display_books(results):
         # Check if result is blank
@@ -43,7 +44,7 @@ class ConsoleSearchBook(MenuHandler):
         for result in results:
             table.add_row(result)
         print("\n{}".format(table))
-    
+
 
 class SearchByAuthor(MenuHandler):
     def __init__(self, database):

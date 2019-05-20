@@ -5,6 +5,7 @@ from lms_library_database import LMSLibraryDatabase
 from menu_handler import MenuHandler
 from google_calander import GoogleCalanderAPI
 
+
 class ConsoleBorrowBook(MenuHandler):
     max_borrow_days = 7
 
@@ -38,7 +39,7 @@ class ConsoleBorrowBook(MenuHandler):
             print("Book with ID {} is currently borrowed!".format(book_id))
             return
         self.borrow_book(book)
-    
+
     def is_borrowed(self, book):
         # makes call to db to get borrowed record
         borrowed = self.db.query_borrowed_book(book["BookID"], "borrowed")
@@ -46,16 +47,19 @@ class ConsoleBorrowBook(MenuHandler):
             return False
         else:
             return True
-    
+
     def borrow_book(self, book):
         today = datetime.now()
         due_date = today + timedelta(days=self.max_borrow_days)
+
+        event_id = GoogleCalanderAPI.create_due_event(
+            due_date, book,
+            self.user
+        )
         self.db.insert_borrowed_book(
             self.user["username"],
             book["BookID"],
             today,
             due_date,
+            event_id
         )
-        GoogleCalanderAPI.create_due_event(due_date, book, self.user)
-
-

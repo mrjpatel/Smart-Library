@@ -22,6 +22,7 @@ create table BookBorrowed (
     BorrowedDate date not null,
     DueDate date not null,
     ReturnedDate date null,
+    EventID text not null,
     constraint PK_BookBorrowed primary key (BookBorrowedID),
     constraint FK_BookBorrowed_LmsUser foreign key (LmsUsername) references LmsUser (username),
     constraint FK_BookBorrowed_Book foreign key (BookID) references Book (BookID)

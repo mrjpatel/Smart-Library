@@ -61,4 +61,11 @@ class GoogleCalanderAPI:
             body=event
         ).execute(http=http)
 
-        print('Event created: %s' % (event.get('htmlLink')))
+        return event.get('id')
+
+    @classmethod
+    def delete_due_event(cls, event_id):
+        cls.update_creds()
+        http = cls.creds.authorize(Http())
+        event =cls.service.events().delete(calendarId='primary', eventId=event_id).execute(http=http)
+        print(event)

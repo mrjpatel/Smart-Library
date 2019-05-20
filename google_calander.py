@@ -2,6 +2,8 @@ import datetime
 import pickle
 import os.path
 from googleapiclient.discovery import build
+from google_auth_oauthlib.flow import InstalledAppFlow
+from google.auth.transport.requests import Request
 from httplib2 import Http
 from oauth2client import file, client, tools
 
@@ -14,16 +16,15 @@ class GoogleCalanderAPI:
     @classmethod
     def update_creds(cls):
         # If there are no (valid) credentials available, let the user log in.
-        if not cls.creds or not cls.creds.valid:
+        if not cls.creds or cls.creds.invalid:
             flow = client.flow_from_clientsecrets("credentials.json", cls.SCOPES)
             cls.creds = tools.run_flow(flow, cls.store)
-        cls.service = build("calendar", "v3", http=cls.creds.authorize(Http()))
+
+        cls.service = build("calendar", "v3", credentials=cls.creds)
     
     @classmethod
     def create_due_event(cls, due_date, book, user):
         str_due_date = due_date.strftime("%Y-%m-%d")
-        time_start = "{}T06:00:00+10:00".format(str_due_date)
-        time_end = "{}T07:00:00+10:00".format(str_due_date)
         summary = 'Return Book with ID: {}'.format(book["BookID"])
         description = '{} {} borrowed {} and is due!'.format(
             user["first_name"],
@@ -34,11 +35,11 @@ class GoogleCalanderAPI:
             "summary": summary,
             "description": description,
             "start": {
-                "dateTime": time_start,
+                "date": str_due_date,
                 "timeZone": "Australia/Melbourne",
             },
             "end": {
-                "dateTime": time_end,
+                "date": str_due_date,
                 "timeZone": "Australia/Melbourne",
             },
             "attendees": [
@@ -47,17 +48,17 @@ class GoogleCalanderAPI:
             "reminders": {
                 "useDefault": False,
                 "overrides": [
-                    { "method": "email", "minutes": 5 },
-                    { "method": "popup", "minutes": 10 },
+                    { "method": "email", "minutes": 1440 },
+                    { "method": "popup", "minutes": 1440 },
                 ],
             }
         }
         cls.update_creds()
+        http = cls.creds.authorize(Http())
 
         event = cls.service.events().insert(
             calendarId='primary',
             body=event
-        ).execute()
+        ).execute(http=http)
 
         print('Event created: %s' % (event.get('htmlLink')))
-

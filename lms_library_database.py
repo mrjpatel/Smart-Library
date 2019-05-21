@@ -4,8 +4,27 @@ import json
 
 
 class LMSLibraryDatabase:
-    book_schema = ["BookID", "Title", "Author", "PublishDate"]
-    user_schema = ["username", "first_name", "last_name", "email"]
+    book_schema = [
+        "BookID",
+        "Title",
+        "Author",
+        "PublishDate"
+    ]
+    user_schema = [
+        "username",
+        "first_name",
+        "last_name",
+        "email"
+    ]
+    book_borrow_schema = [
+        "BookBorrowedID",
+        "LmsUsername",
+        "BookID",
+        "Status",
+        "BorrowedDate",
+        "DueDate",
+        "EventID"
+    ]
 
     def __init__(self, db_settings_file):
         with open(db_settings_file) as json_file:
@@ -143,6 +162,22 @@ class LMSLibraryDatabase:
         # executre query
         return self.__run_query(query, params)
 
+    def query_borrowed_book_by_user(self, book_id, status, username):
+        # prepare statement
+        query = """SELECT * FROM BookBorrowed
+                    WHERE BookID = %(book_id)s
+                    AND Status = %(status)s
+                    AND Lmsusername = %(username)s
+                    ;"""
+        # sanitize inputs
+        params = {
+            "book_id": book_id,
+            "status": status,
+            "username": username
+        }
+        # executre query
+        return self.__run_query(query, params)
+
     def insert_borrowed_book(
         self,
         username,
@@ -175,6 +210,26 @@ class LMSLibraryDatabase:
             "borrow_date": borrow_date,
             "due_date": due_date,
             "event_id": event_id
+        }
+        # executre query
+        self.__run_update(query, params)
+
+    def update_borrowed_book(
+        self,
+        record_id,
+        return_date
+    ):
+        # prepare statement
+        query = """UPDATE BookBorrowed SET
+                        Status = %(status)s,
+                        ReturnedDate = %(return_date)s,
+                    WHERE BookBorrowedID = %(record_id)s
+                    """
+        # sanitize inputs
+        params = {
+            "status": "returned",
+            "return_date": return_date,
+            "record_id": record_id
         }
         # executre query
         self.__run_update(query, params)

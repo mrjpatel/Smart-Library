@@ -2,7 +2,6 @@ from flask import Flask, Blueprint, request, jsonify, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from flask import current_app as app
-from lms_library_database import LMSLibraryDatabase
 import os
 import requests
 import json

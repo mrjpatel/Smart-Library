@@ -12,7 +12,7 @@ site = Blueprint("site", __name__)
 @site.route("/")
 def index():
     # Use REST API.
-    response = requests.get("http://127.0.0.1:5000/admin")
+    response = requests.get("http://127.0.0.1:5000/books")
     data = json.loads(response.text)
 
     return render_template("index.html", books=data)

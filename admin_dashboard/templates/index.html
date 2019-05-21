@@ -3,6 +3,17 @@
         <title>Admin Dashboard</title>
     </head>
     <body>
-        Admin Dashboard
+        <table>
+            <tr>
+                <th>Book ID</th>
+                <th>Title</th>
+            </tr>
+            {%for book in books%}
+                <tr>
+                    <td>{{book.BookID}}</td>
+                    <td>{{book.Title}}</td>
+                </tr>
+            {%endfor%}
+        </table>
     </body>
 </html>

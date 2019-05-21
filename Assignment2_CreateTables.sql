@@ -1,9 +1,9 @@
-create table LmsUser (
-    LmsUserID int not null auto_increment,
-    UserName nvarchar(256) not null,
-    Name text not null,
-    constraint PK_LmsUser primary key (LmsUserID),
-    constraint UN_UserName unique (UserName)
+CREATE TABLE IF NOT EXISTS LmsUser (
+    username NVARCHAR(256) NOT NULL,
+    first_name TEXT NOT NULL,
+    last_name TEXT NOT NULL,
+    email TEXT NOT NULL,
+    CONSTRAINT PK_LmsUser PRIMARY KEY (username)
 );
 
 create table Book (
@@ -16,12 +16,14 @@ create table Book (
 
 create table BookBorrowed (
     BookBorrowedID int not null auto_increment,
-    LmsUserID int not null,
+    LmsUsername NVARCHAR(256) not null,
     BookID int not null,
     Status enum ('borrowed', 'returned'),
     BorrowedDate date not null,
+    DueDate date not null,
     ReturnedDate date null,
+    EventID text not null,
     constraint PK_BookBorrowed primary key (BookBorrowedID),
-    constraint FK_BookBorrowed_LmsUser foreign key (LmsUserID) references LmsUser (LmsUserID),
+    constraint FK_BookBorrowed_LmsUser foreign key (LmsUsername) references LmsUser (username),
     constraint FK_BookBorrowed_Book foreign key (BookID) references Book (BookID)
 );

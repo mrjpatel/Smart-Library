@@ -7,6 +7,7 @@ from google.auth.transport.requests import Request
 from httplib2 import Http
 from oauth2client import file, client, tools
 
+
 class GoogleCalanderAPI:
     # scope for the api access
     SCOPES = ['https://www.googleapis.com/auth/calendar']
@@ -17,11 +18,12 @@ class GoogleCalanderAPI:
     def update_creds(cls):
         # If there are no (valid) credentials available, let the user log in.
         if not cls.creds or cls.creds.invalid:
-            flow = client.flow_from_clientsecrets("credentials.json", cls.SCOPES)
+            flow = client.flow_from_clientsecrets(
+                "credentials.json", cls.SCOPES)
             cls.creds = tools.run_flow(flow, cls.store)
 
         cls.service = build("calendar", "v3", credentials=cls.creds)
-    
+
     @classmethod
     def create_due_event(cls, due_date, book, user):
         str_due_date = due_date.strftime("%Y-%m-%d")
@@ -48,8 +50,8 @@ class GoogleCalanderAPI:
             "reminders": {
                 "useDefault": False,
                 "overrides": [
-                    { "method": "email", "minutes": 1440 },
-                    { "method": "popup", "minutes": 1440 },
+                    {"method": "email", "minutes": 1440},
+                    {"method": "popup", "minutes": 1440},
                 ],
             }
         }
@@ -67,5 +69,8 @@ class GoogleCalanderAPI:
     def delete_due_event(cls, event_id):
         cls.update_creds()
         http = cls.creds.authorize(Http())
-        event =cls.service.events().delete(calendarId='primary', eventId=event_id).execute(http=http)
+        event = cls.service.events().delete(
+            calendarId='primary',
+            eventId=event_id
+        ).execute(http=http)
         print(event)

@@ -157,13 +157,15 @@ class LMSLibraryDatabase:
                         BookID,
                         Status,
                         BorrowedDate,
-                        DueDate
+                        DueDate,
+                        EventID
                     ) VALUES (
                         %(username)s,
                         %(book_id)s,
                         %(status)s,
                         %(borrow_date)s,
-                        %(due_date)s
+                        %(due_date)s,
+                        %(event_id)s
                     );"""
         # sanitize inputs
         params = {
@@ -172,6 +174,7 @@ class LMSLibraryDatabase:
             "status": "borrowed",
             "borrow_date": borrow_date,
             "due_date": due_date,
+            "event_id": event_id
         }
         # executre query
         self.__run_update(query, params)

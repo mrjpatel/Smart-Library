@@ -63,10 +63,7 @@ class MasterPi:
                         cc.sendall(b"Successfully Logged Out")
             except KeyboardInterrupt:
                 print("Keyboard Interrupt detected, shutting down...")
-            finally:
-                s.shutdown(socket.SHUT_RDWR)
-                s.close()
-    
+
     @staticmethod
     def update_or_add_user(db_location, user):
         db = LMSLibraryDatabase(db_location)

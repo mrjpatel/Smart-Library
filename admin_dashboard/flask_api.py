@@ -20,7 +20,7 @@ class Book(db.Model):
 
     def __init__(self, Title, Author, PublishedDate, BookID=None):
         self.BookID = BookID
-        self.Tile = Title
+        self.Title = Title
         self.Author = Author
         self.PublishedDate = PublishedDate
 
@@ -41,7 +41,7 @@ bookSchema = BookSchema()
 booksSchema = BookSchema(many=True)
 
 
-# Endpoint to show all book.
+# Endpoint to show all books.
 @api.route("/books", methods=["GET"])
 def getBooks():
     books = Book.query.all()
@@ -57,7 +57,7 @@ def addBook():
     author = request.json["author"]
     publishedDate = request.json["publishedDate"]
 
-    newBook = bookSchema(
+    newBook = Book(
         Title=title,
         Author=author,
         PublishedDate=publishedDate

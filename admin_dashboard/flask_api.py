@@ -16,7 +16,7 @@ class Book(db.Model):
     BookID = db.Column(db.Integer, primary_key=True, autoincrement=True)
     Title = db.Column(db.Text)
     Author = db.Column(db.Text)
-    PublishedDate = db.Column(db.Date)
+    PublishedDate = db.Column(db.DateTime)
 
     def __init__(self, Title, Author, PublishedDate, BookID=None):
         self.BookID = BookID
@@ -38,28 +38,39 @@ class BookSchema(ma.Schema):
         fields = ("BookID", "Title", "Author", "PublishedDate")
 
 bokSchema = BookSchema()
-bookSchema = BookSchema(many=True)
+booksSchema = BookSchema(many=True)
+
+
+# Endpoint to show all book.
+@api.route("/books", methods=["GET"])
+def getPeople():
+    books = Book.query.all()
+    result = booksSchema.dump(books)
+
+    return jsonify(result.data)
 
 
 # Endpoint to create new book.
-@api.route("/addbook", methods=["POST"])
+@api.route("/book/add", methods=["POST"])
 def addPerson():
-    book = request.json["title", "author", "publishedDate"]
+    title = request.json["title"]
+    author = request.json["author"]
+    publishedDate = request.json["publishedDate"]
 
     newBook = bookSchema(
-        Title=book.title,
-        Author=book.author,
-        PublishedDate=book.publishedDate
+        Title=title,
+        Author=author,
+        PublishedDate=publishedDate
         )
 
-    db.session.add(newPerson)
+    db.session.add(newBook)
     db.session.commit()
 
     return personSchema.jsonify(newBook)
 
 
 # Endpoint to delete book.
-@api.route("/book/<id>", methods=["DELETE"])
+@api.route("/book/remove/<id>", methods=["DELETE"])
 def personDelete(id):
     book = Book.query.get(id)
 

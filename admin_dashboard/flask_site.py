@@ -15,4 +15,4 @@ def index():
     response = requests.get("http://127.0.0.1:5000/admin")
     data = json.loads(response.text)
 
-    return render_template("index.html", admin=data)
+    return render_template("index.html", books=data)

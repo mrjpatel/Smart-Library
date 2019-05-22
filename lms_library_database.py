@@ -23,6 +23,7 @@ class LMSLibraryDatabase:
         "Status",
         "BorrowedDate",
         "DueDate",
+        "ReturnedDate",
         "EventID"
     ]
 
@@ -222,7 +223,7 @@ class LMSLibraryDatabase:
         # prepare statement
         query = """UPDATE BookBorrowed SET
                         Status = %(status)s,
-                        ReturnedDate = %(return_date)s,
+                        ReturnedDate = %(return_date)s
                     WHERE BookBorrowedID = %(record_id)s
                     """
         # sanitize inputs

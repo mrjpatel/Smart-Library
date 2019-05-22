@@ -15,7 +15,7 @@ class ConsoleBorrowBook(MenuHandler):
         self.user = user
 
     def invoke(self):
-        def exit = False
+        exit = False
         while not exit:
             self.start()
             print("Borrow another book? (y/n): ", end="")
@@ -35,13 +35,13 @@ class ConsoleBorrowBook(MenuHandler):
         # input is a number
         book_id = int(str_input)
         # check if book exists
-        book_item = self.db.query_book_by_id(book_id)[0]
+        book_item = self.db.query_book_by_id(book_id)
         if not book_item:
             print("Book with ID {} does not exist!".format(book_id))
             return
         book = dict()
         # convert to book dict
-        for key, value in zip(LMSLibraryDatabase.book_schema, book_item):
+        for key, value in zip(LMSLibraryDatabase.book_schema, book_item[0]):
             book[key] = value
         # check if book is borrowed
         if self.is_borrowed(book):
@@ -67,7 +67,7 @@ class ConsoleBorrowBook(MenuHandler):
             self.user
         )
         # insert db record for borrowed book
-        self.db.delete_due_event(
+        self.db.insert_borrowed_book(
             self.user["username"],
             book["BookID"],
             today,

@@ -15,7 +15,7 @@ class ConsoleReturnBook(MenuHandler):
         self.user = user
 
     def invoke(self):
-        def exit = False
+        exit = False
         while not exit:
             self.start()
             print("Return another book? (y/n): ", end="")
@@ -51,23 +51,26 @@ class ConsoleReturnBook(MenuHandler):
             return
         self.return_book(borrowed_record)
 
-    def is_borrowed(self, book_borrowed):
+    def is_borrowed(self, book_borrowed, username):
         # makes call to db to get borrowed record
         borrowed = self.db.query_borrowed_book_by_user(
-            book["BookID"],
+            book_borrowed["BookID"],
             "borrowed",
             username
         )
         if not borrowed:
             return False
         else:
+            print(borrowed)
+            book = dict()
             # create dict from record
             for key, value in zip(
                 LMSLibraryDatabase.book_borrow_schema,
-                book_item
+                borrowed[0]
             ):
                 book[key] = value
-            return borrowed
+            print(book)
+            return book
 
     def return_book(self, book_borrowed):
         # set date return

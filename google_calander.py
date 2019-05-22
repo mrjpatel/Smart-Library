@@ -25,7 +25,7 @@ class GoogleCalanderAPI:
             cls.creds = tools.run_flow(flow, cls.store)
 
         cls.service = build("calendar", "v3", credentials=cls.creds)
-    
+
     @classmethod
     def create_due_event(cls, due_date, book, user):
         str_due_date = due_date.strftime("%Y-%m-%d")

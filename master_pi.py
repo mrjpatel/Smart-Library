@@ -7,7 +7,9 @@ import json
 from console_menu import ConsoleMenu
 from console_search_book import ConsoleSearchBook
 from console_borrow_book import ConsoleBorrowBook
-from lms_library_database import LMSLibraryDatabase 
+from console_return_book import ConsoleReturnBook
+from lms_library_database import LMSLibraryDatabase
+
 
 class MasterPi:
     @staticmethod
@@ -44,7 +46,8 @@ class MasterPi:
                         # define menu handlers
                         menu_handlers = [
                             ConsoleSearchBook(db_details_file),
-                            ConsoleBorrowBook(db_details_file, user)
+                            ConsoleBorrowBook(db_details_file, user),
+                            ConsoleReturnBook(db_details_file, user)
                         ]
 
                         # display menu, get selection, and run
@@ -76,7 +79,7 @@ class MasterPi:
     @staticmethod
     def validate_user_dict(user):
         if (
-            "first_name" not in user or 
+            "first_name" not in user or
             "last_name" not in user or
             "email" not in user or
             "username" not in user
@@ -85,8 +88,6 @@ class MasterPi:
         else:
             return True
 
-
-                
 
 if __name__ == "__main__":
     MasterPi.start_master_pi()

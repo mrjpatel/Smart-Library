@@ -1,5 +1,5 @@
 {% extends 'bootstrap/base.html' %}
-{% block title %}Add Book{% endblock %}
+{% block title %}Admin Dashboard{% endblock %}
 
 {% block navbar %}
 <nav class="navbar navbar-inverse">
@@ -9,9 +9,9 @@
     </div>
     <ul class="nav navbar-nav">
       <li class="active"><a href="#">Home</a></li>
-      <li><a href="{{ url_for('site.addBook') }}">Add Book</a></li>
-      <li><a href="{{ url_for('site.removeBook') }}">Remove Book</a></li>
-      <li><a href="{{ url_for('site.updateBook') }}">Update Book</a></li>
+      <li><a href="{{ url_for('site.addNewBook') }}">Add Book</a></li>
+      <li><a href="{{ url_for('site.removeExisitngBook') }}">Remove Book</a></li>
+      <li><a href="{{ url_for('site.updateExisitingBook') }}">Update Book</a></li>
       <li><a href="{{ url_for('site.report') }}">Get Report</a></li>
     </ul>
   </div>
@@ -19,7 +19,7 @@
 {% endblock %}
 
 {% block content %}
-<h1>Sensor Data </h1> 
+<h1>Admin Dashbaord </h1> 
 <div class="alert alert-success" role="alert">
     Add Book
 </div>

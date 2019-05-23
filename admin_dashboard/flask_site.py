@@ -38,20 +38,20 @@ def logout():
 
 
 # Add book webpage.
-@site.route("/addBook")
-def addBook():
+@site.route("/book/add")
+def addNewBook():
     return redirect(url_for("addBook.html"))
 
 
 # Remove Book webpage.
-@site.route("/removeBook")
-def removeBook():
+@site.route("/book/remove")
+def removeExistingBook():
     return redirect(url_for("removeBook.html"))
 
 
 # Update Book webpage.
-@site.route("/updateBook")
-def updateBook():
+@site.route("/book/update")
+def updateExistingBook():
     return redirect(url_for("updateBook.html"))
 
 

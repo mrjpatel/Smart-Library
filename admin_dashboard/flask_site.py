@@ -37,32 +37,25 @@ def logout():
     return redirect(url_for("site.login"))
 
 
-"""
-# Client webpage.
+# Add book webpage.
 @site.route("/addBook")
-def index():
-    # Use REST API.
-    response = requests.get("http://127.0.0.1:5000/books")
-    data = json.loads(response.text)
-
-    return render_template("index.html", books=data)
+def addBook():
+    return redirect(url_for("addBook.html"))
 
 
-# Client webpage.
+# Remove Book webpage.
 @site.route("/removeBook")
-def index():
-    # Use REST API.
-    response = requests.get("http://127.0.0.1:5000/books")
-    data = json.loads(response.text)
-
-    return render_template("index.html", books=data)
+def removeBook():
+    return redirect(url_for("removeBook.html"))
 
 
-# Client webpage.
+# Update Book webpage.
 @site.route("/updateBook")
-def index():
-    # Use REST API.
-    response = requests.get("http://127.0.0.1:5000/books")
-    data = json.loads(response.text)
+def updateBook():
+    return redirect(url_for("updateBook.html"))
 
-    return render_template("index.html", books=data)"""
+
+# Report webpage.
+@site.route("/report")
+def report():
+    return redirect(url_for("report.html"))

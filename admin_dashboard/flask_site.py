@@ -40,22 +40,22 @@ def logout():
 # Add book webpage.
 @site.route("/book/add")
 def addNewBook():
-    return redirect(url_for("addNewBook.html"))
+    return render_template("addNewBook.html")
 
 
 # Remove Book webpage.
 @site.route("/book/remove")
 def removeExistingBook():
-    return redirect(url_for("removeExistingBook.html"))
+    return render_template("removeExistingBook.html")
 
 
 # Update Book webpage.
 @site.route("/book/update")
 def updateExistingBook():
-    return redirect(url_for("updateExistingBook.html"))
+    return render_template("updateExistingBook.html")
 
 
 # Report webpage.
 @site.route("/report")
 def report():
-    return redirect(url_for("report.html"))
+    return render_template("report.html")

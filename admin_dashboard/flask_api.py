@@ -78,3 +78,20 @@ def removeBook(id):
     db.session.commit()
 
     return bookSchema.jsonify(book)
+
+
+# Endpoint to update book.
+@api.route("/updateBook/<id>", methods=["PUT"])
+def updateBook(id):
+    book = Book.query.get(id)
+    title = request.json["title"]
+    author = request.json["author"]
+    publishedDate = request.json["publishedDate"]
+
+    book.Title = title
+    book.author = author
+    book.publishedDate = publishedDate
+
+    db.session.commit()
+
+    return bookSchema.jsonify(book)

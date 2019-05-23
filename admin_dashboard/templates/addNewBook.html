@@ -10,8 +10,8 @@
     <ul class="nav navbar-nav">
       <li class="active"><a href="#">Home</a></li>
       <li><a href="{{ url_for('site.addNewBook') }}">Add Book</a></li>
-      <li><a href="{{ url_for('site.removeExisitngBook') }}">Remove Book</a></li>
-      <li><a href="{{ url_for('site.updateExisitingBook') }}">Update Book</a></li>
+      <li><a href="{{ url_for('site.removeExistingBook') }}">Remove Book</a></li>
+      <li><a href="{{ url_for('site.updateExistingBook') }}">Update Book</a></li>
       <li><a href="{{ url_for('site.report') }}">Get Report</a></li>
     </ul>
   </div>
@@ -21,7 +21,7 @@
 {% block content %}
 <h1>Admin Dashbaord </h1> 
 <div class="alert alert-success" role="alert">
-    Remove Book
+    Add Book
 </div>
 
 {% endblock %}

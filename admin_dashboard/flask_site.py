@@ -1,6 +1,5 @@
 from flask import Flask, Blueprint, request, jsonify
 from flask import render_template, redirect, url_for
-from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 import os
@@ -8,7 +7,6 @@ import requests
 import json
 
 site = Blueprint("site", __name__)
-bootstrap = Bootstrap(app)
 
 
 # Client webpage.

@@ -4,6 +4,16 @@ import json
 
 
 class LMSLibraryDatabase:
+    """
+    A class used to access the GCP MySql Database
+
+    book_schema : list
+        Database Schema for the Book Table
+    user_schema : list
+        Database Schema for the User Table
+    book_borrow_schema : list
+        Database Schema for the Book Borrow Table
+    """
     book_schema = [
         "BookID",
         "Title",
@@ -28,6 +38,11 @@ class LMSLibraryDatabase:
     ]
 
     def __init__(self, db_settings_file):
+        """
+        Creating an object of this class. Tests the Database connection
+        :param db_settings_file: Database Setting File
+        :type db_settings_file: string
+        """
         with open(db_settings_file) as json_file:
             data = json.load(json_file)
             self.__host = data["host"]
@@ -37,24 +52,34 @@ class LMSLibraryDatabase:
         self.test_connection()
 
     def test_connection(self):
-        try:
-            # Open connection
-            connection = mysql.connector.connect(
-                host=self.__host,
-                database=self.__database,
-                user=self.__user,
-                password=self.__password
-            )
-            # Check Connection
-            if connection.is_connected() is False:
-                raise Exception("Cannot connect to DB")
-            # Close database connection
-            if(connection.is_connected()):
-                connection.close()
-        except Error as e:
-            print("Error while connecting to MySQL", e)
+        """
+        Tests the Database connection
+
+        :raises: Database Connect Exception
+        """
+        # Open connection
+        connection = mysql.connector.connect(
+            host=self.__host,
+            database=self.__database,
+            user=self.__user,
+            password=self.__password
+        )
+        # Check Connection
+        if connection.is_connected() is False:
+            raise Exception("Cannot connect to DB")
+        # Close database connection
+        if(connection.is_connected()):
+            connection.close()
 
     def query_book_by_id(self, book_id):
+        """
+        Queries Database for books that match the given Book ID
+
+        :param book_id: Book ID of the book
+        :type book_id: str
+        :return: returns book records with the same ID as book_id
+        :rtype: list (dicts with book details)
+        """
         # prepare statement
         query = """SELECT * FROM Book
                     WHERE BookID = %(book_id)s;"""
@@ -66,6 +91,14 @@ class LMSLibraryDatabase:
         return self.__run_query(query, params)
 
     def query_book_by_author(self, author):
+        """
+        Queries Database for books that match the given Author
+
+        :param author: Author of the book
+        :type author: str
+        :return: returns book records with the same Author as author
+        :rtype: list (dicts with book details)
+        """
         # prepare statement
         query = """SELECT * FROM Book
                     WHERE Author = %(author)s;"""
@@ -77,6 +110,14 @@ class LMSLibraryDatabase:
         return self.__run_query(query, params)
 
     def query_book_by_title(self, title):
+        """
+        Queries Database for books that match the given Title
+
+        :param title: Title of the book
+        :type title: str
+        :return: returns book records with the same Title as title
+        :rtype: list (dicts with book details)
+        """
         # prepare statement
         query = """SELECT * FROM Book
                     WHERE Title = %(title)s;"""
@@ -88,6 +129,14 @@ class LMSLibraryDatabase:
         return self.__run_query(query, params)
 
     def query_book_by_publish_date(self, publish_date):
+        """
+        Queries Database for books that match the given Published Date
+
+        :param publish_date: Published Date of the book
+        :type publish_date: str
+        :return: returns book records with the same Published Date as publish_date
+        :rtype: list (dicts with book details)
+        """
         # prepare statement
         query = """SELECT * FROM Book
                     WHERE PublishedDate = %(publish_date)s;"""
@@ -110,6 +159,13 @@ class LMSLibraryDatabase:
         return self.__run_query(query, params)
 
     def add_user(self, user):
+        """
+        Inserts user into Database
+
+        :param user: User Dict to enter into Database
+        :type users: dict that conforms with user_schema
+        :return: no return
+        """
         # prepare statement
         query = """INSERT INTO LmsUser (
                         username,
@@ -133,6 +189,13 @@ class LMSLibraryDatabase:
         self.__run_update(query, params)
 
     def update_user(self, user):
+        """
+        Updates user into Database
+
+        :param user: User Dict to enter into Database
+        :type user: dict that conforms with user_schema
+        :return: no return
+        """
         # prepare statement
         query = """UPDATE LmsUser SET
                         first_name = %(first_name)s,
@@ -150,6 +213,16 @@ class LMSLibraryDatabase:
         self.__run_update(query, params)
 
     def query_borrowed_book(self, book_id, status):
+        """
+        Queries Database for borrowed boook
+
+        :param book_id: Book ID of borrowed book 
+        :type book_id: str
+        :param status: Status of borrowed book
+        :type status: str
+        :return: list of borrowed books with id and satus
+        :rtype: list
+        """
         # prepare statement
         query = """SELECT * FROM BookBorrowed
                     WHERE BookID = %(book_id)s
@@ -164,6 +237,18 @@ class LMSLibraryDatabase:
         return self.__run_query(query, params)
 
     def query_borrowed_book_by_user(self, book_id, status, username):
+        """
+        Queries Database for borrowed boook by a user
+
+        :param book_id: Book ID of borrowed book 
+        :type book_id: str
+        :param status: Status of borrowed book
+        :type status: str
+        :param username: Username of user who borrowed book
+        :type username: str
+        :return: list of borrowed books with id and satus
+        :rtype: list
+        """
         # prepare statement
         query = """SELECT * FROM BookBorrowed
                     WHERE BookID = %(book_id)s
@@ -187,6 +272,21 @@ class LMSLibraryDatabase:
         due_date,
         event_id
     ):
+        """
+        Addes borrowed book to the database
+
+        :param username: Username of user who borrowed book
+        :type username: str
+        :param book_id: Book ID of borrowed book 
+        :type book_id: str
+        :param borrow_date: Datetime of when the book is borrowed
+        :type borrow_date: datetime
+        :param due_date: Datetime of when the book is due
+        :type due_date: datetime
+        :param book_id: Event ID of calander event
+        :type book_id: str
+        :return: no return
+        """
         # prepare statement
         query = """INSERT INTO BookBorrowed (
                         LmsUsername,
@@ -220,6 +320,15 @@ class LMSLibraryDatabase:
         record_id,
         return_date
     ):
+        """
+        Updates borrowed book with return date
+
+        :param record_id: Record ID of borrowed book record
+        :type record_id: int
+        :param due_date: Datetime of when the book is returned
+        :type due_date: datetime
+        :return: no return
+        """
         # prepare statement
         query = """UPDATE BookBorrowed SET
                         Status = %(status)s,
@@ -236,6 +345,16 @@ class LMSLibraryDatabase:
         self.__run_update(query, params)
 
     def __run_query(self, query, params):
+        """
+        Executes Query with the Database
+
+        :param query: SQL Query to execute
+        :type query: str
+        :param params: Parameters for the SQL Query
+        :type params: dict
+        :return: Query Result
+        :rtype: list
+        """
         result = ""
         try:
             # Open connection
@@ -260,6 +379,16 @@ class LMSLibraryDatabase:
                 return(result)
 
     def __run_update(self, query, params):
+        """
+        Executes Database Insert or Update
+
+        :param query: SQL Query to execute
+        :type query: str
+        :param params: Parameters for the SQL Query
+        :type params: dict
+        :return: Query Result
+        :rtype: list
+        """
         result = ""
         try:
             # Open connection

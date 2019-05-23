@@ -1,4 +1,5 @@
-from flask import Flask, Blueprint, request, jsonify, render_template
+from flask import Flask, Blueprint, request, jsonify
+from flask import render_template, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 import os
@@ -18,16 +19,25 @@ def index():
     return render_template("index.html", books=data)
 
 
-# Client webpage.
+# Login webpage.
 @site.route("/login")
-def index():
-    # Use REST API.
-    response = requests.get("http://127.0.0.1:5000/books")
-    data = json.loads(response.text)
-
-    return render_template("index.html", books=data)
+def login():
+    return render_template("login.html")
 
 
+# Dashboard webpage.
+@site.route("/dashboard")
+def dashboard():
+    return render_template("dashboard.html")
+
+
+# Logout webpage.
+@site.route("/logout")
+def logout():
+    return redirect(url_for("site.login"))
+
+
+"""
 # Client webpage.
 @site.route("/addBook")
 def index():
@@ -55,4 +65,4 @@ def index():
     response = requests.get("http://127.0.0.1:5000/books")
     data = json.loads(response.text)
 
-    return render_template("index.html", books=data)
+    return render_template("index.html", books=data)"""

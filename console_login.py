@@ -1,3 +1,4 @@
+import json
 import socket
 import pickle
 
@@ -14,6 +15,7 @@ class ConsoleLogin(MenuHandler):
     user_database: str
         File path to the sqlite3 database
     """
+
     def __init__(self, user_database):
         """
         :param user_database: database for storing users on reception pi
@@ -80,8 +82,12 @@ class ConsoleLogin(MenuHandler):
         :param user: The authenticated user
         :type user: dict
         """
-        # TODO: remove hardcoded destination
-        dest = ("localhost", 32674)
+        # get master pi ip and port from config
+        with open("socket.json", "r") as f:
+            config = json.load(f)
+        ip = config["master_pi_ip"]
+        port = config["port"]
+        dest = (ip, port)
 
         # remove password from dict
         if "encrypted_password" in user:

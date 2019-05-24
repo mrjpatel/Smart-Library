@@ -22,7 +22,8 @@ DATABASE = "lms"
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "mysql://{}:{}@{}/{}".format(
     USER, PASSWORD, HOST, DATABASE)
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+app.config['SECRET_KEY'] = 'FTdtFjkjnjksbdyu'
 
 db.init_app(app)
 

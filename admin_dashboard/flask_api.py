@@ -1,4 +1,5 @@
 from flask import Flask, Blueprint, request, jsonify, render_template, url_for
+from flask import redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from flask import current_app as app
@@ -39,6 +40,18 @@ class BookSchema(ma.Schema):
 
 bookSchema = BookSchema()
 booksSchema = BookSchema(many=True)
+
+
+# Endpoint to login
+@api.route("/adminLogin", methods=["POST"])
+def adminLogin():
+    username = request.form.get('username')
+    password = request.form.get('password')
+
+    if username == "jaqen" and password == "hghar":
+        return redirect(url_for('site.dashboard'))
+    flash('Please check your login details and try again.')
+    return redirect(url_for('site.login'))
 
 
 # Endpoint to show all books.

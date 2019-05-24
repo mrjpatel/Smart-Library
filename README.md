@@ -34,9 +34,7 @@ $ deactivate
 
 ## Configuration
 
-### Reception Pi
-
-#### User password cryptography
+### User password cryptography
 
 AES-256 is used to encrypt and decrypt a hash of the user's password when stored in the database.
 
@@ -45,8 +43,19 @@ There are many ways to generate AES-256 keys. One way is to use `openssl`. For s
 $ openssl enc -aes-256-cbc -k <password> -P -nosalt
 ```
 
-The output of the above should generate a `key` and an `iv`. These should be saved as environment variables for use by the Reception Pi. Replace `<key>` and `<iv>` with their respective values from the above output.
-```
+The output of the above should generate a `key` and an `iv`. These should be saved as environment variables for use by the Reception Pi. Replace `<key>` and `<iv>` with their respective values from the above output. These environmetn variables need to be set on the Reception Pi.
+```bash
 $ export LMS_AES_256_KEY=<key>
 $ export LMS_AES_256_IV=<iv>
+```
+
+### Reception Pi and Master Pi socket configuration
+Communication between the Reception Pi and the Master Pi is done through the use of sockets. In order for this to happen, the Reception Pi needs to know where to find the Master Pi, and the Master Pi needs to know where to expect connections from the Reception Pi.
+
+This configuration is done through the `socket.json` file. Replace `<ip_address>` with the IP address of the Master Pi.
+```json
+{
+    "master_pi_ip": "<ip_address>",
+    "port": 32674
+}
 ```

@@ -31,3 +31,22 @@ When you are done, deactivate the environment using the `deactivate` command.
 ```bash
 $ deactivate
 ```
+
+## Configuration
+
+### Reception Pi
+
+#### User password cryptography
+
+AES-256 is used to encrypt and decrypt a hash of the user's password when stored in the database.
+
+There are many ways to generate AES-256 keys. One way is to use `openssl`. For simplicity and illustrative purposes, we are not using a salt (by specifying the `-nosalt` flag) in order to generate the same key every time the command is run, however specifying a salt or digest is highly encouraged. In the example below, replace `<password>` with the password you wish to use to generate the key.
+```bash
+$ openssl enc -aes-256-cbc -k <password> -P -nosalt
+```
+
+The output of the above should generate a `key` and an `iv`. These should be saved as environment variables for use by the Reception Pi. Replace `<key>` and `<iv>` with their respective values from the above output.
+```
+$ export LMS_AES_256_KEY=<key>
+$ export LMS_AES_256_IV=<iv>
+```

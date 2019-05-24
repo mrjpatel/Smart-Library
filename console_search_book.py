@@ -8,12 +8,26 @@ from prettytable import PrettyTable
 
 
 class ConsoleSearchBook(MenuHandler):
+    """
+    A class to handle the customer searching a book
 
+    db : LMSLibraryDatabase
+        Database object of the master database
+    display_text : str
+        Display test for the console menu
+    """
     def __init__(self, database):
+        """
+        :param database: Database Setting File location
+        :type database: string
+        """
         self.db = LMSLibraryDatabase(database)
         self.display_text = "Search Book"
 
     def invoke(self):
+        """
+        Function that is called to invoke the search book function
+        """
         # set menu handlers
         menu_handlers = [
             SearchByAuthor(self.db),
@@ -33,6 +47,13 @@ class ConsoleSearchBook(MenuHandler):
 
     @staticmethod
     def display_books(results):
+        """
+        Function to display the books in a table
+
+        :param results: Results of books to display
+        :type results: list
+        :return: No return
+        """
         # Check if result is blank
         if not results:
             print("\nNo Books found!!")
@@ -47,11 +68,28 @@ class ConsoleSearchBook(MenuHandler):
 
 
 class SearchByAuthor(MenuHandler):
+    """
+    A class to handle the customer searching by Author
+
+    db : LMSLibraryDatabase
+        Database object of the master database
+    display_text : str
+        Display test for the console menu
+    """
     def __init__(self, database):
+        """
+        :param database: Database Setting File location
+        :type database: string
+        """
         self.db = database
         self.display_text = "Search by Author"
 
     def invoke(self):
+        """
+        Function to search books by Author
+
+        :return: No return
+        """
         print("\nEnter Author Name: ", end="")
         # get option from user, and strip whitespace
         str_option = input().strip()
@@ -64,11 +102,28 @@ class SearchByAuthor(MenuHandler):
 
 
 class SearchByName(MenuHandler):
+    """
+    A class to handle the customer searching by Name
+
+    db : LMSLibraryDatabase
+        Database object of the master database
+    display_text : str
+        Display test for the console menu
+    """
     def __init__(self, database):
+        """
+        :param database: Database Setting File location
+        :type database: string
+        """
         self.db = database
         self.display_text = "Search by Book Title"
 
     def invoke(self):
+        """
+        Function to search books by Name
+
+        :return: No return
+        """
         print("\nEnter Book Name: ", end="")
         # get option from user, and strip whitespace
         str_option = input().strip()
@@ -81,11 +136,28 @@ class SearchByName(MenuHandler):
 
 
 class SearchByPublishedDate(MenuHandler):
+    """
+    A class to handle the customer searching by Published Date
+
+    db : LMSLibraryDatabase
+        Database object of the master database
+    display_text : str
+        Display test for the console menu
+    """
     def __init__(self, database):
+        """
+        :param database: Database Setting File location
+        :type database: string
+        """
         self.db = database
         self.display_text = "Search by Published Date"
 
     def invoke(self):
+        """
+        Function to search books by Published Date
+
+        :return: No return
+        """
         print("\nEnter Published Date (YYYY-MM-DD): ", end="")
         # get option from user, and strip whitespace
         str_option = input().strip()

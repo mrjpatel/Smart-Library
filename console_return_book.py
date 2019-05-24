@@ -7,14 +7,35 @@ from google_calander import GoogleCalanderAPI
 
 
 class ConsoleReturnBook(MenuHandler):
+    """
+    A class to handle the customer borrowing a book
+
+    max_borrow_days : int
+        Number of days to borrow a book
+    db : LMSLibraryDatabase
+        Database object of the master database
+    display_text : str
+        Display test for the console menu
+    user : dict
+        User Object following the LMSLibraryDatabase.user_schema
+    """
     max_borrow_days = 7
 
     def __init__(self, database, user):
+        """
+        :param database: Database Setting File location
+        :type database: string
+        :param user: User Object following the LMSLibraryDatabase.user_schema
+        :type user: dict
+        """
         self.db = LMSLibraryDatabase(database)
         self.display_text = "Return Book(s)"
         self.user = user
 
     def invoke(self):
+        """
+        Function that is called to invoke the return book function
+        """
         exit = False
         while not exit:
             self.start()
@@ -52,6 +73,16 @@ class ConsoleReturnBook(MenuHandler):
         self.return_book(borrowed_record)
 
     def is_borrowed(self, book_borrowed, username):
+        """
+        Function to check if a book is borrowed or not
+
+        :param book: Book details of book to check
+        :type book: dict
+        :param username: Username of who would like to return book
+        :type username: str
+        :return: If book is borrowed
+        :rtype: bool
+        """
         # makes call to db to get borrowed record
         borrowed = self.db.query_borrowed_book_by_user(
             book_borrowed["BookID"],
@@ -73,10 +104,17 @@ class ConsoleReturnBook(MenuHandler):
             return book
 
     def return_book(self, book_borrowed):
+        """
+        Function to return book
+        
+        :param book: Book details of book to check
+        :type book: dict
+        :return: No return
+        """
         # set date return
         today = datetime.now()
         # generate event through google calander api
-        event_id = GoogleCalanderAPI.delete_due_event(
+        GoogleCalanderAPI.delete_due_event(
             book_borrowed["EventID"]
         )
         # insert db record for borrowed book

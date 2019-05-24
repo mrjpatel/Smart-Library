@@ -1,8 +1,21 @@
 class ReceptionPiMenu:
+    """
+    This class contains the logic for displaying and invoking
+    the appropriate menu handler
+    menu_handler: list
+        A list of menu handlers to display and invoke
+    """
     def __init__(self, menu_handlers):
+        """
+        :param menu_handler: menu handlers to print and invoke
+        :type menu_handler: list
+        """
         self.menu_handlers = menu_handlers
 
     def display_menu(self):
+        """
+        Prints the list of menu items
+        """
         print("\nWelcome to the library!")
         for i, h in enumerate(self.menu_handlers):
             # iterate through handlers and display menu text
@@ -11,6 +24,10 @@ class ReceptionPiMenu:
         print("\t{}. {}".format(0, "Exit"))
 
     def prompt_and_invoke_option(self):
+        """
+        Method used to prompt the user for selecting a menu item
+        and invoke the appropriate menu handler
+        """
         while True:
             print("\nSelect an option: ", end="")
             # get option from user, and strip whitespace

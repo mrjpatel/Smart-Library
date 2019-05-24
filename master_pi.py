@@ -12,8 +12,14 @@ from lms_library_database import LMSLibraryDatabase
 
 
 class MasterPi:
+    """
+    A class used to Launch the Master Pi
+    """
     @staticmethod
     def start_master_pi():
+        """
+        This method is called to start the master pi
+        """
         # Load DB details from json
         db_details_file = "lms_library_config.json"
 
@@ -69,6 +75,14 @@ class MasterPi:
 
     @staticmethod
     def update_or_add_user(db_location, user):
+        """
+        Updates or addes the user to the Master Database
+
+        :param user: User Dict to enter into Database
+        :type users: dict that passes validate_user_dict
+        :return: Record from the database
+        :rtype: dict that conforms with user_schema
+        """
         db = LMSLibraryDatabase(db_location)
         db_user = db.get_user(user["username"])
         if not db_user:
@@ -78,6 +92,14 @@ class MasterPi:
 
     @staticmethod
     def validate_user_dict(user):
+        """
+        Validates the user details sent from the Reception Pi to the Master Pi
+
+        :param user: User sent from Reception Pi
+        :type users: dict
+        :return: If user dict is vaild
+        :rtype: blol
+        """
         if (
             "first_name" not in user or
             "last_name" not in user or

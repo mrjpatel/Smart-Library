@@ -1,9 +1,22 @@
 class ConsoleMenu:
+    """
+    This Class is to handle the menu and getting user input.
+    It is responsible for printing the menu and invoking the respective menu
+    handler
+
+    menu_handlers: list
+        List of menu handlers to print and invoke
+    message: str
+        Message to print out before printing the menu
+    """
     def __init__(self, menu_handlers, message):
         self.menu_handlers = menu_handlers
         self.message = message
 
     def display_menu(self):
+        """
+        Prints the menu out with an option for each menu handler
+        """
         print("\n{}".format(self.message))
         for i, h in enumerate(self.menu_handlers):
             # iterate through handlers and display menu text
@@ -12,6 +25,10 @@ class ConsoleMenu:
         print("\t{}. {}".format(0, "Exit"))
 
     def prompt_and_invoke_option(self):
+        """
+        Prompts the user to enter an option and invokes the respective
+        menu handler that is selected
+        """
         while True:
             print("\nSelect an option: ", end="")
             # get option from user, and strip whitespace

@@ -6,6 +6,13 @@ from cryptography.hazmat.primitives.padding import PKCS7
 
 
 class AESCryptography:
+    """
+    This class is responsible for handling all AES cryptography operations.
+    It is used to both encrypt and decrypt payloads.
+    The AES 256 key and IV must be stored in environment variables:
+        LMS_AES_256_KEY
+        LMS_AES_256_IV
+    """
     def __init__(self):
         secret = self.get_secret_from_env()
         self.__key = secret[0]
@@ -19,11 +26,25 @@ class AESCryptography:
 
     @staticmethod
     def get_secret_from_env():
+        """
+        Retrieves the AES 256 key and IV from environment variables
+            LMS_AES_256_KEY
+            LMS_AES_256_IV
+        :return: tuple containing the key and IV
+        :rtype: tuple
+        """
         env_key = os.environ["LMS_AES_256_KEY"]
         env_iv = os.environ["LMS_AES_256_IV"]
         return (bytes.fromhex(env_key), bytes.fromhex(env_iv))
 
     def encrypt(self, message):
+        """
+        Encrypts the message using the key and IV
+        :param message: the message to encrypt
+        :type message: str
+        :return: the encrypted cyphertext
+        :rtype: byte
+        """
         encryptor = self.cypher.encryptor()
         padder = self.pad.padder()
         # message to bytes
@@ -35,6 +56,13 @@ class AESCryptography:
         return cyphertext
 
     def decrypt(self, cyphertext):
+        """
+        Decrypts the cyphertext using the key and IV
+        :param cyphertext: the cyphertext to decrypt
+        :type cyphertext: byte
+        :return: the decrypted plaintext
+        :rtype: str
+        """
         decryptor = self.cypher.decryptor()
         unpadder = self.pad.unpadder()
         # decrypt cyphertext

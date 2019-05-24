@@ -26,7 +26,9 @@ class MasterPi:
 
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             # bind to port
-            addr = ("", 32674)
+            with open("socket.json", "r") as f:
+                config = json.load(f)
+            addr = ("", config["port"])
             s.bind(addr)
             s.listen()
             print("Listening on {}:{}...".format(*addr))

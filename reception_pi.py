@@ -8,6 +8,9 @@ from console_register import ConsoleRegister
 
 
 def main(argv):
+    """
+    The main entry point for the Reception Pi
+    """
     # validate command line arguments
     if len(argv) != 2:
         print("Usage: python3 reception_pi.py database")

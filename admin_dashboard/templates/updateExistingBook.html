@@ -1,4 +1,5 @@
 {% extends 'bootstrap/base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
 {% block title %}Admin Dashboard{% endblock %}
 
 {% block navbar %}
@@ -20,20 +21,51 @@
 {% endblock %}
 
 {% block content %}
-<div class="container"></div>
-  <!-- Success Message -->
-  {% for message in get_flashed_messages() %}
-  <div class="alert alert-success">
-      <button type="button" class="close" data-dismiss="alert">&times;</button>
-      {{ message }}
-  </div>
-  {% endfor %}
+<div class="container">
 
   <h1>Update Book</h1>
   <br>
 
   <!-- Form-->
-  {{ wtf.quick_form(updateBookForm) }}
+  <form method="POST" role="form">
+	{{ updateBookForm.csrf_token }}
+	{{ wtf.form_field(updateBookForm.bookTitle) }}
+	<br>
+	<br>
+	{{ wtf.form_field(updateBookForm.title) }}
+	{{ wtf.form_field(updateBookForm.author) }}
+	{{ wtf.form_field(updateBookForm.publishedDate) }}
+	<br>
+	<button class="btn btn-lg btn-primary btn-block" type="button" onclick="onSubmit()">Update Book</button>
+  </form>
+  
+  <!-- Flask API Request -->
+  <script>
+	function onSubmit() {
+		var changeBook = {};
+		changeBook.title = document.getElementById('title').value;
+		changeBook.author = document.getElementById('author').value;
+		changeBook.publishedDate = document.getElementById('publishedDate').value;
+		
+		if (changeBook.title != "" && changeBook.author != "" && changeBook.publishedDate != ""){
+			var newurl = "/updateBook/" + document.getElementById('bookTitle').value;
+			
+			$.ajax({
+				type: "PUT",
+				url: newurl,
+				data: JSON.stringify(changeBook),
+				contentType: "application/json; charset=utf-8",
+				dataType: "json",
+				success: function(response) {
+						location.reload();
+				}
+			});
+		}
+		else{
+			alert("Please fill all required field");
+		}
+	};
+  </script>
 </div>
 {% endblock %}
 

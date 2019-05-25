@@ -42,30 +42,29 @@ def login():
 def dashboard():
     return render_template("dashboard.html")
 
-"""
+
 # Logout webpage.
 @site.route("/logout")
 def logout():
-    return redirect(url_for("site.login"))"""
+    return redirect(url_for("site.login"))
 
 
 class UpdateBookForm(FlaskForm):
-    bookTitle = SelectField('Book Title', choices=[])
-    title = StringField('Book Title',
+    bookTitle = SelectField('Book to Update', choices=[])
+    title = StringField('New Book Title',
                         validators=[validators.required(),
                                     validators.Regexp('^[a-zA-Z0-9 ]*$',
                                     message='Invalid characters entered!')])
     author = StringField(
-                        'Book Author',
+                        'New Book Author',
                         validators=[validators.required(),
                                     validators.Regexp('^[a-zA-Z0-9 ]*$',
                                     message='Invalid characters entered!')])
     publishedDate = DateField(
-                                'Published Date',
+                                'New Published Date',
                                 format="%Y-%m-%d",
                                 validators=[
                                     validators.required()])
-    submit = SubmitField('Update Book')
 
 
 # Update Book webpage.

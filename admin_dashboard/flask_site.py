@@ -17,6 +17,8 @@ site = Blueprint("site", __name__)
 # Client webpage.
 @site.route("/")
 def index():
+    if 'logged_in' in session:
+        redirect(url_for('site.dashboard'))
     return redirect(url_for('site.login'))
 
 
@@ -45,8 +47,10 @@ def logout():
     flash('Successfully! logged out', 'success')
     return redirect(url_for('site.login'))
 
+
 # Dashboard webpage.
 @site.route("/dashboard")
+@is_logged_in
 def dashboard():
     return render_template("dashboard.html")
 

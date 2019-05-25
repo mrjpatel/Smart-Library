@@ -85,7 +85,7 @@ class VoiceSearchByAuthor(MenuHandler):
         """
         Search for books by author using voice
         """
-        print("\nSay Author Name")
+        print("\nPrepare to say Author Name")
         voice = VoiceSearch()
         search_term = voice.speech_to_text()
         if search_term is None:
@@ -117,7 +117,7 @@ class VoiceSearchByName(MenuHandler):
         """
         Search for books by name using voice
         """
-        print("\nSay Book Title")
+        print("\nPrepare to say Book Title")
         voice = VoiceSearch()
         search_term = voice.speech_to_text()
         if search_term is None:

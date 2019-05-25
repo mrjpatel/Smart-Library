@@ -59,26 +59,6 @@ def adminLogin():
     return redirect(url_for('site.login'))
 
 
-def is_logged_in(f):
-    @wraps(f)
-    def wrap(*args, **kwargs):
-        if 'logged_in' in session:
-            return f(*args, **kwargs)
-        else:
-            flash('Invalid Credentials. Please Login to access this feature.')
-            return redirect(url_for('site.login'))
-    return wrap
-
-
-# Logout
-@api.route('/logout')
-@is_logged_in
-def logout():
-    session.clear()
-    flash('Successfully! logged out', 'success')
-    return redirect(url_for('site.login'))
-
-
 # Endpoint to show all books.
 @api.route("/books", methods=["GET"])
 def getBooks():

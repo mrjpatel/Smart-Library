@@ -43,10 +43,13 @@ def dashboard():
     return render_template("dashboard.html")
 
 
-# Logout webpage.
-@site.route("/logout")
+# Logout
+@api.route('/logout')
+@is_logged_in
 def logout():
-    return redirect(url_for("site.login"))
+    session.clear()
+    flash('Successfully! logged out', 'success')
+    return redirect(url_for('site.login'))
 
 
 class RemoveBookForm(FlaskForm):

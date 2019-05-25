@@ -88,7 +88,6 @@ class AddBookForm(FlaskForm):
 
 # Endpoint to create new book.
 @api.route("/addBook", methods=["GET", "POST"])
-@is_logged_in
 def addBook():
     addBookForm = AddBookForm()
     if request.method == 'POST' and addBookForm.validate_on_submit():

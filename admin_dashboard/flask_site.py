@@ -44,7 +44,7 @@ def dashboard():
 
 
 # Logout
-@api.route('/logout')
+@site.route('/logout')
 @is_logged_in
 def logout():
     session.clear()

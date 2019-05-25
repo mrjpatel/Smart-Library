@@ -1,3 +1,5 @@
+import subprocess
+
 from prettytable import PrettyTable
 
 from console_menu import ConsoleMenu
@@ -85,8 +87,10 @@ class VoiceSearchByAuthor(MenuHandler):
         """
         Search for books by author using voice
         """
-        print("\nPrepare to say Author Name")
         voice = VoiceSearch()
+        # clear screen of errors
+        subprocess.run("clear")
+        print("\nPrepare to say Author Name")
         search_term = voice.speech_to_text()
         if search_term is None:
             print("Error: could not perform search")
@@ -117,8 +121,10 @@ class VoiceSearchByName(MenuHandler):
         """
         Search for books by name using voice
         """
-        print("\nPrepare to say Book Title")
         voice = VoiceSearch()
+        # clear screen of errors
+        subprocess.run("clear")
+        print("\nPrepare to say Book Title")
         search_term = voice.speech_to_text()
         if search_term is None:
             print("Error: could not perform search")

@@ -34,18 +34,6 @@ class ConsoleBorrowBook(MenuHandler):
 
     def invoke(self):
         """
-        Function that is called to invoke the borrow book function
-        """
-        exit = False
-        while not exit:
-            self.start()
-            print("Borrow another book? (y/n): ", end="")
-            str_input = input().strip()
-            if str_input is not "y":
-                exit = True
-
-    def start(self):
-        """
         Function to get user input for borrow book
         """
         print("\nEnter BookID to borrow: ", end="")

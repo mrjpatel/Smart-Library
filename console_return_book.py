@@ -96,7 +96,6 @@ class ConsoleReturnBook(MenuHandler):
         if not borrowed:
             return False
         else:
-            print(borrowed)
             book = dict()
             # create dict from record
             for key, value in zip(
@@ -104,7 +103,6 @@ class ConsoleReturnBook(MenuHandler):
                 borrowed[0]
             ):
                 book[key] = value
-            print(book)
             return book
 
     def return_book(self, book_borrowed):

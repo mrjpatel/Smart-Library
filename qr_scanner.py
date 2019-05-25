@@ -4,6 +4,7 @@ import datetime
 import imutils
 import time
 import cv2
+import json
 
 
 class QrScanner:
@@ -13,7 +14,7 @@ class QrScanner:
         print("Starting QR Scanner...")
         vs = VideoStream(src=0).start()
         time.sleep(2.0)
-        found = set()
+        found = list()
         i = 0
         # loop over the frames from the video stream
         while i < 10:
@@ -34,7 +35,7 @@ class QrScanner:
                 #  print it and update the set
                 if barcodeData not in found:
                     print("Found Barcode: {}".format(barcodeData))
-                    found.add(barcodeData)
+                    found.append(json.loads(barcodeData))
 
             # return if found a barcode
             if found:

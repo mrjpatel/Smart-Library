@@ -1,14 +1,16 @@
 from datetime import datetime
 from datetime import timedelta
+import socket
+import pickle
 
 from lms_library_database import LMSLibraryDatabase
 from menu_handler import MenuHandler
-from google_calander import GoogleCalanderAPI
+from console_return_book import ConsoleReturnBook
 
 
-class ConsoleReturnBook(MenuHandler):
+class ConsoleQRReturnBook(MenuHandler):
     """
-    A class to handle the customer borrowing a book
+    A class to handle the customer returning a book using a QR code
 
     max_borrow_days : int
         Number of days to borrow a book
@@ -18,28 +20,42 @@ class ConsoleReturnBook(MenuHandler):
         Display test for the console menu
     user : dict
         User Object following the LMSLibraryDatabase.user_schema
+    cs : obj
+        Reception Socket connection object
     """
     max_borrow_days = 7
 
-    def __init__(self, database, user):
+    def __init__(self, database, user, cc):
         """
         :param database: Database Setting File location
         :type database: string
         :param user: User Object following the LMSLibraryDatabase.user_schema
         :type user: dict
+        :param cc: Client Connection Object of the Reception Pi
+        :type cc: obj
         """
+        self.database = database
         self.db = LMSLibraryDatabase(database)
-        self.display_text = "Return Book(s)"
+        self.display_text = "Return Book(s) using Barcode"
         self.user = user
+        self.cc = cc
 
     def invoke(self):
         """
         Function that is called to invoke the return book function
         """
-        exit = False
-        while not exit:
-            self.start()
-            print("Return another book? (y/n): ", end="")
-            str_input = input().strip()
-            if str_input is not "y":
-                exit = True
+        self.start()
+
+    def start(self):
+        self.cc.sendall(b"barcode")
+        data = pickle.loads(self.cc.recv(1024))
+        print(data)
+        return_book = ConsoleReturnBook(self.database, self.user)
+        if not data:
+            print("Invaild Barcode!")
+            return
+        for book in data:
+            if not book["id"]:
+                print("Invalid Barcode!")
+                return
+            return_book.start(book["id"])

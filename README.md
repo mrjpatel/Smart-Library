@@ -84,7 +84,7 @@ There is an additional approval step that is required to be done while the Maste
 ### Speech Recognition
 Before the Speech to Text functionality can be used, the following packages must be installed using `apt`.
 ```bash
-$ sudo apt install portaudio19-dev python-all-dev python3-all-dev pyaudio
+$ sudo apt install portaudio19-dev python-all-dev python3-all-dev python3-pyaudio
 ```
 
 # Running the Smart Library

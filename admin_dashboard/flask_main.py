@@ -14,11 +14,17 @@ app = Flask(__name__)
 bootstrap = Bootstrap(app)
 basedir = os.path.abspath(os.path.dirname(__file__))
 
-# Get this from the json data
-HOST = "35.244.71.109"
-USER = "masterpi"
-PASSWORD = "rguC4M3Jmg8BDxw"
-DATABASE = "lms"
+with open("lms_library_config.json") as json_file:
+    data = json.load(json_file)
+    host = data["host"]
+    user = data["user"]
+    password = data["password"]
+    database = data["database"]
+
+HOST = host
+USER = user
+PASSWORD = password
+DATABASE = database
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "mysql://{}:{}@{}/{}".format(
     USER, PASSWORD, HOST, DATABASE)

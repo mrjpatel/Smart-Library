@@ -120,10 +120,11 @@ class LMSLibraryDatabase:
         """
         # prepare statement
         query = """SELECT * FROM Book
-                    WHERE LOWER(Title) = LOWER(%(title)s);"""
+                    WHERE LOWER(Title) LIKE LOWER(%(title)s);"""
         # sanitize inputs
         params = {
-            "title": title
+            # contains match for LIKE clause
+            "title": "%" + title + "%"
         }
         # executre query
         return self.__run_query(query, params)

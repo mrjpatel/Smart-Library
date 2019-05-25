@@ -52,6 +52,32 @@ def logout():
     return redirect(url_for('site.login'))
 
 
+class AddBookForm(FlaskForm):
+    title = StringField('Book Title',
+                        validators=[validators.required(),
+                                    validators.Regexp('^[a-zA-Z0-9 ]*$',
+                                    message='Invalid characters entered!')])
+    author = StringField(
+                        'Book Author',
+                        validators=[validators.required(),
+                                    validators.Regexp('^[a-zA-Z0-9 ]*$',
+                                    message='Invalid characters entered!')])
+    publishedDate = DateField(
+                                'Published Date',
+                                format="%Y-%m-%d",
+                                validators=[
+                                    validators.required()])
+
+
+# Add Book webpage.
+@site.route("/book/add")
+@is_logged_in
+def addNewBook():
+    addBookForm = AddBookForm()
+
+    return render_template("addNewBook.html", addBookForm=addBookForm)
+
+
 class RemoveBookForm(FlaskForm):
     bookTitle = SelectField('Book Title', choices=[])
 

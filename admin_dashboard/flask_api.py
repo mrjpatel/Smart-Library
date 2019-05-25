@@ -68,7 +68,7 @@ def getBooks():
     return jsonify(result.data)
 
 
-class AddBookForm(FlaskForm):
+"""class AddBookForm(FlaskForm):
     title = StringField('Book Title',
                         validators=[validators.required(),
                                     validators.Regexp('^[a-zA-Z0-9 ]*$',
@@ -112,8 +112,25 @@ def addBook():
                             title="Enter Book Title",
                             author="Enter Book Author",
                             publishedDate="Enter Book Published date"
-                        )
+                        )"""
 
+
+# Endpoint to create new book.
+@api.route("/addBook", methods=["POST"])
+def addBook():
+    title = request.json["title"]
+    author = request.json["author"]
+    publishedDate = request.json["publishedDate"]
+
+    newBook = Book(
+        Title=title,
+        Author=author,
+        PublishedDate=publishedDate
+    )
+
+    db.session.add(newBook)
+    db.session.commit()
+    return bookSchema.jsonify(newBook)
 
 # Endpoint to update book.
 @api.route("/removeBook/<id>", methods=["DELETE"])

@@ -11,8 +11,8 @@
     </div>
     <ul class="nav navbar-nav">
       <li><a href="{{ url_for('site.dashboard') }}">Home</a></li>
-      <li class="active"><a href="{{ url_for('api.addBook') }}">Add Book</a></li>
-      <li><a href="{{ url_for('api.removeBook') }}">Remove Book</a></li>
+      <li class="active"><a href="{{ url_for('site.addNewBook') }}">Add Book</a></li>
+      <li><a href="{{ url_for('site.removeExistingBook') }}">Remove Book</a></li>
       <li><a href="{{ url_for('site.updateExistingBook') }}">Update Book</a></li>
       <li><a href="{{ url_for('site.report') }}">Get Report</a></li>
       <li><a href="{{ url_for('site.logout') }}">Logout</a></li>
@@ -35,7 +35,41 @@
   <br>
 
   <!-- Form-->
-  {{ wtf.quick_form(addBookForm) }}
+  <form method="POST" role="form">
+      {{ updateBookForm.csrf_token }}
+      {{ wtf.form_field(addBookForm.title) }}
+      {{ wtf.form_field(addBookForm.author) }}
+      {{ wtf.form_field(addBookForm.publishedDate) }}
+      <br>
+      <button class="btn btn-lg btn-primary btn-block" type="button" onclick="onAddBook()">Add Book</button>
+  </form>
+
+  <!-- Flask API Request -->
+  <script>
+      function onAddBook() {
+        var addBook = {};
+        addBook.title = document.getElementById('title').value;
+        addBook.author = document.getElementById('author').value;
+        addBook.publishedDate = document.getElementById('publishedDate').value;
+        
+        if (addBook.title != "" && addBook.author != "" && addBook.publishedDate != ""){
+          $.ajax({
+            type: "POST",
+            url: "/addBook",
+            data: JSON.stringify(changeBook),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function(response) {
+                location.reload();
+            }
+          });
+        }
+        else{
+          alert("Please fill all required field");
+        }
+      };
+      </script>
+
 </div>
 {% endblock %}
 

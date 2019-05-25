@@ -48,6 +48,7 @@ class ConsoleQRReturnBook(MenuHandler):
 
     def start(self):
         self.cc.sendall(b"barcode")
+        print("Please scan QR Code via Reception Pi")
         data = pickle.loads(self.cc.recv(1024))
         print(data)
         return_book = ConsoleReturnBook(self.database, self.user)

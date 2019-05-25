@@ -105,7 +105,7 @@ class ConsoleLogin(MenuHandler):
                     data = QrScanner.get_qr_codes()
                     print(data)
                     s.send(pickle.dumps(data))
-                    pass
+                    print("Please continue on Master Pi")
                 if message == "voice":
                     # TODO: Voice Searching
                     pass

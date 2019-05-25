@@ -36,7 +36,7 @@
 
   <!-- Form-->
   <form method="POST" role="form">
-      {{ updateBookForm.csrf_token }}
+      {{ addBookForm.csrf_token }}
       {{ wtf.form_field(addBookForm.title) }}
       {{ wtf.form_field(addBookForm.author) }}
       {{ wtf.form_field(addBookForm.publishedDate) }}
@@ -56,7 +56,7 @@
           $.ajax({
             type: "POST",
             url: "/addBook",
-            data: JSON.stringify(changeBook),
+            data: JSON.stringify(addBook),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function(response) {

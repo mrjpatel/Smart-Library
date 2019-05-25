@@ -68,53 +68,6 @@ def getBooks():
     return jsonify(result.data)
 
 
-"""class AddBookForm(FlaskForm):
-    title = StringField('Book Title',
-                        validators=[validators.required(),
-                                    validators.Regexp('^[a-zA-Z0-9 ]*$',
-                                    message='Invalid characters entered!')])
-    author = StringField(
-                        'Book Author',
-                        validators=[validators.required(),
-                                    validators.Regexp('^[a-zA-Z0-9 ]*$',
-                                    message='Invalid characters entered!')])
-    publishedDate = DateField(
-                                'Published Date',
-                                format="%Y-%m-%d",
-                                validators=[
-                                    validators.required()])
-    submit = SubmitField('Submit')
-
-
-# Endpoint to create new book.
-@api.route("/addBook", methods=["GET", "POST"])
-def addBook():
-    addBookForm = AddBookForm()
-    if request.method == 'POST' and addBookForm.validate_on_submit():
-        title = addBookForm.title.data
-        author = addBookForm.author.data
-        publishedDate = addBookForm.publishedDate.data
-
-        newBook = Book(
-            Title=title,
-            Author=author,
-            PublishedDate=publishedDate
-            )
-
-        db.session.add(newBook)
-        db.session.commit()
-        flash('Successfully! Added new book to database.')
-        return redirect(url_for('api.addBook'))
-
-    return render_template(
-                            'addNewBook.html',
-                            addBookForm=addBookForm,
-                            title="Enter Book Title",
-                            author="Enter Book Author",
-                            publishedDate="Enter Book Published date"
-                        )"""
-
-
 # Endpoint to create new book.
 @api.route("/addBook", methods=["POST"])
 def addBook():

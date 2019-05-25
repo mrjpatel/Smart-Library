@@ -37,12 +37,6 @@ def login():
     return render_template("login.html")
 
 
-# Dashboard webpage.
-@site.route("/dashboard")
-def dashboard():
-    return render_template("dashboard.html")
-
-
 # Logout
 @site.route('/logout')
 @is_logged_in
@@ -50,6 +44,11 @@ def logout():
     session.clear()
     flash('Successfully! logged out', 'success')
     return redirect(url_for('site.login'))
+
+# Dashboard webpage.
+@site.route("/dashboard")
+def dashboard():
+    return render_template("dashboard.html")
 
 
 class AddBookForm(FlaskForm):

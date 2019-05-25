@@ -9,6 +9,7 @@ import json
 from flask_wtf import FlaskForm
 from wtforms import SubmitField, StringField, validators
 from wtforms.fields.html5 import DateField
+from functools import wraps
 
 api = Blueprint("api", __name__)
 db = SQLAlchemy()
@@ -64,7 +65,7 @@ def is_logged_in(f):
         if 'logged_in' in session:
             return f(*args, **kwargs)
         else:
-            flash('Unauthorized, Please login', 'danger')
+            flash('Invalid Credentials. Please Login to access this feature.')
             return redirect(url_for('site.login'))
     return wrap
 

@@ -1,5 +1,5 @@
 from flask import Flask, Blueprint, request, jsonify, render_template, url_for
-from flask import redirect, flash
+from flask import redirect, flash, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from flask import current_app as app
@@ -52,10 +52,21 @@ def adminLogin():
     password = request.form.get('password')
 
     if username == "jaqen" and password == "hghar":
+        session['logged_in'] = True
         return redirect(url_for('site.dashboard'))
     flash('Please check your login details and try again.')
     return redirect(url_for('site.login'))
 
+
+def is_logged_in(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        if 'logged_in' in session:
+            return f(*args, **kwargs)
+        else:
+            flash('Unauthorized, Please login', 'danger')
+            return redirect(url_for('site.login'))
+    return wrap
 
 # Endpoint to show all books.
 @api.route("/books", methods=["GET"])
@@ -86,6 +97,7 @@ class AddBookForm(FlaskForm):
 
 # Endpoint to create new book.
 @api.route("/addBook", methods=["GET", "POST"])
+@is_logged_in
 def addBook():
     addBookForm = AddBookForm()
     if request.method == 'POST' and addBookForm.validate_on_submit():

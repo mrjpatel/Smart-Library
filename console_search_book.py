@@ -22,7 +22,7 @@ class ConsoleSearchBook(MenuHandler):
         :type database: string
         """
         self.db = LMSLibraryDatabase(database)
-        self.display_text = "Search Book"
+        self.display_text = "Search Book by text"
 
     def invoke(self):
         """
@@ -40,7 +40,7 @@ class ConsoleSearchBook(MenuHandler):
         while not is_exit:
             menu = ConsoleMenu(
                 menu_handlers,
-                "Search Book:"
+                "Search Book by text:"
             )
             menu.display_menu()
             is_exit = menu.prompt_and_invoke_option()

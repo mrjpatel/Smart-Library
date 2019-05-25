@@ -9,6 +9,7 @@ from console_search_book import ConsoleSearchBook
 from console_borrow_book import ConsoleBorrowBook
 from console_return_book import ConsoleReturnBook
 from lms_library_database import LMSLibraryDatabase
+from voice_search_book import VoiceSearchBook
 
 
 class MasterPi:
@@ -54,6 +55,7 @@ class MasterPi:
                         # define menu handlers
                         menu_handlers = [
                             ConsoleSearchBook(db_details_file),
+                            VoiceSearchBook(db_details_file),
                             ConsoleBorrowBook(db_details_file, user),
                             ConsoleReturnBook(db_details_file, user)
                         ]

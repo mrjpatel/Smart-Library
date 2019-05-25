@@ -10,7 +10,7 @@
     <ul class="nav navbar-nav">
       <li><a href="#">Home</a></li>
       <li><a href="{{ url_for('api.addBook') }}">Add Book</a></li>
-      <li class="active"><a href="{{ url_for('site.removeExistingBook') }}">Remove Book</a></li>
+      <li class="active"><a href="#">Remove Book</a></li>
       <li><a href="{{ url_for('site.updateExistingBook') }}">Update Book</a></li>
       <li><a href="{{ url_for('site.report') }}">Get Report</a></li>
       <li><a href="{{ url_for('site.logout') }}">Logout</a></li>
@@ -20,11 +20,21 @@
 {% endblock %}
 
 {% block content %}
-<h1>Admin Dashbaord </h1> 
-<div class="alert alert-success" role="alert">
-    Remove Book
-</div>
+<div class="container">
+  <!-- Success Message -->
+  {% for message in get_flashed_messages() %}
+  <div class="alert alert-success">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      {{ message }}
+  </div>
+  {% endfor %}
 
+  <h1>Remove Book </h1>
+  <br>
+
+  <!-- Form-->
+  {{ wtf.quick_form(form) }}
+</div>
 {% endblock %}
 
 {% block scripts %}

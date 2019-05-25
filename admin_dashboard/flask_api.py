@@ -7,7 +7,7 @@ import os
 import requests
 import json
 from flask_wtf import FlaskForm
-from wtforms import SubmitField, StringField, validators
+from wtforms import SubmitField, StringField SelectField, validators
 from wtforms.fields.html5 import DateField
 from functools import wraps
 
@@ -69,6 +69,7 @@ def is_logged_in(f):
             return redirect(url_for('site.login'))
     return wrap
 
+
 # Endpoint to show all books.
 @api.route("/books", methods=["GET"])
 def getBooks():
@@ -124,6 +125,20 @@ def addBook():
                             author="Enter Book Author",
                             publishedDate="Enter Book Published date"
                         )
+
+
+class RemoveBookForm(FlaskForm):
+    bookTitle = SelectField('Book Title', choices=[])
+    submit = SubmitField('Submit')
+
+
+# Endpoint to delete book.
+@api.route("/removeBook", methods=["GET", "POST"])
+def removeBook():
+    form = RemoveBookForm()
+    form.bookTitle.choices = [
+        (books.id, books.title), for books in Book.query.all()]
+    return render_template("removeExistingBook.html", form=form)
 
 
 # Endpoint to delete book.

@@ -60,6 +60,25 @@ This configuration is done through the `socket.json` file. Replace `<ip_address>
 }
 ```
 
+### Master Pi Database Configuration (GCP MySQL)
+Communication to the Master Pi's remote database is configured via the `lms_library_config.json` file. Replace the following with your own MySql Details
+```json
+{
+    "host": "<ip_address>",
+    "database": "<db_name>",
+    "user": "<account_username>",
+    "password": "<account_password>"
+}
+```
+
+
+### Master Pi Google Calendar API Configuration
+Communication to Google's APIs is done via OAuth2. For this to happen the Master Pi must have OAuth2 credentials so that the Master Pi can talk directly to Google's APIs
+
+This can be generated via: https://developers.google.com/identity/protocols/OAuth2WebServer
+There is an additional approval step that is required to be done while the Master Pi is running, This will allow the program to update your calendar and send invites out on your behalf
+
+
 # Running the Smart Library
 
 ## Reception Pi

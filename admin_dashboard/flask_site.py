@@ -5,7 +5,11 @@ from flask_marshmallow import Marshmallow
 import os
 import requests
 import json
+from flask_wtf import FlaskForm
+from wtforms import SubmitField, StringField, SelectField, validators
+from wtforms.fields.html5 import DateField
 from functools import wraps
+from flask_api import Book
 
 site = Blueprint("site", __name__)
 
@@ -45,10 +49,36 @@ def logout():
     return redirect(url_for("site.login"))"""
 
 
+class UpdateBookForm(FlaskForm):
+    bookTitle = SelectField('Book Title', choices=[])
+    title = StringField('Book Title',
+                        validators=[validators.required(),
+                                    validators.Regexp('^[a-zA-Z0-9 ]*$',
+                                    message='Invalid characters entered!')])
+    author = StringField(
+                        'Book Author',
+                        validators=[validators.required(),
+                                    validators.Regexp('^[a-zA-Z0-9 ]*$',
+                                    message='Invalid characters entered!')])
+    publishedDate = DateField(
+                                'Published Date',
+                                format="%Y-%m-%d",
+                                validators=[
+                                    validators.required()])
+    submit = SubmitField('Update Book')
+
+
 # Update Book webpage.
 @site.route("/book/update")
+@is_logged_in
 def updateExistingBook():
-    return render_template("updateExistingBook.html")
+    updateBookForm = UpdateBookForm()
+    updateBookForm.bookTitle.choices = [
+        (books.BookID, books.Title) for books in Book.query.all()]
+
+    return render_template(
+                            "updateExistingBook.html",
+                            updateBookForm=updateBookForm)
 
 
 # Report webpage.

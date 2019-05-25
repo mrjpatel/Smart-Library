@@ -13,18 +13,28 @@
       <li><a href="{{ url_for('api.removeBook') }}">Remove Book</a></li>
       <li class="active"><a href="{{ url_for('site.updateExistingBook') }}">Update Book</a></li>
       <li><a href="{{ url_for('site.report') }}">Get Report</a></li>
-      <li><a href="{{ url_for('site.logout') }}">Logout</a></li>
+      <li><a href="{{ url_for('api.logout') }}">Logout</a></li>
     </ul>
   </div>
 </nav>
 {% endblock %}
 
 {% block content %}
-<h1>Admin Dashbaord </h1> 
-<div class="alert alert-success" role="alert">
-    Update Book
-</div>
+<div class="container"></div>
+  <!-- Success Message -->
+  {% for message in get_flashed_messages() %}
+  <div class="alert alert-success">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      {{ message }}
+  </div>
+  {% endfor %}
 
+  <h1>Update Book</h1>
+  <br>
+
+  <!-- Form-->
+  {{ wtf.quick_form(updateBookForm) }}
+</div>
 {% endblock %}
 
 {% block scripts %}

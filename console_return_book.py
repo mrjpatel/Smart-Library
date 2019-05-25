@@ -68,7 +68,7 @@ class ConsoleReturnBook(MenuHandler):
         # convert to book dict
         for key, value in zip(LMSLibraryDatabase.book_schema, book_item):
             book[key] = value
-
+        print("Returning {} by {}...".format(book["Title"], book["Author"]))
         # check if book is borrowed
         borrowed_record = self.is_borrowed(book, self.user["username"])
         if not borrowed_record:
@@ -126,5 +126,5 @@ class ConsoleReturnBook(MenuHandler):
         )
         print(
             "Successfully Returned book: " +
-            "{}, Reminder Deleted!".format(book_borrowed["BookID"])
+            "{}, Reminder Deleted!".format(book_borrowed["0"])
         )

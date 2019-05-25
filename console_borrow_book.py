@@ -55,9 +55,10 @@ class ConsoleBorrowBook(MenuHandler):
         # convert to book dict
         for key, value in zip(LMSLibraryDatabase.book_schema, book_item[0]):
             book[key] = value
+        print("Borrowing {} by {}...".format(book["Title"], book["Author"]))
         # check if book is borrowed
         if self.is_borrowed(book):
-            print("Book with ID {} is currently borrowed!".format(book_id))
+            print("Cannot borrow book, book is currently borrowed!")
             return
         self.borrow_book(book)
 
@@ -80,7 +81,7 @@ class ConsoleBorrowBook(MenuHandler):
     def borrow_book(self, book):
         """
         Function to borrow book
-        
+
         :param book: Book details of book to check
         :type book: dict
         :return: No return

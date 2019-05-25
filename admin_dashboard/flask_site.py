@@ -17,7 +17,7 @@ site = Blueprint("site", __name__)
 # Client webpage.
 @site.route("/")
 def index():
-    redirect(url_for('site.dashboard'))
+    return redirect(url_for('site.dashboard'))
 
 
 def is_logged_in(f):

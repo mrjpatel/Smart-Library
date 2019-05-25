@@ -85,6 +85,7 @@ def addBook():
     db.session.commit()
     return bookSchema.jsonify(newBook)
 
+
 # Endpoint to update book.
 @api.route("/removeBook/<id>", methods=["DELETE"])
 def removeBook(id):

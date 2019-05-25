@@ -135,33 +135,10 @@ def addBook():
                             publishedDate="Enter Book Published date"
                         )
 
-"""
-class RemoveBookForm(FlaskForm):
-    bookTitle = SelectField('Book Title', choices=[])
-    submit = SubmitField('Submit')
-
-
-# Endpoint to delete book.
-@api.route("/removeBook", methods=["GET", "POST"])
-@is_logged_in
-def removeBook():
-    form = RemoveBookForm()
-    form.bookTitle.choices = [
-        (books.BookID, books.Title) for books in Book.query.all()]
-
-    if request.method == 'POST':
-        id = request.form.get('bookTitle')
-        book = Book.query.get(id)
-        db.session.delete(book)
-        db.session.commit()
-        flash('Successfully! Removed book from database.')
-        return redirect(url_for('api.removeBook'))
-    return render_template("removeExistingBook.html", form=form)"""
-
 
 # Endpoint to update book.
 @api.route("/removeBook/<id>", methods=["DELETE"])
-def updateBook(id):
+def removeBook(id):
     book = Book.query.get(id)
 
     db.session.delete(book)

@@ -57,7 +57,7 @@ class RemoveBookForm(FlaskForm):
 @site.route("/book/remove")
 @is_logged_in
 def removeExistingBook():
-    removeBookForm = UpdateBookForm()
+    removeBookForm = RemoveBookForm()
     removeBookForm.bookTitle.choices = [
         (books.BookID, books.Title) for books in Book.query.all()]
 

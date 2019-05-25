@@ -71,13 +71,17 @@ Communication to the Master Pi's remote database is configured via the `lms_libr
 }
 ```
 
-
 ### Master Pi Google Calendar API Configuration
 Communication to Google's APIs is done via OAuth2. For this to happen the Master Pi must have OAuth2 credentials so that the Master Pi can talk directly to Google's APIs
 
 This can be generated via: https://developers.google.com/identity/protocols/OAuth2WebServer
 There is an additional approval step that is required to be done while the Master Pi is running, This will allow the program to update your calendar and send invites out on your behalf. You will then need to replace the `credentials.json` file with the one that is generated from following the link above.
 
+### Speech Recognition
+Before the Speech to Text functionality can be used, the following packages must be installed using `apt`.
+```bash
+$ sudo apt install portaudio19-dev python-all-dev python3-all-dev pyaudio
+```
 
 # Running the Smart Library
 

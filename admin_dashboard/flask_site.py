@@ -32,13 +32,6 @@ def dashboard():
 def logout():
     return redirect(url_for("site.login"))
 
-
-"""# Remove Book webpage.
-@site.route("/book/remove")
-def removeExistingBook():
-    return render_template("removeExistingBook.html")
-"""
-
 # Update Book webpage.
 @site.route("/book/update")
 def updateExistingBook():

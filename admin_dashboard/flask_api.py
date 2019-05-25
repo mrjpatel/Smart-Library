@@ -7,7 +7,7 @@ import os
 import requests
 import json
 from flask_wtf import FlaskForm
-from wtforms import SubmitField, StringField SelectField, validators
+from wtforms import SubmitField, StringField, SelectField, validators
 from wtforms.fields.html5 import DateField
 from functools import wraps
 
@@ -135,21 +135,19 @@ class RemoveBookForm(FlaskForm):
 # Endpoint to delete book.
 @api.route("/removeBook", methods=["GET", "POST"])
 def removeBook():
+
     form = RemoveBookForm()
     form.bookTitle.choices = [
-        (books.id, books.title), for books in Book.query.all()]
+        (books.BookID, books.Title) for books in Book.query.all()]
+
+    if request.method == 'POST':
+        id = request.form.get('bookTitle')
+        book = Book.query.get(id)
+        db.session.delete(book)
+        db.session.commit()
+        flash('Successfully! Removed book from database.')
+        return redirect(url_for('api.removeBook'))
     return render_template("removeExistingBook.html", form=form)
-
-
-# Endpoint to delete book.
-@api.route("/removeBook/<id>", methods=["DELETE"])
-def removeBook(id):
-    book = Book.query.get(id)
-
-    db.session.delete(book)
-    db.session.commit()
-
-    return bookSchema.jsonify(book)
 
 
 # Endpoint to update book.

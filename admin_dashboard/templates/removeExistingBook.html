@@ -1,4 +1,5 @@
 {% extends 'bootstrap/base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
 {% block title %}Admin Dashboard{% endblock %}
 
 {% block navbar %}
@@ -10,7 +11,7 @@
     <ul class="nav navbar-nav">
       <li><a href="#">Home</a></li>
       <li><a href="{{ url_for('api.addBook') }}">Add Book</a></li>
-      <li class="active"><a href="#">Remove Book</a></li>
+      <li class="active"><a href="{{ url_for('api.removeBook') }}">Remove Book</a></li>
       <li><a href="{{ url_for('site.updateExistingBook') }}">Update Book</a></li>
       <li><a href="{{ url_for('site.report') }}">Get Report</a></li>
       <li><a href="{{ url_for('site.logout') }}">Logout</a></li>
@@ -32,7 +33,7 @@
   <h1>Remove Book </h1>
   <br>
 
-  <!-- Form-->
+  <!-- Remove Book Form-->
   {{ wtf.quick_form(form) }}
 </div>
 {% endblock %}

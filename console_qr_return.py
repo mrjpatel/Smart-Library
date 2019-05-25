@@ -56,7 +56,7 @@ class ConsoleQRReturnBook(MenuHandler):
             print("Invaild Barcode!")
             return
         for book in data:
-            if not book["id"]:
+            if not book["BookID"]:
                 print("Invalid Barcode!")
                 return
-            return_book.start(book["id"])
+            return_book.start(book["BookID"])

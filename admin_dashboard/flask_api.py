@@ -70,6 +70,15 @@ def is_logged_in(f):
     return wrap
 
 
+# Logout
+@app.route('/logout')
+@is_logged_in
+def logout():
+    session.clear()
+    flash('Successfully! logged out', 'success')
+    return redirect(url_for('site.login'))
+
+
 # Endpoint to show all books.
 @api.route("/books", methods=["GET"])
 def getBooks():

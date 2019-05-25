@@ -26,11 +26,12 @@ def login():
 def dashboard():
     return render_template("dashboard.html")
 
-
+"""
 # Logout webpage.
 @site.route("/logout")
 def logout():
-    return redirect(url_for("site.login"))
+    return redirect(url_for("site.login"))"""
+
 
 # Update Book webpage.
 @site.route("/book/update")

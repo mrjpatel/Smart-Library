@@ -126,5 +126,5 @@ class ConsoleReturnBook(MenuHandler):
         )
         print(
             "Successfully Returned book: " +
-            "{}, Reminder Deleted!".format(book_borrowed["0"])
+            "{}, Reminder Deleted!".format(book_borrowed["BookID"])
         )

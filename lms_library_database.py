@@ -102,7 +102,7 @@ class LMSLibraryDatabase:
         """
         # prepare statement
         query = """SELECT * FROM Book
-                    WHERE Author = %(author)s;"""
+                    WHERE LOWER(Author) = LOWER(%(author)s);"""
         # sanitize inputs
         params = {
             "author": author
@@ -121,7 +121,7 @@ class LMSLibraryDatabase:
         """
         # prepare statement
         query = """SELECT * FROM Book
-                    WHERE Title = %(title)s;"""
+                    WHERE LOWER(Title) = LOWER(%(title)s);"""
         # sanitize inputs
         params = {
             "title": title

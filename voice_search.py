@@ -32,7 +32,7 @@ class VoiceSearch:
             # adjust for ambient noise for optimal performance
             r.adjust_for_ambient_noise(source)
 
-            print("Say something...")
+            print("Listening...")
             try:
                 # try get audio
                 # stop listening after 2 seconds if no speech detected
@@ -47,10 +47,10 @@ class VoiceSearch:
             print("You said '{}'".format(speech))
             return speech
         except sr.UnknownValueError:
-            print("We could not understand you")
+            print("We couldn't understand you")
             return None
         except sr.RequestError as re:
-            print("Something went wrong.")
+            print("Something went wrong")
             print(re)
             return None
 

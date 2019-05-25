@@ -11,8 +11,7 @@ class VoiceSearch:
         """
         Creates an instance of a VoiceSearch object
         """
-        # mic_name = "Microsoft® LifeCam HD-3000: USB Audio (hw:1,0)"
-        mic_name = "Built-in Microphone"
+        mic_name = "Microsoft® LifeCam HD-3000: USB Audio (hw:1,0)"
         # set mic id to avoid ambiguity
         for i, microphone_name in enumerate(sr.Microphone.list_microphone_names()):
             if(microphone_name == mic_name):

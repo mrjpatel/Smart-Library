@@ -36,6 +36,9 @@ class VoiceSearch:
                 # try get audio
                 # stop listening after 2 seconds if no speech detected
                 audio = r.listen(source, timeout=2)
+
+                # inform the user the listening has stopped
+                print("Processing audio...")
             except sr.WaitTimeoutError:
                 print("We couldn't hear anything")
                 return None

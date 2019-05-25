@@ -42,7 +42,3 @@ class VoiceSearch:
             print(re)
             return None
 
-if __name__ == "__main__":
-    vs = VoiceSearch()
-    s = vs.speech_to_text()
-    print(s)

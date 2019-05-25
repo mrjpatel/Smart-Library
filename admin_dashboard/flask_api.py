@@ -135,7 +135,7 @@ def addBook():
                             publishedDate="Enter Book Published date"
                         )
 
-
+"""
 class RemoveBookForm(FlaskForm):
     bookTitle = SelectField('Book Title', choices=[])
     submit = SubmitField('Submit')
@@ -156,7 +156,18 @@ def removeBook():
         db.session.commit()
         flash('Successfully! Removed book from database.')
         return redirect(url_for('api.removeBook'))
-    return render_template("removeExistingBook.html", form=form)
+    return render_template("removeExistingBook.html", form=form)"""
+
+
+# Endpoint to update book.
+@api.route("/removeBook/<id>", methods=["DELETE"])
+def updateBook(id):
+    book = Book.query.get(id)
+
+    db.session.delete(book)
+    db.session.commit()
+
+    return bookSchema.jsonify(book)
 
 
 # Endpoint to update book.

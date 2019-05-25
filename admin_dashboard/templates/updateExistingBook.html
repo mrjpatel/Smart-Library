@@ -11,7 +11,7 @@
     <ul class="nav navbar-nav">
       <li><a href="{{ url_for('site.dashboard') }}">Home</a></li>
       <li><a href="{{ url_for('api.addBook') }}">Add Book</a></li>
-      <li><a href="{{ url_for('api.removeBook') }}">Remove Book</a></li>
+      <li><a href="{{ url_for('site.removeExistingBook') }}">Remove Book</a></li>
       <li class="active"><a href="{{ url_for('site.updateExistingBook') }}">Update Book</a></li>
       <li><a href="{{ url_for('site.report') }}">Get Report</a></li>
       <li><a href="{{ url_for('api.logout') }}">Logout</a></li>
@@ -22,7 +22,6 @@
 
 {% block content %}
 <div class="container">
-
   <h1>Update Book</h1>
   <br>
 

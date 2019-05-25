@@ -9,9 +9,9 @@
       <a class="navbar-brand" href="{{ url_for('site.dashboard') }}">Admin Dashboard</a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="#">Home</a></li>
+      <li><a href="{{ url_for('site.dashboard') }}">Home</a></li>
       <li><a href="{{ url_for('api.addBook') }}">Add Book</a></li>
-      <li class="active"><a href="{{ url_for('api.removeBook') }}">Remove Book</a></li>
+      <li class="active"><a href="{{ url_for('site.removeExistingBook') }}">Remove Book</a></li>
       <li><a href="{{ url_for('site.updateExistingBook') }}">Update Book</a></li>
       <li><a href="{{ url_for('site.report') }}">Get Report</a></li>
       <li><a href="{{ url_for('site.logout') }}">Logout</a></li>
@@ -34,7 +34,26 @@
   <br>
 
   <!-- Remove Book Form-->
-  {{ wtf.quick_form(form) }}
+  <form method="POST" role="form">
+      {{ removeBookForm.csrf_token }}
+      {{ wtf.form_field(removeBookForm.bookTitle) }}
+      <br>
+      <button class="btn btn-lg btn-primary btn-block" type="button" onclick="onRemove()">Remove Book</button>
+  </form>
+
+  <!-- Flask API Request -->
+  <script>
+      function onRemove() {
+        var newurl = "/removeBook/" + document.getElementById('bookTitle').value;
+        $.ajax({
+          type: "DELETE",
+          url: newurl,
+          success: function(response) {
+              location.reload();
+          }
+        });
+      }
+      </script>
 </div>
 {% endblock %}
 

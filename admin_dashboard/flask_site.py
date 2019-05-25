@@ -49,6 +49,23 @@ def logout():
     return redirect(url_for("site.login"))
 
 
+class RemoveBookForm(FlaskForm):
+    bookTitle = SelectField('Book Title', choices=[])
+
+
+# Remove Book webpage.
+@site.route("/book/remove")
+@is_logged_in
+def removeExistingBook():
+    removeBookForm = UpdateBookForm()
+    removeBookForm.bookTitle.choices = [
+        (books.BookID, books.Title) for books in Book.query.all()]
+
+    return render_template(
+                            "removeExistingBook.html",
+                            removeBookForm=removeBookForm)
+
+
 class UpdateBookForm(FlaskForm):
     bookTitle = SelectField('Book to Update', choices=[])
     title = StringField('New Book Title',

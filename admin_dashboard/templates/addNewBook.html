@@ -2,6 +2,7 @@
 {% import "bootstrap/wtf.html" as wtf %}
 {% block title %}Admin Dashboard{% endblock %}
 
+<!-- Navbar -->
 {% block navbar %}
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
@@ -9,35 +10,35 @@
       <a class="navbar-brand" href="{{ url_for('site.dashboard') }}">Admin Dashboard</a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="{{ url_for('site.addNewBook') }}">Add Book</a></li>
+      <li><a href="{{ url_for('site.dashboard') }}">Home</a></li>
+      <li class="active"><a href="{{ url_for('api.addBook') }}">Add Book</a></li>
       <li><a href="{{ url_for('site.removeExistingBook') }}">Remove Book</a></li>
       <li><a href="{{ url_for('site.updateExistingBook') }}">Update Book</a></li>
       <li><a href="{{ url_for('site.report') }}">Get Report</a></li>
+      <li><a href="{{ url_for('site.logout') }}">Logout</a></li>
     </ul>
   </div>
 </nav>
 {% endblock %}
 
 {% block content %}
-{% block content %}
 <div class="container">
-    {% for message in get_flashed_messages() %}
-    <div class="alert alert-success">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        {{ message }}
-    </div>
-    {% endfor %}
+  <!-- Success Message -->
+  {% for message in get_flashed_messages() %}
+  <div class="alert alert-success">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      {{ message }}
+  </div>
+  {% endfor %}
 
-    {% block page_content %}{% endblock %}
+  <h1>Add New Book </h1>
+  <br>
+
+  <!-- Form-->
+  {{ wtf.quick_form(addBookForm) }}
 </div>
-{% endblock %}
-<h1>Add New Book </h1> 
-{{ wtf.quick_form(addBookForm) }}
-
 {% endblock %}
 
 {% block scripts %}
 {{ super() }}
 {% endblock %}
-
-

@@ -33,12 +33,6 @@ def logout():
     return redirect(url_for("site.login"))
 
 
-# Add book webpage.
-@site.route("/book/add")
-def addNewBook():
-    return render_template("addNewBook.html")
-
-
 # Remove Book webpage.
 @site.route("/book/remove")
 def removeExistingBook():

@@ -6,6 +6,9 @@ from flask import current_app as app
 import os
 import requests
 import json
+from flask_wtf import FlaskForm
+from wtforms import SubmitField, StringField, validators
+from wtforms.fields.html5 import DateField
 
 api = Blueprint("api", __name__)
 db = SQLAlchemy()
@@ -63,14 +66,32 @@ def getBooks():
     return jsonify(result.data)
 
 
+class AddBookForm(FlaskForm):
+    title = StringField('Book Title',
+                        validators=[validators.required(),
+                                    validators.Regexp('^[a-zA-Z0-9 ]*$',
+                                    message='Invalid characters entered!')])
+    author = StringField(
+                        'Book Author',
+                        validators=[validators.required(),
+                                    validators.Regexp('^[a-zA-Z0-9 ]*$',
+                                    message='Invalid characters entered!')])
+    publishedDate = DateField(
+                                'Published Date',
+                                format="%Y-%m-%d",
+                                validators=[
+                                    validators.required()])
+    submit = SubmitField('Submit')
+
+
 # Endpoint to create new book.
 @api.route("/addBook", methods=["GET", "POST"])
 def addBook():
-    addBookForm = NewAddBookForm()
-    if form.validate_on_submit():
-        title = form.title.data
-        author = form.author.data
-        publishedDate = form.publishedDate.data
+    addBookForm = AddBookForm()
+    if request.method == 'POST' and addBookForm.validate_on_submit():
+        title = addBookForm.title.data
+        author = addBookForm.author.data
+        publishedDate = addBookForm.publishedDate.data
 
         newBook = Book(
             Title=title,
@@ -81,10 +102,15 @@ def addBook():
         db.session.add(newBook)
         db.session.commit()
         flash('Successfully! Added new book to database.')
-        return redirect(url_for('site.addNewBook'))
-    else:
-        flash('Error! Please try again')
-        return redirect(url_for('site.addNewBook'))
+        return redirect(url_for('api.addBook'))
+
+    return render_template(
+                            'addNewBook.html',
+                            addBookForm=addBookForm,
+                            title="Enter Book Title",
+                            author="Enter Book Author",
+                            publishedDate="Enter Book Published date"
+                        )
 
 
 # Endpoint to delete book.

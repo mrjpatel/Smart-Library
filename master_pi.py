@@ -69,6 +69,7 @@ class MasterPi:
                             is_exit = menu.prompt_and_invoke_option()
                         print("Goodbye!")
 
+                        cc.sendall(b"exit")
                         cc.sendall(b"Successfully Logged Out")
             except KeyboardInterrupt:
                 print("Keyboard Interrupt detected, shutting down...")

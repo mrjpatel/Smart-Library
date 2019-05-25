@@ -134,8 +134,8 @@ class RemoveBookForm(FlaskForm):
 
 # Endpoint to delete book.
 @api.route("/removeBook", methods=["GET", "POST"])
+@is_logged_in
 def removeBook():
-
     form = RemoveBookForm()
     form.bookTitle.choices = [
         (books.BookID, books.Title) for books in Book.query.all()]

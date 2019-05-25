@@ -64,22 +64,27 @@ def getBooks():
 
 
 # Endpoint to create new book.
-@api.route("/addBook", methods=["POST"])
+@api.route("/addBook", methods=["GET", "POST"])
 def addBook():
-    title = request.json["title"]
-    author = request.json["author"]
-    publishedDate = request.json["publishedDate"]
+    addBookForm = NewAddBookForm()
+    if form.validate_on_submit():
+        title = form.title.data
+        author = form.author.data
+        publishedDate = form.publishedDate.data
 
-    newBook = Book(
-        Title=title,
-        Author=author,
-        PublishedDate=publishedDate
-        )
+        newBook = Book(
+            Title=title,
+            Author=author,
+            PublishedDate=publishedDate
+            )
 
-    db.session.add(newBook)
-    db.session.commit()
-
-    return bookSchema.jsonify(newBook)
+        db.session.add(newBook)
+        db.session.commit()
+        flash('Successfully! Added new book to database.')
+        return redirect(url_for('site.addNewBook'))
+    else:
+        flash('Error! Please try again')
+        return redirect(url_for('site.addNewBook'))
 
 
 # Endpoint to delete book.

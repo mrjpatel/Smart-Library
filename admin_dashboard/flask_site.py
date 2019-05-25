@@ -1,10 +1,11 @@
-from flask import Flask, Blueprint, request, jsonify
-from flask import render_template, redirect, url_for
+from flask import Flask, Blueprint, request, jsonify, flash
+from flask import render_template, redirect, url_for, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 import os
 import requests
 import json
+from functools import wraps
 
 site = Blueprint("site", __name__)
 
@@ -13,6 +14,17 @@ site = Blueprint("site", __name__)
 @site.route("/")
 def index():
     return redirect(url_for('site.login'))
+
+
+def is_logged_in(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        if 'logged_in' in session:
+            return f(*args, **kwargs)
+        else:
+            flash('Invalid Credentials. Please Login to access this feature.')
+            return redirect(url_for('site.login'))
+    return wrap
 
 
 # Login webpage.
@@ -41,5 +53,6 @@ def updateExistingBook():
 
 # Report webpage.
 @site.route("/report")
+@is_logged_in
 def report():
     return render_template("report.html")

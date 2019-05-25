@@ -71,7 +71,7 @@ def is_logged_in(f):
 
 
 # Logout
-@app.route('/logout')
+@api.route('/logout')
 @is_logged_in
 def logout():
     session.clear()

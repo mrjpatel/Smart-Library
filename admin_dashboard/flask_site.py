@@ -17,9 +17,7 @@ site = Blueprint("site", __name__)
 # Client webpage.
 @site.route("/")
 def index():
-    if 'logged_in' in session:
-        redirect(url_for('site.dashboard'))
-    return redirect(url_for('site.login'))
+    redirect(url_for('site.dashboard'))
 
 
 def is_logged_in(f):

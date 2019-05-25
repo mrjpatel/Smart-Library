@@ -35,6 +35,10 @@ $ deactivate
 ## Configuration
 
 ### User password cryptography
+The `cryptography` library relies on some packages to be installed. These will need to be installe dwith the `apt` package manager.
+```bash
+$ sudo apt install build-essential libssl-dev libffi-dev python-dev
+```
 
 AES-256 is used to encrypt and decrypt a hash of the user's password when stored in the database.
 

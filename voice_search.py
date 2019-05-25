@@ -4,7 +4,13 @@ import speech_recognition as sr
 # code samples in the 2019 COSC2674 Programming Internet of Things
 # course material
 class VoiceSearch:
+    """
+    Class to handle all speech to text functionality
+    """
     def __init__(self):
+        """
+        Creates an instance of a VoiceSearch object
+        """
         # mic_name = "Microsoft® LifeCam HD-3000: USB Audio (hw:1,0)"
         mic_name = "Built-in Microphone"
         # set mic id to avoid ambiguity
@@ -14,6 +20,12 @@ class VoiceSearch:
                 break
     
     def speech_to_text(self):
+        """
+        Gets audio from the microphone and hands off to Google
+        for audio processing
+        :return: the text in the audio if successful, None otherwise
+        :rtype: str
+        """
         # get audio from microphone
         r = sr.Recognizer()
         with sr.Microphone(device_index=self.device_id) as source:

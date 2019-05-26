@@ -106,8 +106,8 @@ def updateBook(id):
     publishedDate = request.json["publishedDate"]
 
     book.Title = title
-    book.author = author
-    book.publishedDate = publishedDate
+    book.Author = author
+    book.PublishedDate = publishedDate
 
     db.session.commit()
 

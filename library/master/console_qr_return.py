@@ -3,9 +3,9 @@ from datetime import timedelta
 import socket
 import pickle
 
-from lms_library_database import LMSLibraryDatabase
-from menu_handler import MenuHandler
-from console_return_book import ConsoleReturnBook
+from library.common.lms_library_database import LMSLibraryDatabase
+from library.common.menu_handler import MenuHandler
+from .console_return_book import ConsoleReturnBook
 
 
 class ConsoleQRReturnBook(MenuHandler):

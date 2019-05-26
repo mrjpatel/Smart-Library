@@ -1,9 +1,9 @@
 from datetime import datetime
 from datetime import timedelta
 
-from lms_library_database import LMSLibraryDatabase
-from menu_handler import MenuHandler
-from google_calander import GoogleCalanderAPI
+from library.common.lms_library_database import LMSLibraryDatabase
+from library.common.menu_handler import MenuHandler
+from .google_calander import GoogleCalanderAPI
 
 
 class ConsoleBorrowBook(MenuHandler):

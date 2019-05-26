@@ -1,5 +1,6 @@
 import sqlite3
 
+
 class LMSUserDatabase:
     """
     Class used to access the locally stored user database

@@ -3,9 +3,9 @@ import socket
 import pickle
 import json
 
-from menu_handler import MenuHandler
-from user_credential import UserCredential
-from qr_scanner import QrScanner
+from library.common.menu_handler import MenuHandler
+from .user_credential import UserCredential
+from .qr_scanner import QrScanner
 
 
 class ConsoleLogin(MenuHandler):

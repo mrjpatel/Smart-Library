@@ -4,13 +4,13 @@ import socket
 import pickle
 import json
 
-from console_menu import ConsoleMenu
-from console_search_book import ConsoleSearchBook
-from console_borrow_book import ConsoleBorrowBook
-from console_return_book import ConsoleReturnBook
-from console_qr_return import ConsoleQRReturnBook
-from lms_library_database import LMSLibraryDatabase
-from voice_search_book import VoiceSearchBook
+from library.common.console_menu import ConsoleMenu
+from library.common.lms_library_database import LMSLibraryDatabase
+from .console_search_book import ConsoleSearchBook
+from .console_borrow_book import ConsoleBorrowBook
+from .console_return_book import ConsoleReturnBook
+from .console_qr_return import ConsoleQRReturnBook
+from .voice_search_book import VoiceSearchBook
 
 
 class MasterPi:
@@ -55,11 +55,7 @@ class MasterPi:
 
                         # define menu handlers
                         menu_handlers = [
-<<<<<<< HEAD
                             ConsoleSearchBook(db_details_file, user),
-=======
-                            ConsoleSearchBook(db_details_file),
->>>>>>> ccd3efcc5173717de2f96a9296441c98bc4ff448
                             VoiceSearchBook(db_details_file),
                             ConsoleBorrowBook(db_details_file, user),
                             ConsoleReturnBook(db_details_file, user),

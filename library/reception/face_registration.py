@@ -1,27 +1,35 @@
-# USAGE
-# With default parameter of user/id
-#       python3 01_capture.py -n default_user
-# OR specifying the dataset and user/id
-#       python3 02_capture.py -i dataset -n default_user
-
 # Acknowledgement
 # This code is adapted from:
 # https://www.hackster.io/mjrobot/real-time-face-recognition-an-end-to-end-project-a10826
-
-# import the necessary packages
+# Additional acknowledgement
+# Code snippets use in this Module is taken from PIoT Course Tutorial 9
 import cv2
 import os
 from image_encoding import ImageEncoding
 
 
 class FaceRegistration:
+    """
+    Class for handling the face registration.
+    It is used to start video stream and capture user images
+    and store into a trained dataset directory
+    """
 
     def register(self, name):
+        """
+        Registers user's face
+        :param name: username of the user
+        :type name: str
+        :return: Wheter the face was registered
+        :rtype: bool
+        """
         folder = "./dataset/{}".format(name)
 
+        # Create a new folder for the new name
         if not os.path.exists(folder):
             os.makedirs(folder)
 
+        # Start the camera, set video width and height
         cam = cv2.VideoCapture(0)
         cam.set(3, 640)
         cam.set(4, 480)

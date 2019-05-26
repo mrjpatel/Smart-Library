@@ -27,8 +27,8 @@ class ImageEncoding:
         knownEncodings = []
         knownNames = []
 
+        print("Started Processing images. Please wait")
         for (i, imagePath) in enumerate(imagePaths):
-            print("Processing image {}/{}".format(i + 1, len(imagePaths)))
             name = imagePath.split(os.path.sep)[-2]
 
             image = cv2.imread(imagePath)
@@ -41,6 +41,7 @@ class ImageEncoding:
                 knownEncodings.append(encoding)
                 knownNames.append(name)
 
+        print("Finished Processing images!")
         print("Serializing encodings...")
         data = {
             "encodings": knownEncodings,
@@ -49,7 +50,3 @@ class ImageEncoding:
 
         with open(encoding_file, "wb") as f:
             f.write(pickle.dumps(data))
-
-if __name__ == "__main__":
-    ie = ImageEncoding()
-    print(ie.register("encodings.pickle"))

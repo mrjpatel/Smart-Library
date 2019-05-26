@@ -11,6 +11,7 @@
 # import the necessary packages
 import cv2
 import os
+from image_encoding import ImageEncoding
 
 
 class FaceRegistration:
@@ -58,3 +59,5 @@ class FaceRegistration:
 if __name__ == "__main__":
     fr = FaceRegistration()
     print(fr.register("user1"))
+    ie = ImageEncoding()
+    ie.encode("encodings.pickle")

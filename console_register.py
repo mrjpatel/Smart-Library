@@ -2,6 +2,8 @@ import re
 
 from user_credential import UserCredential
 from menu_handler import MenuHandler
+from face_registration import FaceRegistration
+from image_encoding import ImageEncoding
 
 
 class ConsoleRegister(MenuHandler):
@@ -29,6 +31,7 @@ class ConsoleRegister(MenuHandler):
         first_name = self.get_first_name()
         last_name = self.get_last_name()
         email = self.get_email()
+        self.register_face(username)
 
         # create new user
         credentials = UserCredential(username, password)
@@ -118,3 +121,17 @@ class ConsoleRegister(MenuHandler):
             if not is_valid_email:
                 print("{} is not a valid email".format(email))
         return email
+
+    def register_face(self, username):
+        """
+        Prompt and get the toogle to register face
+        :param username: The username of user
+        :type username: str
+        """
+        print("Please wait to register your face")
+
+        face_register = FaceRegistration()
+        print(face_register.register(username))
+
+        image_encode = ImageEncoding()
+        image_encode.encode("encodings.pickle")

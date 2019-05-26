@@ -55,9 +55,3 @@ class FaceRegistration:
 
         cam.release()
         return "Successfully! registered face"
-
-if __name__ == "__main__":
-    fr = FaceRegistration()
-    print(fr.register("user1"))
-    ie = ImageEncoding()
-    ie.encode("encodings.pickle")

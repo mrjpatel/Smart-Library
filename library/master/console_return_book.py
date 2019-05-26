@@ -124,6 +124,7 @@ class ConsoleReturnBook(MenuHandler):
         """
         # set date return
         today = datetime.now()
+
         # generate event through google calander api
         GoogleCalanderAPI.delete_due_event(
             book_borrowed["EventID"]
@@ -137,3 +138,8 @@ class ConsoleReturnBook(MenuHandler):
             "Successfully Returned book: " +
             "{}, Reminder Deleted!".format(book_borrowed["BookID"])
         )
+        # print if book is being returned after due date
+        if today > book_borrowed["DueDate"]:
+            print("Book was due on {} and is returned Late!".format(
+                book_borrowed["DueDate"]
+            ))

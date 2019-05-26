@@ -40,6 +40,7 @@ class LMSLibraryDatabase:
     def __init__(self, db_settings_file):
         """
         Creating an object of this class. Tests the Database connection
+
         :param db_settings_file: Database Setting File
         :type db_settings_file: string
         """
@@ -134,7 +135,8 @@ class LMSLibraryDatabase:
 
         :param publish_date: Published Date of the book
         :type publish_date: str
-        :return: returns book records with the same Published Date as publish_date
+        :return: returns book records with the same Published Date as
+        publish_date
         :rtype: list (dicts with book details)
         """
         # prepare statement
@@ -216,7 +218,7 @@ class LMSLibraryDatabase:
         """
         Queries Database for borrowed boook
 
-        :param book_id: Book ID of borrowed book 
+        :param book_id: Book ID of borrowed book
         :type book_id: str
         :param status: Status of borrowed book
         :type status: str
@@ -240,7 +242,7 @@ class LMSLibraryDatabase:
         """
         Queries Database for borrowed boook by a user
 
-        :param book_id: Book ID of borrowed book 
+        :param book_id: Book ID of borrowed book
         :type book_id: str
         :param status: Status of borrowed book
         :type status: str
@@ -277,7 +279,7 @@ class LMSLibraryDatabase:
 
         :param username: Username of user who borrowed book
         :type username: str
-        :param book_id: Book ID of borrowed book 
+        :param book_id: Book ID of borrowed book
         :type book_id: str
         :param borrow_date: Datetime of when the book is borrowed
         :type borrow_date: datetime

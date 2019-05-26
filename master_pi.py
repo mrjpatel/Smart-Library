@@ -8,6 +8,7 @@ from console_menu import ConsoleMenu
 from console_search_book import ConsoleSearchBook
 from console_borrow_book import ConsoleBorrowBook
 from console_return_book import ConsoleReturnBook
+from console_qr_return import ConsoleQRReturnBook
 from lms_library_database import LMSLibraryDatabase
 
 
@@ -51,9 +52,10 @@ class MasterPi:
 
                         # define menu handlers
                         menu_handlers = [
-                            ConsoleSearchBook(db_details_file),
+                            ConsoleSearchBook(db_details_file, user),
                             ConsoleBorrowBook(db_details_file, user),
-                            ConsoleReturnBook(db_details_file, user)
+                            ConsoleReturnBook(db_details_file, user),
+                            ConsoleQRReturnBook(db_details_file, user, cc)
                         ]
 
                         # display menu, get selection, and run
@@ -69,6 +71,7 @@ class MasterPi:
                             is_exit = menu.prompt_and_invoke_option()
                         print("Goodbye!")
 
+                        cc.sendall(b"exit")
                         cc.sendall(b"Successfully Logged Out")
             except KeyboardInterrupt:
                 print("Keyboard Interrupt detected, shutting down...")

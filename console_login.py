@@ -1,8 +1,10 @@
 import socket
 import pickle
+import json
 
 from menu_handler import MenuHandler
 from user_credential import UserCredential
+from qr_scanner import QrScanner
 
 
 class ConsoleLogin(MenuHandler):
@@ -94,5 +96,17 @@ class ConsoleLogin(MenuHandler):
             serial_user = pickle.dumps(user)
             s.send(serial_user)
             print("Logging in as user {}".format(user["username"]))
-            logout_message = s.recv(1024).decode("utf-8")
+            while True:
+                message = s.recv(1024).decode("utf-8").strip()
+                if message == "exit":
+                    logout_message = s.recv(1024).decode("utf-8")
+                    break
+                if message == "barcode":
+                    data = QrScanner.get_qr_codes()
+                    print(data)
+                    s.send(pickle.dumps(data))
+                    print("Please continue on Master Pi")
+                if message == "voice":
+                    # TODO: Voice Searching
+                    pass
             print(logout_message)

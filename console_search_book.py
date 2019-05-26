@@ -1,10 +1,11 @@
 from datetime import datetime
 from dateutil.parser import parse
+from prettytable import PrettyTable
 
 from lms_library_database import LMSLibraryDatabase
 from menu_handler import MenuHandler
 from console_menu import ConsoleMenu
-from prettytable import PrettyTable
+from console_borrow_book import ConsoleBorrowBook
 
 
 class ConsoleSearchBook(MenuHandler):
@@ -16,13 +17,15 @@ class ConsoleSearchBook(MenuHandler):
     display_text : str
         Display test for the console menu
     """
-    def __init__(self, database):
+    def __init__(self, database, user):
         """
         :param database: Database Setting File location
         :type database: string
         """
         self.db = LMSLibraryDatabase(database)
         self.display_text = "Search Book"
+        self.user = user
+        self.database = database
 
     def invoke(self):
         """
@@ -30,9 +33,9 @@ class ConsoleSearchBook(MenuHandler):
         """
         # set menu handlers
         menu_handlers = [
-            SearchByAuthor(self.db),
-            SearchByName(self.db),
-            SearchByPublishedDate(self.db)
+            SearchByAuthor(self.db, self),
+            SearchByName(self.db, self),
+            SearchByPublishedDate(self.db, self)
         ]
 
         # display menu, get selection, and run
@@ -66,6 +69,13 @@ class ConsoleSearchBook(MenuHandler):
             table.add_row(result)
         print("\n{}".format(table))
 
+    def prompt_borrow_book(self):
+        print("Would you like to borrow a book? (y/n): ", end="")
+        str_input = input().strip()
+        if str_input == "y":
+            borrow_handler = ConsoleBorrowBook(self.database, self.user)
+            borrow_handler.invoke()
+
 
 class SearchByAuthor(MenuHandler):
     """
@@ -76,12 +86,15 @@ class SearchByAuthor(MenuHandler):
     display_text : str
         Display test for the console menu
     """
-    def __init__(self, database):
+    def __init__(self, database, sbh):
         """
         :param database: Database Setting File location
         :type database: string
+        :param sbh: SearchBook Handler Object
+        :type database: obj
         """
         self.db = database
+        self.sbh = sbh
         self.display_text = "Search by Author"
 
     def invoke(self):
@@ -99,6 +112,7 @@ class SearchByAuthor(MenuHandler):
         ConsoleSearchBook.display_books(
             self.db.query_book_by_author(str_option)
         )
+        self.sbh.prompt_borrow_book()
 
 
 class SearchByName(MenuHandler):
@@ -110,12 +124,15 @@ class SearchByName(MenuHandler):
     display_text : str
         Display test for the console menu
     """
-    def __init__(self, database):
+    def __init__(self, database, sbh):
         """
         :param database: Database Setting File location
         :type database: string
+        :param sbh: SearchBook Handler Object
+        :type database: obj
         """
         self.db = database
+        self.sbh = sbh
         self.display_text = "Search by Book Title"
 
     def invoke(self):
@@ -133,6 +150,7 @@ class SearchByName(MenuHandler):
         ConsoleSearchBook.display_books(
             self.db.query_book_by_title(str_option)
         )
+        self.sbh.prompt_borrow_book()
 
 
 class SearchByPublishedDate(MenuHandler):
@@ -144,12 +162,15 @@ class SearchByPublishedDate(MenuHandler):
     display_text : str
         Display test for the console menu
     """
-    def __init__(self, database):
+    def __init__(self, database, sbh):
         """
         :param database: Database Setting File location
         :type database: string
+        :param sbh: SearchBook Handler Object
+        :type database: obj
         """
         self.db = database
+        self.sbh = sbh
         self.display_text = "Search by Published Date"
 
     def invoke(self):
@@ -167,6 +188,7 @@ class SearchByPublishedDate(MenuHandler):
             ConsoleSearchBook.display_books(
                 self.db.query_book_by_publish_date(publish_date)
             )
+            self.sbh.prompt_borrow_book()
         except:
             print("Invalid Input!")
             return

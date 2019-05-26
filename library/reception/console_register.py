@@ -116,12 +116,7 @@ class ConsoleRegister(MenuHandler):
         while not is_valid_email:
             print("Email: ", end="")
             email = input().strip()
-            email_regex_str = r"""
-                ([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*
-                |"([]!#-[^-~ \t]|(\\[\t -~]))+")@
-                ([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*
-                |\[[\t -Z^-~]*])"""
-            email_regex = re.compile(email_regex_str)
+            email_regex = re.compile(r"[^@]+@[^\.]+\..+")
             is_valid_email = email_regex.match(email) is not None
             if not is_valid_email:
                 print("{} is not a valid email".format(email))

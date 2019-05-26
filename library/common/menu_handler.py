@@ -21,7 +21,7 @@ class MenuHandler(ABC):
         function to get the display text of the menu handler
         """
         return self.display_text
-    
+
     @abstractmethod
     def invoke(self):
         """

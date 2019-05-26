@@ -7,7 +7,6 @@ from prettytable import PrettyTable
 from library.common.console_menu import ConsoleMenu
 from library.common.lms_library_database import LMSLibraryDatabase
 from library.common.menu_handler import MenuHandler
-# from library.voice_search import VoiceSearch
 
 
 class VoiceSearchBook(MenuHandler):
@@ -105,6 +104,7 @@ class VoiceSearchByAuthor(MenuHandler):
         if search_term is None:
             print("Error: could not perform search")
             return
+        print("Searching for: " + search_term)
         VoiceSearchBook.display_books(
             self.db.query_book_by_author(search_term)
         )
@@ -140,6 +140,7 @@ class VoiceSearchByName(MenuHandler):
         if search_term is None:
             print("Error: could not perform search")
             return
+        print("Searching for: " + search_term)
         VoiceSearchBook.display_books(
-            self.db.query_book_by_author(search_term)
+            self.db.query_book_by_title(search_term)
         )

@@ -27,6 +27,7 @@ class UserCredential:
     def get_encrypted_password(self):
         """
         Encrypts the user's hashed password
+
         :return: the cyphertext of the encrypted hashed password
         :rtype: byte
         """
@@ -36,6 +37,7 @@ class UserCredential:
         """
         Decrypts the cyphertext and checks whether
         it matches the hashed password
+
         :param cyphertext: the encrpyted cyphertext
         :type cyphertext: byte
         :return: true if the decrytped plain text matches the hashed password

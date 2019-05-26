@@ -16,8 +16,8 @@ class FaceRegistration:
     """
 
     def register(self, name):
-        """
-        Registers user's face
+        """Registers user's face.
+
         :param name: username of the user
         :type name: str
         :return: Wheter the face was registered

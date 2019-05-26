@@ -1,7 +1,7 @@
 import re
 
-from user_credential import UserCredential
-from menu_handler import MenuHandler
+from library.common.menu_handler import MenuHandler
+from .user_credential import UserCredential
 
 
 class ConsoleRegister(MenuHandler):

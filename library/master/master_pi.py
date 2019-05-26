@@ -4,13 +4,13 @@ import socket
 import pickle
 import json
 
-from console_menu import ConsoleMenu
-from console_search_book import ConsoleSearchBook
-from console_borrow_book import ConsoleBorrowBook
-from console_return_book import ConsoleReturnBook
-from console_qr_return import ConsoleQRReturnBook
-from lms_library_database import LMSLibraryDatabase
-from voice_search_book import VoiceSearchBook
+from library.common.console_menu import ConsoleMenu
+from library.common.lms_library_database import LMSLibraryDatabase
+from .console_search_book import ConsoleSearchBook
+from .console_borrow_book import ConsoleBorrowBook
+from .console_return_book import ConsoleReturnBook
+from .console_qr_return import ConsoleQRReturnBook
+from .voice_search_book import VoiceSearchBook
 
 
 class MasterPi:
@@ -56,7 +56,11 @@ class MasterPi:
                         # define menu handlers
                         menu_handlers = [
                             ConsoleSearchBook(db_details_file, user),
+<<<<<<< HEAD:master_pi.py
                             VoiceSearchBook(db_details_file),
+=======
+                            VoiceSearchBook(db_details_file, cc),
+>>>>>>> feature/rubric-upgrades:library/master/master_pi.py
                             ConsoleBorrowBook(db_details_file, user),
                             ConsoleReturnBook(db_details_file, user),
                             ConsoleQRReturnBook(db_details_file, user, cc)

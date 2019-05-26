@@ -1,6 +1,6 @@
 import hashlib
 
-from aes_cryptography import AESCryptography
+from .aes_cryptography import AESCryptography
 
 
 class UserCredential:

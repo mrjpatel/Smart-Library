@@ -1,11 +1,13 @@
+import pickle
+import socket
 import subprocess
 
 from prettytable import PrettyTable
 
-from console_menu import ConsoleMenu
-from lms_library_database import LMSLibraryDatabase
-from menu_handler import MenuHandler
-from voice_search import VoiceSearch
+from library.common.console_menu import ConsoleMenu
+from library.common.lms_library_database import LMSLibraryDatabase
+from library.common.menu_handler import MenuHandler
+# from library.voice_search import VoiceSearch
 
 
 class VoiceSearchBook(MenuHandler):
@@ -13,15 +15,20 @@ class VoiceSearchBook(MenuHandler):
     Class to handle searching for a book through voice
     db: LMSLibraryDatabase
         Database object of the master database
+    cc : obj
+        Reception Socket connection object
     """
 
-    def __init__(self, database):
+    def __init__(self, database, cc):
         """
         Creates a handler object
         :param databse: Database setting file location
         :type database: str
+        :param cc: Client Connection Object of the Reception Pi
+        :type cc: obj
         """
         self.db = LMSLibraryDatabase(database)
+        self.cc = cc
         self.display_text = "Search Book by voice"
 
     def invoke(self):
@@ -30,8 +37,8 @@ class VoiceSearchBook(MenuHandler):
         """
         # set menu handlers
         menu_handlers = [
-            VoiceSearchByAuthor(self.db),
-            VoiceSearchByName(self.db)
+            VoiceSearchByAuthor(self.db, self.cc),
+            VoiceSearchByName(self.db, self.cc)
         ]
 
         # display menu, get selection, and run
@@ -73,25 +80,28 @@ class VoiceSearchByAuthor(MenuHandler):
         Database object of the master database
     display_text: str
         Display text for the menu
+    cc : obj
+        Reception Socket connection object
     """
 
-    def __init__(self, database):
+    def __init__(self, database, cc):
         """
         :param database: Database setting file location
         :type database: str
+        :param cc: Client Connection Object of the Reception Pi
+        :type cc: obj
         """
         self.db = database
+        self.cc = cc
         self.display_text = "Voice search by Author"
 
     def invoke(self):
         """
         Search for books by author using voice
         """
-        voice = VoiceSearch()
-        # clear screen of errors
-        subprocess.run("clear")
-        print("\nPrepare to say Author Name")
-        search_term = voice.speech_to_text()
+        self.cc.sendall(b"voice")
+        print("Please say author name via Reception Pi...")
+        search_term = pickle.loads(self.cc.recv(1024))
         if search_term is None:
             print("Error: could not perform search")
             return
@@ -109,26 +119,27 @@ class VoiceSearchByName(MenuHandler):
         Display text for the menu
     """
 
-    def __init__(self, database):
+    def __init__(self, database, cc):
         """
         :param database: Database setting file location
         :type database: str
+        :param cc: Client Connection Object of the Reception Pi
+        :type cc: obj
         """
         self.db = database
+        self.cc = cc
         self.display_text = "Voice search by Book Title"
 
     def invoke(self):
         """
         Search for books by name using voice
         """
-        voice = VoiceSearch()
-        # clear screen of errors
-        subprocess.run("clear")
-        print("\nPrepare to say Book Title")
-        search_term = voice.speech_to_text()
+        self.cc.sendall(b"voice")
+        print("Please say took title via Reception Pi...")
+        search_term = pickle.loads(self.cc.recv(1024))
         if search_term is None:
             print("Error: could not perform search")
             return
         VoiceSearchBook.display_books(
-            self.db.query_book_by_title(search_term)
+            self.db.query_book_by_author(search_term)
         )

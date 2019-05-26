@@ -23,5 +23,6 @@ class Test_ConsoleLogin(unittest.TestCase):
             username = cl.get_password()
             self.assertEqual(username, "user1")
 
+
 if __name__ == "__main__":
     unittest.main()

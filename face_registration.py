@@ -31,7 +31,8 @@ class FaceRegistration:
 
         img_counter = 0
         while img_counter <= 4:
-            key = input("Press e to exit regstration or ENTER to continue: ")
+            key = input(
+                "Press e to cancel face regstration or ENTER to continue: ")
             if key == "e":
                 return False
 

@@ -3,7 +3,14 @@ from face_login import FaceLogin
 
 
 class FacialRecognitionController(MenuHandler):
+    """
+    Class for handling the face log in.
+    It is used to start video stream to recognise face
+    and attempting to authenitcate the user into the system
 
+    user_database: str
+        File path to the sqlite3 database
+    """
     def __init__(self, user_database):
         """
         :param user_database: database for storing users on reception pi
@@ -14,19 +21,16 @@ class FacialRecognitionController(MenuHandler):
 
     def invoke(self):
         """
-        Method that is called when the user selects the "Log in" option
+        Method that is called when the user selects the "Log in with face"
+        option
         """
         print("Log in to the LMS\n")
         face = FaceLogin()
         user = face.recognise().strip()
 
-        while user == "":
-            print("Face not registered.")
-            key = input("Press e to exit or ENTER to re-login using face: ")
-            if key == "e":
-                return
-            if key == "\n":
-                user = face.recognise().strip()
+        if user == "":
+            print("Face not found")
+            return
 
         self.connect_to_master_pi(user)
 
@@ -36,8 +40,11 @@ class FacialRecognitionController(MenuHandler):
         :param user: The authenticated user
         :type user: dict
         """
-        # TODO: remove hardcoded destination
-        dest = ("localhost", 32674)
+        with open("socket.json", "r") as f:
+            config = json.load(f)
+            ip = config["master_pi_ip"]
+            port = config["port"]
+            dest = (ip, port)
 
         # Connect to master pi
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:

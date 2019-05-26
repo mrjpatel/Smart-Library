@@ -21,7 +21,7 @@ class Test_ConsoleLogin(unittest.TestCase):
         with patch("builtins.input", side_effect=user_input):
             cl = ConsoleLogin("")
             username = cl.get_password()
-            self.assertEqual(username, "user1")
+            self.assertEqual(username, "password123")
 
 
 if __name__ == "__main__":

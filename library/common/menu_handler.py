@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 
-from lms_user_database import LMSUserDatabase
+from .lms_user_database import LMSUserDatabase
+
 
 class MenuHandler(ABC):
     """

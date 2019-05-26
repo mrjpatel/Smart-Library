@@ -4,12 +4,12 @@ import socket
 import pickle
 import json
 
-from console_menu import ConsoleMenu
-from console_search_book import ConsoleSearchBook
-from console_borrow_book import ConsoleBorrowBook
-from console_return_book import ConsoleReturnBook
-from console_qr_return import ConsoleQRReturnBook
-from lms_library_database import LMSLibraryDatabase
+from library.common.console_menu import ConsoleMenu
+from library.common.lms_library_database import LMSLibraryDatabase
+from .console_search_book import ConsoleSearchBook
+from .console_borrow_book import ConsoleBorrowBook
+from .console_return_book import ConsoleReturnBook
+from .console_qr_return import ConsoleQRReturnBook
 
 
 class MasterPi:

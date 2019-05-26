@@ -2,10 +2,10 @@ from datetime import datetime
 from dateutil.parser import parse
 from prettytable import PrettyTable
 
-from lms_library_database import LMSLibraryDatabase
-from menu_handler import MenuHandler
-from console_menu import ConsoleMenu
-from console_borrow_book import ConsoleBorrowBook
+from library.common.lms_library_database import LMSLibraryDatabase
+from library.common.menu_handler import MenuHandler
+from library.common.console_menu import ConsoleMenu
+from .console_borrow_book import ConsoleBorrowBook
 
 
 class ConsoleSearchBook(MenuHandler):

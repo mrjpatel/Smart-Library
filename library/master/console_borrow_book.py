@@ -77,7 +77,9 @@ class ConsoleBorrowBook(MenuHandler):
         print("Borrowing {} by {}...".format(book["Title"], book["Author"]))
         # check if book is borrowed
         if self.is_borrowed(book):
-            print("Cannot borrow book, book is currently borrowed!")
+            print("Cannot borrow book, {} is currently borrowed!".format(
+                book_id
+            ))
             return
         self.borrow_book(book)
 

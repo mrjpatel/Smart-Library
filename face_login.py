@@ -9,10 +9,8 @@ import cv2
 
 class FaceLogin:
 
-    def __init__(self):
-        data = pickle.loads(open("encodings.pickle", "rb").read())
-
     def recognise(self):
+        data = pickle.loads(open("encodings.pickle", "rb").read())
         print("starting video stream...")
         vs = VideoStream(src=0).start()
         time.sleep(2.0)
@@ -22,12 +20,9 @@ class FaceLogin:
         # convert the input frame from BGR to RGB then resize it to have
         # a width of 750px (to speedup processing)
         rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-        rgb = imutils.resize(frame, width=args["resolution"])
+        rgb = imutils.resize(frame, width=240)
 
-        boxes = face_recognition.face_locations(
-                                            rgb,
-                                            model=args["detection_method"]
-                                            )
+        boxes = face_recognition.face_locations(rgb, model="hog")
         encodings = face_recognition.face_encodings(rgb, boxes)
         names = []
 
@@ -50,6 +45,8 @@ class FaceLogin:
 
         for name in names:
             return(name)
+
+        return ""
 
 
 if __name__ == "__main__":

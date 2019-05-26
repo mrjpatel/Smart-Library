@@ -135,8 +135,7 @@ class LMSLibraryDatabase:
 
         :param publish_date: Published Date of the book
         :type publish_date: str
-        :return: returns book records with the same Published Date as
-        publish_date
+        :return: returns records with the same Published Date as publish_date
         :rtype: list (dicts with book details)
         """
         # prepare statement

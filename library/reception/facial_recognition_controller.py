@@ -1,7 +1,6 @@
 from library.common.menu_handler import MenuHandler
 from .console_login import ConsoleLogin
 from .face_login import FaceLogin
-from .user_credential import UserCredential
 
 
 class FacialRecognitionController(MenuHandler):
@@ -35,7 +34,6 @@ class FacialRecognitionController(MenuHandler):
             print("Face not found")
             return
 
-        user_creds = UserCredential(user, "")
-        user_dict = self.db.get_user(user_creds)
+        user_dict = self.db.get_user_by_username(user)
         login = ConsoleLogin(self.database)
         login.connect_to_master_pi(user_dict)

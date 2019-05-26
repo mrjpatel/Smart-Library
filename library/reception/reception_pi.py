@@ -5,7 +5,7 @@ import sys
 from library.common.console_menu import ConsoleMenu
 from .console_login import ConsoleLogin
 from .console_register import ConsoleRegister
-from facial_recognition_controller import FacialRecognitionController
+from .facial_recognition_controller import FacialRecognitionController
 
 
 def main(argv):

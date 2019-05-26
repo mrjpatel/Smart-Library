@@ -18,6 +18,7 @@ class FacialRecognitionController(MenuHandler):
         :type user_database: str
         """
         self.database = user_database
+        super().__init__(user_database)
         self.display_text = "Log in with face"
 
     def invoke(self):
@@ -33,5 +34,6 @@ class FacialRecognitionController(MenuHandler):
             print("Face not found")
             return
 
+        user_dict = self.db.get_user(user)
         login = ConsoleLogin(self.database)
-        login.connect_to_master_pi(user)
+        login.connect_to_master_pi(user_dict)

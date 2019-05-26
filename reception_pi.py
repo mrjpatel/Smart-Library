@@ -5,6 +5,7 @@ import sys
 from console_login import ConsoleLogin
 from reception_pi_menu import ReceptionPiMenu
 from console_register import ConsoleRegister
+from facial_recognition_controller import FacialRecognitionController
 
 
 def main(argv):
@@ -21,7 +22,8 @@ def main(argv):
     # define menu handlers
     menu_handlers = [
         ConsoleRegister(db_location),
-        ConsoleLogin(db_location)
+        ConsoleLogin(db_location),
+        FacialRecognitionController(db_location)
     ]
     # display menu, get selection, and run
     is_exit = False

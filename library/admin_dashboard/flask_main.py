@@ -1,5 +1,4 @@
-# pip3 install flask flask_sqlalchemy flask_marshmallow marshmallow-sqlalchemy
-# python3 flask_main.py
+# Code snippetsin this module is adapted from PIoT TL08 task 2
 from flask import Flask, request, jsonify, render_template
 from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy

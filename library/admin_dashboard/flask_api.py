@@ -1,3 +1,4 @@
+# Code snippetsin this module is adapted from PIoT TL08 task 2
 from flask import Flask, Blueprint, request, jsonify, render_template, url_for
 from flask import redirect, flash, session
 from flask_sqlalchemy import SQLAlchemy
@@ -17,6 +18,11 @@ ma = Marshmallow()
 
 
 class Book(db.Model):
+    """
+    Class of Book Model to check data for book model
+    db.Model: database Model
+        the clould database
+    """
     __tablename__ = "Book"
     BookID = db.Column(db.Integer, primary_key=True, autoincrement=True)
     Title = db.Column(db.Text)
@@ -32,6 +38,9 @@ class Book(db.Model):
 
 class BookSchema(ma.Schema):
     """
+    Class of Book Schema to check data
+    ma.Schema: Book Schema
+        schema for book model
     Reference:
     https://github.com/marshmallow-code/marshmallow/issues/377#issuecomment-261628415
     """
@@ -49,6 +58,10 @@ booksSchema = BookSchema(many=True)
 # Endpoint to login
 @api.route("/adminLogin", methods=["POST"])
 def adminLogin():
+    """
+    POST Request Route for Admin Login
+    triggered on form submit.
+    """
     username = request.form.get('username')
     password = request.form.get('password')
 
@@ -62,6 +75,9 @@ def adminLogin():
 # Endpoint to show all books.
 @api.route("/books", methods=["GET"])
 def getBooks():
+    """
+    GET Request Route for getting all books data.
+    """
     books = Book.query.all()
     result = booksSchema.dump(books)
 
@@ -71,6 +87,9 @@ def getBooks():
 # Endpoint to create new book.
 @api.route("/addBook", methods=["POST"])
 def addBook():
+    """
+    POST Request to add new book to database, triggered on form submit
+    """
     title = request.json["title"]
     author = request.json["author"]
     publishedDate = request.json["publishedDate"]
@@ -89,6 +108,11 @@ def addBook():
 # Endpoint to update book.
 @api.route("/removeBook/<id>", methods=["DELETE"])
 def removeBook(id):
+    """
+    DELETE Request to remove book from database, triggered on form submit
+    id: Integer
+        The id of book to remove
+    """
     book = Book.query.get(id)
 
     db.session.delete(book)
@@ -100,6 +124,11 @@ def removeBook(id):
 # Endpoint to update book.
 @api.route("/updateBook/<id>", methods=["PUT"])
 def updateBook(id):
+    """
+    PUT Request to update book from database, triggered on form submit
+    id: Integer
+        The id of book to update
+    """
     book = Book.query.get(id)
     title = request.json["title"]
     author = request.json["author"]

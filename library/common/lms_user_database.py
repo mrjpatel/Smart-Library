@@ -145,6 +145,7 @@ class LMSUserDatabase:
             user = {}
             for i, c in enumerate(columns):
                 user[c] = result_set[i]
+            return user
 
     def is_username_exists(self, username):
         """

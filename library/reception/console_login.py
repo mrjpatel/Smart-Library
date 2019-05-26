@@ -46,6 +46,7 @@ class ConsoleLogin(MenuHandler):
     def validate_credentials(self, credentials):
         """
         Validates the user's credentials against the database
+
         :param credentials: An object containing the user's credentials
         :type credentials: UserCredential
         :return: Whether the credentials are correct
@@ -82,6 +83,7 @@ class ConsoleLogin(MenuHandler):
     def connect_to_master_pi(self, user):
         """
         Establishes a socket connection to the master pi
+
         :param user: The authenticated user
         :type user: dict
         """

@@ -8,3 +8,4 @@ Auto Generated Documentation
    reception_pi
    master_pi
    common
+   admin_dashboard

@@ -26,6 +26,7 @@ class VoiceSearch:
         """
         Gets audio from the microphone and hands off to Google
         for audio processing
+
         :return: the text in the audio if successful, None otherwise
         :rtype: str
         """

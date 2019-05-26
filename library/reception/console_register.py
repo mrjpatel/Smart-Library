@@ -3,12 +3,13 @@ import re
 from library.common.menu_handler import MenuHandler
 from .user_credential import UserCredential
 from .face_registration import FaceRegistration
-from image_encoding import ImageEncoding
+from .image_encoding import ImageEncoding
 
 
 class ConsoleRegister(MenuHandler):
     """
     Class to handle the text based user registration through the console
+
     user_database: str
         The location of the user database
     """
@@ -41,6 +42,7 @@ class ConsoleRegister(MenuHandler):
     def get_username(self):
         """
         Prompt and gets the username from the user
+
         :return: The inputted username
         :rtype: str
         """
@@ -61,6 +63,7 @@ class ConsoleRegister(MenuHandler):
     def get_password(self):
         """
         Prompt and get the password from the user
+
         :return: The inputted password
         :rtype: str
         """
@@ -77,6 +80,7 @@ class ConsoleRegister(MenuHandler):
     def get_first_name(self):
         """
         Prompt and get the first name from the user
+
         :return: the inputted first name
         :rtype: str
         """
@@ -93,6 +97,7 @@ class ConsoleRegister(MenuHandler):
     def get_last_name(self):
         """
         Prompt and get the last name from the user
+
         :return: the inputted last name
         :rtype: str
         """
@@ -109,6 +114,7 @@ class ConsoleRegister(MenuHandler):
     def get_email(self):
         """
         Prompt and get the email from the user
+
         :return: the inputted email
         :rtype: str
         """
@@ -124,7 +130,8 @@ class ConsoleRegister(MenuHandler):
 
     def register_face(self, username):
         """
-        Prompts facial registration module to register face
+        Prompt and get the toogle to register face
+
         :param username: The username of user
         :type username: str
         """

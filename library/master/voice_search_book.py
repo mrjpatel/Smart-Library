@@ -12,6 +12,7 @@ from library.common.menu_handler import MenuHandler
 class VoiceSearchBook(MenuHandler):
     """
     Class to handle searching for a book through voice
+
     db: LMSLibraryDatabase
         Database object of the master database
     cc : obj
@@ -21,6 +22,7 @@ class VoiceSearchBook(MenuHandler):
     def __init__(self, database, cc):
         """
         Creates a handler object
+
         :param databse: Database setting file location
         :type database: str
         :param cc: Client Connection Object of the Reception Pi
@@ -75,6 +77,7 @@ class VoiceSearchBook(MenuHandler):
 class VoiceSearchByAuthor(MenuHandler):
     """
     Class to handle searching for voice searching a book by name
+
     db: LMSLibraryDatabase
         Database object of the master database
     display_text: str
@@ -113,6 +116,7 @@ class VoiceSearchByAuthor(MenuHandler):
 class VoiceSearchByName(MenuHandler):
     """
     Class to handle searching for voice searching a book by name
+
     db: LMSLibraryDatabase
         Database object of the master database
     display_text: str

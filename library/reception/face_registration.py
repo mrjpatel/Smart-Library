@@ -5,7 +5,7 @@
 # Code snippets use in this Module is taken from PIoT Course Tutorial 9
 import cv2
 import os
-from image_encoding import ImageEncoding
+from .image_encoding import ImageEncoding
 
 
 class FaceRegistration:
@@ -16,8 +16,8 @@ class FaceRegistration:
     """
 
     def register(self, name):
-        """
-        Registers user's face
+        """Registers user's face.
+
         :param name: username of the user
         :type name: str
         :return: Wheter the face was registered

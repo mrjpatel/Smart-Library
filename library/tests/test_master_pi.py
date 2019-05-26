@@ -52,13 +52,23 @@ class Test_Master_Pi(unittest.TestCase):
         self.assertFalse(MasterPi.validate_user_dict(user))
 
     def test_update_or_add_user_1(self):
+        # Test user add
         user = {
             "first_name": "John",
             "last_name": "Smith",
             "email": "john.smith@gmail.com",
             "username": "jsmith"
         }
-        db = LMSLibraryDatabase("lms_library_config.json")
+        test_db = "lms_library_config_test.json"
+        db = LMSLibraryDatabase(test_db)
+        user_list = list()
+        user_list.append(user["username"])
+        user_list.append(user["first_name"])
+        user_list.append(user["last_name"])
+        user_list.append(user["email"])
+        MasterPi.update_or_add_user(test_db, user)
+        db_user = db.get_user(user["username"])
+        self.assertTupleEqual(tuple(user_list), db_user[0])
 
 if __name__ == "__main__":
     unittest.main()

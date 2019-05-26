@@ -20,7 +20,8 @@ class QrScanner:
     """
     @staticmethod
     def get_qr_codes():
-        """
+        """Retrieves Data from QR Code.
+
         This function acitvates the camera and scans for QR codes
         It then inturpates the codes into a list and returns it
         """

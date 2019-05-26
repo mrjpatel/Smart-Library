@@ -125,5 +125,8 @@ class ConsoleBorrowBook(MenuHandler):
         )
         print(
             "Successfully borrowed book: " +
-            "{}, Reminder to return sent!".format(book["Title"])
+            "{}, Reminder to return sent to {}!".format(
+                book["BookID"],
+                self.user["email"]
+            )
         )

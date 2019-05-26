@@ -104,7 +104,7 @@ def addNewBook():
 
 
 class RemoveBookForm(FlaskForm):
-    """Handle Remove Book form using wtf.
+    """Handles Remove Book form using wtf.
     Inherits from FlaskForm
     """
     bookTitle = SelectField('Book Title', choices=[])
@@ -127,7 +127,7 @@ def removeExistingBook():
 
 
 class UpdateBookForm(FlaskForm):
-    """Handle Update Book form using wtf.
+    """Handles Update Book form using wtf.
     Inherits from FlaskForm
     """
     bookTitle = SelectField('Book to Update', choices=[])

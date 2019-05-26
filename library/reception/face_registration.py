@@ -5,7 +5,7 @@
 # Code snippets use in this Module is taken from PIoT Course Tutorial 9
 import cv2
 import os
-from image_encoding import ImageEncoding
+from .image_encoding import ImageEncoding
 
 
 class FaceRegistration:

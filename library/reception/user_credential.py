@@ -6,11 +6,13 @@ from .aes_cryptography import AESCryptography
 class UserCredential:
     """
     Class used to store the user's credentials
+
     username: str
         The user's username
     password: str
         The user's password
     """
+
     def __init__(self, username, password):
         """
         :param username: the user's username

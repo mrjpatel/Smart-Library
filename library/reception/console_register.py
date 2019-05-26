@@ -9,6 +9,7 @@ from .image_encoding import ImageEncoding
 class ConsoleRegister(MenuHandler):
     """
     Class to handle the text based user registration through the console
+
     user_database: str
         The location of the user database
     """
@@ -124,7 +125,7 @@ class ConsoleRegister(MenuHandler):
 
     def register_face(self, username):
         """
-        Prompts facial registration module to register face
+        Prompt and get the toogle to register face
         :param username: The username of user
         :type username: str
         """

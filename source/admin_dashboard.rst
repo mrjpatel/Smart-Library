@@ -1,11 +1,6 @@
 Admin DashBoard
 ===============
 
-flask_main
-##########
-.. automodule:: library.admin_dashboard.flask_main
-    :members:
-
 flask_api
 #########
 .. automodule:: library.admin_dashboard.flask_api

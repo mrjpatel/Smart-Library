@@ -31,6 +31,7 @@ class LMSUserDatabase:
     def insert_user(self, credentials, first_name, last_name, email):
         """
         Inserts a new user record in the users database
+
         :param credentials: an object containing the user's crendentials
         :type crendentials: UserCredential
         :param first_name: the user's first name
@@ -71,6 +72,7 @@ class LMSUserDatabase:
         """
         Searches for a user by their username from the database
         and returns the result as a dictionary
+
         :param credentials: an object containing the user's credentials
         :type credentials: UserCredential
         :return: the user details
@@ -113,6 +115,7 @@ class LMSUserDatabase:
         """
         Searches for a user by their username from the database
         and returns the result as a dictionary
+
         :param username: username string to get
         :type username: str
         :return: the user details
@@ -151,6 +154,7 @@ class LMSUserDatabase:
         """
         Checks against the database whether the given username
         exists in the lms_user table
+
         :param username: the username to search
         :type username: str
         :return: true if the username exists in the database, false otherwise

@@ -9,7 +9,7 @@ from flask_wtf import FlaskForm
 from wtforms import SubmitField, StringField, SelectField, validators
 from wtforms.fields.html5 import DateField
 from functools import wraps
-from flask_api import Book
+from .flask_api import Book
 
 site = Blueprint("site", __name__)
 

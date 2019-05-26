@@ -7,8 +7,8 @@ from flask_marshmallow import Marshmallow
 import os
 import requests
 import json
-from flask_api import api, db
-from flask_site import site
+from .flask_api import api, db
+from .flask_site import site
 
 app = Flask(__name__)
 bootstrap = Bootstrap(app)

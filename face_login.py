@@ -1,3 +1,4 @@
+# Code snippets taken from RMIT University IoT Programming Course Tutorial 9
 from imutils.video import VideoStream
 import face_recognition
 import argparse

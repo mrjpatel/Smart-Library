@@ -81,6 +81,33 @@ Communication to Google's APIs is done via OAuth2. For this to happen the Master
 This can be generated via: https://developers.google.com/identity/protocols/OAuth2WebServer
 There is an additional approval step that is required to be done while the Master Pi is running, This will allow the program to update your calendar and send invites out on your behalf. You will then need to replace the `credentials.json` file with the one that is generated from following the link above.
 
+### Admin Webpage
+Admin Dashboard webpage is done using Flask. The FLask CRUD API connects to google cloud db which is configured via `lms_library_config.json` file which has admin user to connect to cloud database. The structure of this file is samae as the one shown above under Master Pi Database COnfiguration. This file will reside in `admin_dashboard/lms_library_config.json`
+
+To start the flask webpage. We need to create a environemnt variable for the flask app. So we will create a `.flaskenv` file and add the following line
+```bash
+FLASK_APP=flask_main.py
+```
+Alternatively this can also be done using
+```bash
+export FLASK_APP=flask_main.py
+``` 
+Once the environemnt variable is set. We are ready to run the admin dashboard page. This can be done using:
+```bash
+flask run --host <ip_address>
+```
+or 
+```bash
+flask run //to run the app locally.
+```
+
+### Facial Recognition
+Before the facial recognition functionality can be used, the following packages mentioned in `facial_recognition_install.txt` must be installed.
+Once the packages are installed. We need to download haarcasde_frontalface_default.xml using the `curl` This file is from opencv project which can be found here: https://github.com/opencv/opencv
+```bash
+$ curl -o haarcascade_frontalface_default.xml https://github.com/opencv/opencv/blob/master/data/haarcascades/haarcascade_frontalface_alt.xml
+```
+
 ### Speech Recognition
 Before the Speech to Text functionality can be used, the following packages must be installed using `apt`.
 ```bash

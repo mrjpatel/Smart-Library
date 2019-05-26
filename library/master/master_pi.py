@@ -56,11 +56,7 @@ class MasterPi:
                         # define menu handlers
                         menu_handlers = [
                             ConsoleSearchBook(db_details_file, user),
-<<<<<<< HEAD:master_pi.py
-                            VoiceSearchBook(db_details_file),
-=======
                             VoiceSearchBook(db_details_file, cc),
->>>>>>> feature/rubric-upgrades:library/master/master_pi.py
                             ConsoleBorrowBook(db_details_file, user),
                             ConsoleReturnBook(db_details_file, user),
                             ConsoleQRReturnBook(db_details_file, user, cc)

@@ -21,8 +21,8 @@ class FacialRecognitionController(MenuHandler):
 
     def invoke(self):
         """
-        Method that is called when the user selects the "Log in with face"
-        option
+        Method that is called when the user selects the
+        "Log in with face" option
         """
         print("Log in to the LMS\n")
         face = FaceLogin()

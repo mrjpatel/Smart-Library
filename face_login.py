@@ -45,11 +45,8 @@ class FaceLogin:
                 names.append(name)
 
         for name in names:
+            vs.stop()
             return(name)
 
+        vs.stop()
         return ""
-
-
-if __name__ == "__main__":
-    fl = FaceLogin()
-    print(fl.recognise())

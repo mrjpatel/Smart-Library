@@ -3,6 +3,8 @@ import speech_recognition as sr
 # sections of this class have been referenced from the week 10
 # code samples in the 2019 COSC2674 Programming Internet of Things
 # course material
+
+
 class VoiceSearch:
     """
     Class to handle all speech to text functionality
@@ -13,11 +15,13 @@ class VoiceSearch:
         """
         mic_name = "Microsoft® LifeCam HD-3000: USB Audio (hw:1,0)"
         # set mic id to avoid ambiguity
-        for i, microphone_name in enumerate(sr.Microphone.list_microphone_names()):
+        for i, microphone_name in enumerate(
+            sr.Microphone.list_microphone_names()
+        ):
             if(microphone_name == mic_name):
                 self.device_id = i
                 break
-    
+
     def speech_to_text(self):
         """
         Gets audio from the microphone and hands off to Google
@@ -55,4 +59,3 @@ class VoiceSearch:
             print("Something went wrong")
             print(re)
             return None
-

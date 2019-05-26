@@ -2,7 +2,7 @@ import re
 
 from library.common.menu_handler import MenuHandler
 from .user_credential import UserCredential
-from face_registration import FaceRegistration
+from .face_registration import FaceRegistration
 from image_encoding import ImageEncoding
 
 
@@ -116,7 +116,12 @@ class ConsoleRegister(MenuHandler):
         while not is_valid_email:
             print("Email: ", end="")
             email = input().strip()
-            email_regex = re.compile(r"^[A-z0-9\.]+@[A-z\.]+[A-z]$")
+            email_regex_str = r"""
+                ([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*
+                |"([]!#-[^-~ \t]|(\\[\t -~]))+")@
+                ([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*
+                |\[[\t -Z^-~]*])"""
+            email_regex = re.compile(email_regex_str)
             is_valid_email = email_regex.match(email) is not None
             if not is_valid_email:
                 print("{} is not a valid email".format(email))
@@ -135,3 +140,4 @@ class ConsoleRegister(MenuHandler):
 
         image_encode = ImageEncoding()
         image_encode.encode("encodings.pickle")
+

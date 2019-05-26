@@ -15,3 +15,8 @@ lms_library_database
 ####################
 .. automodule:: library.common.lms_library_database
     :members:
+
+lms_user_database
+#################
+.. automodule:: library.common.lms_user_database
+    :members:

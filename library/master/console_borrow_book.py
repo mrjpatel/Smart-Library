@@ -49,7 +49,7 @@ class ConsoleBorrowBook(MenuHandler):
         str_list = str_input.split(",")
         for str_id in str_list:
             self.start(str_id)
-    
+
     def start(self, book_string):
         """
         Fuction to borrow a book from the library

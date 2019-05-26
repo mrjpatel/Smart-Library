@@ -18,11 +18,11 @@ ma = Marshmallow()
 
 
 class Book(db.Model):
-    """
+    """Book Model
     Class of Book Model to check data for book model
-    db.Model: database Model
-        the clould database
+    Inherits from the db model
     """
+
     __tablename__ = "Book"
     BookID = db.Column(db.Integer, primary_key=True, autoincrement=True)
     Title = db.Column(db.Text)
@@ -39,11 +39,10 @@ class Book(db.Model):
 class BookSchema(ma.Schema):
     """
     Class of Book Schema to check data
-    ma.Schema: Book Schema
-        schema for book model
     Reference:
-    https://github.com/marshmallow-code/marshmallow/issues/377#issuecomment-261628415
+    github.com/marshmallow-code/marshmallow/issues/377#issuecomment-261628415
     """
+
     def __init__(self, strict=True, **kwargs):
         super().__init__(strict=strict, **kwargs)
 
@@ -110,8 +109,9 @@ def addBook():
 def removeBook(id):
     """
     DELETE Request to remove book from database, triggered on form submit
-    id: Integer
-        The id of book to remove
+
+    :param id: The id of book to remove
+    :type id: int
     """
     book = Book.query.get(id)
 
@@ -126,8 +126,9 @@ def removeBook(id):
 def updateBook(id):
     """
     PUT Request to update book from database, triggered on form submit
-    id: Integer
-        The id of book to update
+
+    :param id: The id of book to remove
+    :type id: int
     """
     book = Book.query.get(id)
     title = request.json["title"]

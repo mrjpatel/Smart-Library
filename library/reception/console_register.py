@@ -3,7 +3,7 @@ import re
 from library.common.menu_handler import MenuHandler
 from .user_credential import UserCredential
 from .face_registration import FaceRegistration
-from image_encoding import ImageEncoding
+from .image_encoding import ImageEncoding
 
 
 class ConsoleRegister(MenuHandler):

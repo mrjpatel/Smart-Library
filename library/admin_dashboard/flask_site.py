@@ -72,10 +72,8 @@ def dashboard():
 
 
 class AddBookForm(FlaskForm):
-    """
-    Class to handle Add new Book form using wtf
-    FlaskForm: flask form
-        The structure of Flask form
+    """Handles Add new Book form using wtf.
+    Inherits from FlaskForm
     """
     title = StringField('Book Title',
                         validators=[validators.required(),
@@ -106,10 +104,8 @@ def addNewBook():
 
 
 class RemoveBookForm(FlaskForm):
-    """
-    Class to handle Remove Book form using wtf
-    FlaskForm: flask form
-        The structure of Flask form
+    """Handle Remove Book form using wtf.
+    Inherits from FlaskForm
     """
     bookTitle = SelectField('Book Title', choices=[])
 
@@ -131,10 +127,8 @@ def removeExistingBook():
 
 
 class UpdateBookForm(FlaskForm):
-    """
-    Class to handle Update Book form using wtf
-    FlaskForm: flask form
-        The structure of Flask form
+    """Handle Update Book form using wtf.
+    Inherits from FlaskForm
     """
     bookTitle = SelectField('Book to Update', choices=[])
     title = StringField('New Book Title',

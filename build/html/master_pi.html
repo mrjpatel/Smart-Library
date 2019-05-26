@@ -1,0 +1,567 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Master Pi &#8212; Smart Library 1.0.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Common" href="common.html" />
+    <link rel="prev" title="Reception Pi" href="reception_pi.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="master-pi">
+<h1>Master Pi<a class="headerlink" href="#master-pi" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-library.master.master_pi">
+<span id="id1"></span><h2>master_pi<a class="headerlink" href="#module-library.master.master_pi" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="library.master.master_pi.MasterPi">
+<em class="property">class </em><code class="descclassname">library.master.master_pi.</code><code class="descname">MasterPi</code><a class="headerlink" href="#library.master.master_pi.MasterPi" title="Permalink to this definition">¶</a></dt>
+<dd><p>A class used to Launch the Master Pi</p>
+<dl class="staticmethod">
+<dt id="library.master.master_pi.MasterPi.start_master_pi">
+<em class="property">static </em><code class="descname">start_master_pi</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#library.master.master_pi.MasterPi.start_master_pi" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method is called to start the master pi</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="library.master.master_pi.MasterPi.update_or_add_user">
+<em class="property">static </em><code class="descname">update_or_add_user</code><span class="sig-paren">(</span><em>db_location</em>, <em>user</em><span class="sig-paren">)</span><a class="headerlink" href="#library.master.master_pi.MasterPi.update_or_add_user" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates or addes the user to the Master Database</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>user</strong> – User Dict to enter into Database</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Record from the database</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict that conforms with user_schema</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="library.master.master_pi.MasterPi.validate_user_dict">
+<em class="property">static </em><code class="descname">validate_user_dict</code><span class="sig-paren">(</span><em>user</em><span class="sig-paren">)</span><a class="headerlink" href="#library.master.master_pi.MasterPi.validate_user_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validates the user details sent from the Reception Pi to the Master Pi</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>user</strong> – User sent from Reception Pi</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>If user dict is vaild</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>blol</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-library.master.console_search_book">
+<span id="console-search-book"></span><h2>console_search_book<a class="headerlink" href="#module-library.master.console_search_book" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="library.master.console_search_book.ConsoleSearchBook">
+<em class="property">class </em><code class="descclassname">library.master.console_search_book.</code><code class="descname">ConsoleSearchBook</code><span class="sig-paren">(</span><em>database</em>, <em>user</em><span class="sig-paren">)</span><a class="headerlink" href="#library.master.console_search_book.ConsoleSearchBook" title="Permalink to this definition">¶</a></dt>
+<dd><p>A class to handle the customer searching a book</p>
+<dl class="simple">
+<dt>db<span class="classifier">LMSLibraryDatabase</span></dt><dd><p>Database object of the master database</p>
+</dd>
+<dt>display_text<span class="classifier">str</span></dt><dd><p>Display test for the console menu</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="library.master.console_search_book.ConsoleSearchBook.display_books">
+<code class="descname">display_books</code><span class="sig-paren">(</span><em>results</em><span class="sig-paren">)</span><a class="headerlink" href="#library.master.console_search_book.ConsoleSearchBook.display_books" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to display the books in a table</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>results</strong> (<em>list</em>) – Results of books to display</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>No return</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="library.master.console_search_book.ConsoleSearchBook.invoke">
+<code class="descname">invoke</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#library.master.console_search_book.ConsoleSearchBook.invoke" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function that is called to invoke the search book function</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="library.master.console_search_book.SearchByAuthor">
+<em class="property">class </em><code class="descclassname">library.master.console_search_book.</code><code class="descname">SearchByAuthor</code><span class="sig-paren">(</span><em>database</em>, <em>sbh</em><span class="sig-paren">)</span><a class="headerlink" href="#library.master.console_search_book.SearchByAuthor" title="Permalink to this definition">¶</a></dt>
+<dd><p>A class to handle the customer searching by Author</p>
+<dl class="simple">
+<dt>db<span class="classifier">LMSLibraryDatabase</span></dt><dd><p>Database object of the master database</p>
+</dd>
+<dt>display_text<span class="classifier">str</span></dt><dd><p>Display test for the console menu</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="library.master.console_search_book.SearchByAuthor.invoke">
+<code class="descname">invoke</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#library.master.console_search_book.SearchByAuthor.invoke" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to search books by Author</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>No return</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="library.master.console_search_book.SearchByName">
+<em class="property">class </em><code class="descclassname">library.master.console_search_book.</code><code class="descname">SearchByName</code><span class="sig-paren">(</span><em>database</em>, <em>sbh</em><span class="sig-paren">)</span><a class="headerlink" href="#library.master.console_search_book.SearchByName" title="Permalink to this definition">¶</a></dt>
+<dd><p>A class to handle the customer searching by Name</p>
+<dl class="simple">
+<dt>db<span class="classifier">LMSLibraryDatabase</span></dt><dd><p>Database object of the master database</p>
+</dd>
+<dt>display_text<span class="classifier">str</span></dt><dd><p>Display test for the console menu</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="library.master.console_search_book.SearchByName.invoke">
+<code class="descname">invoke</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#library.master.console_search_book.SearchByName.invoke" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to search books by Name</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>No return</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="library.master.console_search_book.SearchByPublishedDate">
+<em class="property">class </em><code class="descclassname">library.master.console_search_book.</code><code class="descname">SearchByPublishedDate</code><span class="sig-paren">(</span><em>database</em>, <em>sbh</em><span class="sig-paren">)</span><a class="headerlink" href="#library.master.console_search_book.SearchByPublishedDate" title="Permalink to this definition">¶</a></dt>
+<dd><p>A class to handle the customer searching by Published Date</p>
+<dl class="simple">
+<dt>db<span class="classifier">LMSLibraryDatabase</span></dt><dd><p>Database object of the master database</p>
+</dd>
+<dt>display_text<span class="classifier">str</span></dt><dd><p>Display test for the console menu</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="library.master.console_search_book.SearchByPublishedDate.invoke">
+<code class="descname">invoke</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#library.master.console_search_book.SearchByPublishedDate.invoke" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to search books by Published Date</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>No return</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-library.master.console_borrow_book">
+<span id="console-borrow-book"></span><h2>console_borrow_book<a class="headerlink" href="#module-library.master.console_borrow_book" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="library.master.console_borrow_book.ConsoleBorrowBook">
+<em class="property">class </em><code class="descclassname">library.master.console_borrow_book.</code><code class="descname">ConsoleBorrowBook</code><span class="sig-paren">(</span><em>database</em>, <em>user</em><span class="sig-paren">)</span><a class="headerlink" href="#library.master.console_borrow_book.ConsoleBorrowBook" title="Permalink to this definition">¶</a></dt>
+<dd><p>A class to handle the customer borrowing a book</p>
+<dl class="simple">
+<dt>max_borrow_days<span class="classifier">int</span></dt><dd><p>Number of days to borrow a book</p>
+</dd>
+<dt>db<span class="classifier">LMSLibraryDatabase</span></dt><dd><p>Database object of the master database</p>
+</dd>
+<dt>display_text<span class="classifier">str</span></dt><dd><p>Display test for the console menu</p>
+</dd>
+<dt>user<span class="classifier">dict</span></dt><dd><p>User Object following the LMSLibraryDatabase.user_schema</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="library.master.console_borrow_book.ConsoleBorrowBook.borrow_book">
+<code class="descname">borrow_book</code><span class="sig-paren">(</span><em>book</em><span class="sig-paren">)</span><a class="headerlink" href="#library.master.console_borrow_book.ConsoleBorrowBook.borrow_book" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to borrow book</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>book</strong> (<em>dict</em>) – Book details of book to check</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>No return</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="library.master.console_borrow_book.ConsoleBorrowBook.invoke">
+<code class="descname">invoke</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#library.master.console_borrow_book.ConsoleBorrowBook.invoke" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to get user input for borrow book</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="library.master.console_borrow_book.ConsoleBorrowBook.is_borrowed">
+<code class="descname">is_borrowed</code><span class="sig-paren">(</span><em>book</em><span class="sig-paren">)</span><a class="headerlink" href="#library.master.console_borrow_book.ConsoleBorrowBook.is_borrowed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to check if a book is borrowed or not</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>book</strong> (<em>dict</em>) – Book details of book to check</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>If book is borrowed</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="library.master.console_borrow_book.ConsoleBorrowBook.start">
+<code class="descname">start</code><span class="sig-paren">(</span><em>book_string</em><span class="sig-paren">)</span><a class="headerlink" href="#library.master.console_borrow_book.ConsoleBorrowBook.start" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fuction to borrow a book from the library</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>book_string</strong> (<em>str</em>) – Book ID of the book to borrow</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>No return</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-library.master.console_return_book">
+<span id="console-return-book"></span><h2>console_return_book<a class="headerlink" href="#module-library.master.console_return_book" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="library.master.console_return_book.ConsoleReturnBook">
+<em class="property">class </em><code class="descclassname">library.master.console_return_book.</code><code class="descname">ConsoleReturnBook</code><span class="sig-paren">(</span><em>database</em>, <em>user</em><span class="sig-paren">)</span><a class="headerlink" href="#library.master.console_return_book.ConsoleReturnBook" title="Permalink to this definition">¶</a></dt>
+<dd><p>A class to handle the customer returning a book</p>
+<dl class="simple">
+<dt>max_borrow_days<span class="classifier">int</span></dt><dd><p>Number of days to borrow a book</p>
+</dd>
+<dt>db<span class="classifier">LMSLibraryDatabase</span></dt><dd><p>Database object of the master database</p>
+</dd>
+<dt>display_text<span class="classifier">str</span></dt><dd><p>Display test for the console menu</p>
+</dd>
+<dt>user<span class="classifier">dict</span></dt><dd><p>User Object following the LMSLibraryDatabase.user_schema</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="library.master.console_return_book.ConsoleReturnBook.invoke">
+<code class="descname">invoke</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#library.master.console_return_book.ConsoleReturnBook.invoke" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function that is called to invoke the return book function.
+Gets the user input and validates if it is in a vaild book id format</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="library.master.console_return_book.ConsoleReturnBook.is_borrowed">
+<code class="descname">is_borrowed</code><span class="sig-paren">(</span><em>book_borrowed</em>, <em>username</em><span class="sig-paren">)</span><a class="headerlink" href="#library.master.console_return_book.ConsoleReturnBook.is_borrowed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to check if a book is borrowed or not</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>book</strong> (<em>dict</em>) – Book details of book to check</p></li>
+<li><p><strong>username</strong> (<em>str</em>) – Username of who would like to return book</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>If book is borrowed</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="library.master.console_return_book.ConsoleReturnBook.return_book">
+<code class="descname">return_book</code><span class="sig-paren">(</span><em>book_borrowed</em><span class="sig-paren">)</span><a class="headerlink" href="#library.master.console_return_book.ConsoleReturnBook.return_book" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to return book</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>book</strong> (<em>dict</em>) – Book details of book to check</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>No return</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="library.master.console_return_book.ConsoleReturnBook.start">
+<code class="descname">start</code><span class="sig-paren">(</span><em>book_string</em><span class="sig-paren">)</span><a class="headerlink" href="#library.master.console_return_book.ConsoleReturnBook.start" title="Permalink to this definition">¶</a></dt>
+<dd><p>This fuction is responsible for returning a book.
+It takes the book id given by the user and checks if it is borrowed by
+the user and then returns the book, deleting the calander invite</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>book_string</strong> (<em>str</em>) – Book ID of the book to return</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>No return</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-library.master.console_qr_return">
+<span id="console-qr-return"></span><h2>console_qr_return<a class="headerlink" href="#module-library.master.console_qr_return" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="library.master.console_qr_return.ConsoleQRReturnBook">
+<em class="property">class </em><code class="descclassname">library.master.console_qr_return.</code><code class="descname">ConsoleQRReturnBook</code><span class="sig-paren">(</span><em>database</em>, <em>user</em>, <em>cc</em><span class="sig-paren">)</span><a class="headerlink" href="#library.master.console_qr_return.ConsoleQRReturnBook" title="Permalink to this definition">¶</a></dt>
+<dd><p>A class to handle the customer returning a book using a QR code</p>
+<dl class="simple">
+<dt>max_borrow_days<span class="classifier">int</span></dt><dd><p>Number of days to borrow a book</p>
+</dd>
+<dt>db<span class="classifier">LMSLibraryDatabase</span></dt><dd><p>Database object of the master database</p>
+</dd>
+<dt>display_text<span class="classifier">str</span></dt><dd><p>Display test for the console menu</p>
+</dd>
+<dt>user<span class="classifier">dict</span></dt><dd><p>User Object following the LMSLibraryDatabase.user_schema</p>
+</dd>
+<dt>cs<span class="classifier">obj</span></dt><dd><p>Reception Socket connection object</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="library.master.console_qr_return.ConsoleQRReturnBook.invoke">
+<code class="descname">invoke</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#library.master.console_qr_return.ConsoleQRReturnBook.invoke" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function that is called to invoke the return book function</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-library.master.voice_search_book">
+<span id="voice-search-book"></span><h2>voice_search_book<a class="headerlink" href="#module-library.master.voice_search_book" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="library.master.voice_search_book.VoiceSearchBook">
+<em class="property">class </em><code class="descclassname">library.master.voice_search_book.</code><code class="descname">VoiceSearchBook</code><span class="sig-paren">(</span><em>database</em>, <em>cc</em><span class="sig-paren">)</span><a class="headerlink" href="#library.master.voice_search_book.VoiceSearchBook" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to handle searching for a book through voice</p>
+<dl class="simple">
+<dt>db: LMSLibraryDatabase</dt><dd><p>Database object of the master database</p>
+</dd>
+<dt>cc<span class="classifier">obj</span></dt><dd><p>Reception Socket connection object</p>
+</dd>
+</dl>
+<dl class="staticmethod">
+<dt id="library.master.voice_search_book.VoiceSearchBook.display_books">
+<em class="property">static </em><code class="descname">display_books</code><span class="sig-paren">(</span><em>results</em><span class="sig-paren">)</span><a class="headerlink" href="#library.master.voice_search_book.VoiceSearchBook.display_books" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to display the books in a table</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>results</strong> (<em>list</em>) – Results of books to display</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>No return</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="library.master.voice_search_book.VoiceSearchBook.invoke">
+<code class="descname">invoke</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#library.master.voice_search_book.VoiceSearchBook.invoke" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that is called to invoke search for a book by voice</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="library.master.voice_search_book.VoiceSearchByAuthor">
+<em class="property">class </em><code class="descclassname">library.master.voice_search_book.</code><code class="descname">VoiceSearchByAuthor</code><span class="sig-paren">(</span><em>database</em>, <em>cc</em><span class="sig-paren">)</span><a class="headerlink" href="#library.master.voice_search_book.VoiceSearchByAuthor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to handle searching for voice searching a book by name</p>
+<dl class="simple">
+<dt>db: LMSLibraryDatabase</dt><dd><p>Database object of the master database</p>
+</dd>
+<dt>display_text: str</dt><dd><p>Display text for the menu</p>
+</dd>
+<dt>cc<span class="classifier">obj</span></dt><dd><p>Reception Socket connection object</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="library.master.voice_search_book.VoiceSearchByAuthor.invoke">
+<code class="descname">invoke</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#library.master.voice_search_book.VoiceSearchByAuthor.invoke" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search for books by author using voice</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="library.master.voice_search_book.VoiceSearchByName">
+<em class="property">class </em><code class="descclassname">library.master.voice_search_book.</code><code class="descname">VoiceSearchByName</code><span class="sig-paren">(</span><em>database</em>, <em>cc</em><span class="sig-paren">)</span><a class="headerlink" href="#library.master.voice_search_book.VoiceSearchByName" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to handle searching for voice searching a book by name</p>
+<dl class="simple">
+<dt>db: LMSLibraryDatabase</dt><dd><p>Database object of the master database</p>
+</dd>
+<dt>display_text: str</dt><dd><p>Display text for the menu</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="library.master.voice_search_book.VoiceSearchByName.invoke">
+<code class="descname">invoke</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#library.master.voice_search_book.VoiceSearchByName.invoke" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search for books by name using voice</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-library.master.google_calander">
+<span id="google-calander"></span><h2>google_calander<a class="headerlink" href="#module-library.master.google_calander" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="library.master.google_calander.GoogleCalanderAPI">
+<em class="property">class </em><code class="descclassname">library.master.google_calander.</code><code class="descname">GoogleCalanderAPI</code><a class="headerlink" href="#library.master.google_calander.GoogleCalanderAPI" title="Permalink to this definition">¶</a></dt>
+<dd><p>A class to access the Google Calander APIs</p>
+<dl class="simple">
+<dt>SCOPES: list</dt><dd><p>List of scopes for the API access</p>
+</dd>
+<dt>store: file.Storage</dt><dd><p>File that stores the Refesh token</p>
+</dd>
+<dt>creds: credentials</dt><dd><p>Credentials that are used to access the APIs</p>
+</dd>
+</dl>
+<dl class="classmethod">
+<dt id="library.master.google_calander.GoogleCalanderAPI.create_due_event">
+<em class="property">classmethod </em><code class="descname">create_due_event</code><span class="sig-paren">(</span><em>due_date</em>, <em>book</em>, <em>user</em><span class="sig-paren">)</span><a class="headerlink" href="#library.master.google_calander.GoogleCalanderAPI.create_due_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creats an event and and sends it to the users emal address</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>due_date</strong> (<em>datetime</em>) – Due date of the reminder</p></li>
+<li><p><strong>book</strong> (<em>dict that conforms with LMSLibraryDatabase.book_schema</em>) – Due date of the reminder</p></li>
+<li><p><strong>user</strong> (<em>dict that conforms with LMSLibraryDatabase.user_schema</em>) – Due date of the reminder</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Event ID of the created event</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="library.master.google_calander.GoogleCalanderAPI.delete_due_event">
+<em class="property">classmethod </em><code class="descname">delete_due_event</code><span class="sig-paren">(</span><em>event_id</em><span class="sig-paren">)</span><a class="headerlink" href="#library.master.google_calander.GoogleCalanderAPI.delete_due_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deletes an event from their Event ID</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>event_id</strong> (<em>str</em>) – Event ID of the reminder</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>No return</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Smart Library</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="code.html">Auto Generated Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="reception_pi.html">Reception Pi</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Master Pi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="common.html">Common</a></li>
+<li class="toctree-l2"><a class="reference internal" href="admin_dashboard.html">Admin DashBoard</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="code.html">Auto Generated Documentation</a><ul>
+      <li>Previous: <a href="reception_pi.html" title="previous chapter">Reception Pi</a></li>
+      <li>Next: <a href="common.html" title="next chapter">Common</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Russell Menezes, Toan Nguyen, Japan Patel.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.0.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/master_pi.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

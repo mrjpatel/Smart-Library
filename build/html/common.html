@@ -1,0 +1,465 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Common &#8212; Smart Library 1.0.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Admin DashBoard" href="admin_dashboard.html" />
+    <link rel="prev" title="Master Pi" href="master_pi.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="common">
+<h1>Common<a class="headerlink" href="#common" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-library.common.console_menu">
+<span id="console-menu"></span><h2>console_menu<a class="headerlink" href="#module-library.common.console_menu" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="library.common.console_menu.ConsoleMenu">
+<em class="property">class </em><code class="descclassname">library.common.console_menu.</code><code class="descname">ConsoleMenu</code><span class="sig-paren">(</span><em>menu_handlers</em>, <em>message</em><span class="sig-paren">)</span><a class="headerlink" href="#library.common.console_menu.ConsoleMenu" title="Permalink to this definition">¶</a></dt>
+<dd><p>This Class is to handle the menu and getting user input.
+It is responsible for printing the menu and invoking the respective menu
+handler</p>
+<dl class="simple">
+<dt>menu_handlers: list</dt><dd><p>List of menu handlers to print and invoke</p>
+</dd>
+<dt>message: str</dt><dd><p>Message to print out before printing the menu</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="library.common.console_menu.ConsoleMenu.display_menu">
+<code class="descname">display_menu</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#library.common.console_menu.ConsoleMenu.display_menu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prints the menu out with an option for each menu handler</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="library.common.console_menu.ConsoleMenu.prompt_and_invoke_option">
+<code class="descname">prompt_and_invoke_option</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#library.common.console_menu.ConsoleMenu.prompt_and_invoke_option" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prompts the user to enter an option and invokes the respective
+menu handler that is selected</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-library.common.menu_handler">
+<span id="menu-handler"></span><h2>menu_handler<a class="headerlink" href="#module-library.common.menu_handler" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="library.common.menu_handler.MenuHandler">
+<em class="property">class </em><code class="descclassname">library.common.menu_handler.</code><code class="descname">MenuHandler</code><span class="sig-paren">(</span><em>user_database</em><span class="sig-paren">)</span><a class="headerlink" href="#library.common.menu_handler.MenuHandler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Abstract class that is used for all the menu options</p>
+<dl class="simple">
+<dt>db<span class="classifier">LMSUserDatabase</span></dt><dd><p>Database object</p>
+</dd>
+<dt>display_text<span class="classifier">str</span></dt><dd><p>Display test for the console menu</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="library.common.menu_handler.MenuHandler.get_display_text">
+<code class="descname">get_display_text</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#library.common.menu_handler.MenuHandler.get_display_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>function to get the display text of the menu handler</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="library.common.menu_handler.MenuHandler.invoke">
+<code class="descname">invoke</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#library.common.menu_handler.MenuHandler.invoke" title="Permalink to this definition">¶</a></dt>
+<dd><p>Abstract function to invoke the child classes functionallity</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-library.common.lms_library_database">
+<span id="lms-library-database"></span><h2>lms_library_database<a class="headerlink" href="#module-library.common.lms_library_database" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="library.common.lms_library_database.LMSLibraryDatabase">
+<em class="property">class </em><code class="descclassname">library.common.lms_library_database.</code><code class="descname">LMSLibraryDatabase</code><span class="sig-paren">(</span><em>db_settings_file</em><span class="sig-paren">)</span><a class="headerlink" href="#library.common.lms_library_database.LMSLibraryDatabase" title="Permalink to this definition">¶</a></dt>
+<dd><p>A class used to access the GCP MySql Database</p>
+<dl class="simple">
+<dt>book_schema<span class="classifier">list</span></dt><dd><p>Database Schema for the Book Table</p>
+</dd>
+<dt>user_schema<span class="classifier">list</span></dt><dd><p>Database Schema for the User Table</p>
+</dd>
+<dt>book_borrow_schema<span class="classifier">list</span></dt><dd><p>Database Schema for the Book Borrow Table</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="library.common.lms_library_database.LMSLibraryDatabase.add_user">
+<code class="descname">add_user</code><span class="sig-paren">(</span><em>user</em><span class="sig-paren">)</span><a class="headerlink" href="#library.common.lms_library_database.LMSLibraryDatabase.add_user" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inserts user into Database</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>user</strong> – User Dict to enter into Database</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>no return</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="library.common.lms_library_database.LMSLibraryDatabase.insert_borrowed_book">
+<code class="descname">insert_borrowed_book</code><span class="sig-paren">(</span><em>username</em>, <em>book_id</em>, <em>borrow_date</em>, <em>due_date</em>, <em>event_id</em><span class="sig-paren">)</span><a class="headerlink" href="#library.common.lms_library_database.LMSLibraryDatabase.insert_borrowed_book" title="Permalink to this definition">¶</a></dt>
+<dd><p>Addes borrowed book to the database</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>username</strong> (<em>str</em>) – Username of user who borrowed book</p></li>
+<li><p><strong>book_id</strong> (<em>str</em>) – Book ID of borrowed book</p></li>
+<li><p><strong>borrow_date</strong> (<em>datetime</em>) – Datetime of when the book is borrowed</p></li>
+<li><p><strong>due_date</strong> (<em>datetime</em>) – Datetime of when the book is due</p></li>
+<li><p><strong>book_id</strong> – Event ID of calander event</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>no return</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="library.common.lms_library_database.LMSLibraryDatabase.query_book_by_author">
+<code class="descname">query_book_by_author</code><span class="sig-paren">(</span><em>author</em><span class="sig-paren">)</span><a class="headerlink" href="#library.common.lms_library_database.LMSLibraryDatabase.query_book_by_author" title="Permalink to this definition">¶</a></dt>
+<dd><p>Queries Database for books that match the given Author</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>author</strong> (<em>str</em>) – Author of the book</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>returns book records with the same Author as author</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list (dicts with book details)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="library.common.lms_library_database.LMSLibraryDatabase.query_book_by_id">
+<code class="descname">query_book_by_id</code><span class="sig-paren">(</span><em>book_id</em><span class="sig-paren">)</span><a class="headerlink" href="#library.common.lms_library_database.LMSLibraryDatabase.query_book_by_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Queries Database for books that match the given Book ID</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>book_id</strong> (<em>str</em>) – Book ID of the book</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>returns book records with the same ID as book_id</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list (dicts with book details)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="library.common.lms_library_database.LMSLibraryDatabase.query_book_by_publish_date">
+<code class="descname">query_book_by_publish_date</code><span class="sig-paren">(</span><em>publish_date</em><span class="sig-paren">)</span><a class="headerlink" href="#library.common.lms_library_database.LMSLibraryDatabase.query_book_by_publish_date" title="Permalink to this definition">¶</a></dt>
+<dd><p>Queries Database for books that match the given Published Date</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>publish_date</strong> (<em>str</em>) – Published Date of the book</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>returns records with the same Published Date as publish_date</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list (dicts with book details)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="library.common.lms_library_database.LMSLibraryDatabase.query_book_by_title">
+<code class="descname">query_book_by_title</code><span class="sig-paren">(</span><em>title</em><span class="sig-paren">)</span><a class="headerlink" href="#library.common.lms_library_database.LMSLibraryDatabase.query_book_by_title" title="Permalink to this definition">¶</a></dt>
+<dd><p>Queries Database for books that match the given Title</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>title</strong> (<em>str</em>) – Title of the book</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>returns book records with the same Title as title</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list (dicts with book details)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="library.common.lms_library_database.LMSLibraryDatabase.query_borrowed_book">
+<code class="descname">query_borrowed_book</code><span class="sig-paren">(</span><em>book_id</em>, <em>status</em><span class="sig-paren">)</span><a class="headerlink" href="#library.common.lms_library_database.LMSLibraryDatabase.query_borrowed_book" title="Permalink to this definition">¶</a></dt>
+<dd><p>Queries Database for borrowed boook</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>book_id</strong> (<em>str</em>) – Book ID of borrowed book</p></li>
+<li><p><strong>status</strong> (<em>str</em>) – Status of borrowed book</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list of borrowed books with id and satus</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="library.common.lms_library_database.LMSLibraryDatabase.query_borrowed_book_by_user">
+<code class="descname">query_borrowed_book_by_user</code><span class="sig-paren">(</span><em>book_id</em>, <em>status</em>, <em>username</em><span class="sig-paren">)</span><a class="headerlink" href="#library.common.lms_library_database.LMSLibraryDatabase.query_borrowed_book_by_user" title="Permalink to this definition">¶</a></dt>
+<dd><p>Queries Database for borrowed boook by a user</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>book_id</strong> (<em>str</em>) – Book ID of borrowed book</p></li>
+<li><p><strong>status</strong> (<em>str</em>) – Status of borrowed book</p></li>
+<li><p><strong>username</strong> (<em>str</em>) – Username of user who borrowed book</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list of borrowed books with id and satus</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="library.common.lms_library_database.LMSLibraryDatabase.test_connection">
+<code class="descname">test_connection</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#library.common.lms_library_database.LMSLibraryDatabase.test_connection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tests the Database connection</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p>Database Connect Exception</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="library.common.lms_library_database.LMSLibraryDatabase.update_borrowed_book">
+<code class="descname">update_borrowed_book</code><span class="sig-paren">(</span><em>record_id</em>, <em>return_date</em><span class="sig-paren">)</span><a class="headerlink" href="#library.common.lms_library_database.LMSLibraryDatabase.update_borrowed_book" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates borrowed book with return date</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>record_id</strong> (<em>int</em>) – Record ID of borrowed book record</p></li>
+<li><p><strong>due_date</strong> (<em>datetime</em>) – Datetime of when the book is returned</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>no return</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="library.common.lms_library_database.LMSLibraryDatabase.update_user">
+<code class="descname">update_user</code><span class="sig-paren">(</span><em>user</em><span class="sig-paren">)</span><a class="headerlink" href="#library.common.lms_library_database.LMSLibraryDatabase.update_user" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates user into Database</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>user</strong> (<em>dict that conforms with user_schema</em>) – User Dict to enter into Database</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>no return</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-library.common.lms_user_database">
+<span id="lms-user-database"></span><h2>lms_user_database<a class="headerlink" href="#module-library.common.lms_user_database" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="library.common.lms_user_database.LMSUserDatabase">
+<em class="property">class </em><code class="descclassname">library.common.lms_user_database.</code><code class="descname">LMSUserDatabase</code><span class="sig-paren">(</span><em>db</em><span class="sig-paren">)</span><a class="headerlink" href="#library.common.lms_user_database.LMSUserDatabase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class used to access the locally stored user database</p>
+<dl class="simple">
+<dt>db: str</dt><dd><p>The location of the sqlite3 database</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="library.common.lms_user_database.LMSUserDatabase.create_table">
+<code class="descname">create_table</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#library.common.lms_user_database.LMSUserDatabase.create_table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads in the defined schema in the “lms_user.sql” file
+and executes it on the database</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="library.common.lms_user_database.LMSUserDatabase.get_user">
+<code class="descname">get_user</code><span class="sig-paren">(</span><em>credentials</em><span class="sig-paren">)</span><a class="headerlink" href="#library.common.lms_user_database.LMSUserDatabase.get_user" title="Permalink to this definition">¶</a></dt>
+<dd><p>Searches for a user by their username from the database
+and returns the result as a dictionary</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>credentials</strong> (<a class="reference internal" href="reception_pi.html#library.reception.user_credential.UserCredential" title="library.reception.user_credential.UserCredential"><em>UserCredential</em></a>) – an object containing the user’s credentials</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the user details</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="library.common.lms_user_database.LMSUserDatabase.get_user_by_username">
+<code class="descname">get_user_by_username</code><span class="sig-paren">(</span><em>username</em><span class="sig-paren">)</span><a class="headerlink" href="#library.common.lms_user_database.LMSUserDatabase.get_user_by_username" title="Permalink to this definition">¶</a></dt>
+<dd><p>Searches for a user by their username from the database
+and returns the result as a dictionary</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>username</strong> (<em>str</em>) – username string to get</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the user details</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="library.common.lms_user_database.LMSUserDatabase.insert_user">
+<code class="descname">insert_user</code><span class="sig-paren">(</span><em>credentials</em>, <em>first_name</em>, <em>last_name</em>, <em>email</em><span class="sig-paren">)</span><a class="headerlink" href="#library.common.lms_user_database.LMSUserDatabase.insert_user" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inserts a new user record in the users database</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>credentials</strong> – an object containing the user’s crendentials</p></li>
+<li><p><strong>first_name</strong> (<em>str</em>) – the user’s first name</p></li>
+<li><p><strong>last_name</strong> (<em>str</em>) – the user’s last name</p></li>
+<li><p><strong>email</strong> (<em>str</em>) – the user’s email</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="library.common.lms_user_database.LMSUserDatabase.is_username_exists">
+<code class="descname">is_username_exists</code><span class="sig-paren">(</span><em>username</em><span class="sig-paren">)</span><a class="headerlink" href="#library.common.lms_user_database.LMSUserDatabase.is_username_exists" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks against the database whether the given username
+exists in the lms_user table</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>username</strong> (<em>str</em>) – the username to search</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>true if the username exists in the database, false otherwise</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Smart Library</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="code.html">Auto Generated Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="reception_pi.html">Reception Pi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="master_pi.html">Master Pi</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Common</a></li>
+<li class="toctree-l2"><a class="reference internal" href="admin_dashboard.html">Admin DashBoard</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="code.html">Auto Generated Documentation</a><ul>
+      <li>Previous: <a href="master_pi.html" title="previous chapter">Master Pi</a></li>
+      <li>Next: <a href="admin_dashboard.html" title="next chapter">Admin DashBoard</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Russell Menezes, Toan Nguyen, Japan Patel.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.0.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/common.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

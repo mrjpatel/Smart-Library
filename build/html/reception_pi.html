@@ -1,0 +1,513 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Reception Pi &#8212; Smart Library 1.0.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Master Pi" href="master_pi.html" />
+    <link rel="prev" title="Auto Generated Documentation" href="code.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="reception-pi">
+<h1>Reception Pi<a class="headerlink" href="#reception-pi" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-library.reception.reception_pi">
+<span id="id1"></span><h2>reception_pi<a class="headerlink" href="#module-library.reception.reception_pi" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="library.reception.reception_pi.main">
+<code class="descclassname">library.reception.reception_pi.</code><code class="descname">main</code><span class="sig-paren">(</span><em>argv</em><span class="sig-paren">)</span><a class="headerlink" href="#library.reception.reception_pi.main" title="Permalink to this definition">¶</a></dt>
+<dd><p>The main entry point for the Reception Pi</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-library.reception.console_login">
+<span id="console-login"></span><h2>console_login<a class="headerlink" href="#module-library.reception.console_login" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="library.reception.console_login.ConsoleLogin">
+<em class="property">class </em><code class="descclassname">library.reception.console_login.</code><code class="descname">ConsoleLogin</code><span class="sig-paren">(</span><em>user_database</em><span class="sig-paren">)</span><a class="headerlink" href="#library.reception.console_login.ConsoleLogin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class for handling the console log in.
+It is used to to prompt the user for their credentials
+and attempting to authenitcate the user into the system</p>
+<dl class="simple">
+<dt>user_database: str</dt><dd><p>File path to the sqlite3 database</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="library.reception.console_login.ConsoleLogin.connect_to_master_pi">
+<code class="descname">connect_to_master_pi</code><span class="sig-paren">(</span><em>user</em><span class="sig-paren">)</span><a class="headerlink" href="#library.reception.console_login.ConsoleLogin.connect_to_master_pi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Establishes a socket connection to the master pi</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>user</strong> (<em>dict</em>) – The authenticated user</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="library.reception.console_login.ConsoleLogin.get_password">
+<code class="descname">get_password</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#library.reception.console_login.ConsoleLogin.get_password" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prompts and gets the password from the user</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="library.reception.console_login.ConsoleLogin.get_username">
+<code class="descname">get_username</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#library.reception.console_login.ConsoleLogin.get_username" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prompts and gets the username from the user</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="library.reception.console_login.ConsoleLogin.invoke">
+<code class="descname">invoke</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#library.reception.console_login.ConsoleLogin.invoke" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that is called when the user selects the “Log in” option</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="library.reception.console_login.ConsoleLogin.validate_credentials">
+<code class="descname">validate_credentials</code><span class="sig-paren">(</span><em>credentials</em><span class="sig-paren">)</span><a class="headerlink" href="#library.reception.console_login.ConsoleLogin.validate_credentials" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validates the user’s credentials against the database</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>credentials</strong> (<a class="reference internal" href="#library.reception.user_credential.UserCredential" title="library.reception.user_credential.UserCredential"><em>UserCredential</em></a>) – An object containing the user’s credentials</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Whether the credentials are correct</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-library.reception.console_register">
+<span id="console-register"></span><h2>console_register<a class="headerlink" href="#module-library.reception.console_register" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="library.reception.console_register.ConsoleRegister">
+<em class="property">class </em><code class="descclassname">library.reception.console_register.</code><code class="descname">ConsoleRegister</code><span class="sig-paren">(</span><em>user_database</em><span class="sig-paren">)</span><a class="headerlink" href="#library.reception.console_register.ConsoleRegister" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to handle the text based user registration through the console</p>
+<dl class="simple">
+<dt>user_database: str</dt><dd><p>The location of the user database</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="library.reception.console_register.ConsoleRegister.get_email">
+<code class="descname">get_email</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#library.reception.console_register.ConsoleRegister.get_email" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prompt and get the email from the user</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the inputted email</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="library.reception.console_register.ConsoleRegister.get_first_name">
+<code class="descname">get_first_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#library.reception.console_register.ConsoleRegister.get_first_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prompt and get the first name from the user</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the inputted first name</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="library.reception.console_register.ConsoleRegister.get_last_name">
+<code class="descname">get_last_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#library.reception.console_register.ConsoleRegister.get_last_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prompt and get the last name from the user</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the inputted last name</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="library.reception.console_register.ConsoleRegister.get_password">
+<code class="descname">get_password</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#library.reception.console_register.ConsoleRegister.get_password" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prompt and get the password from the user</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The inputted password</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="library.reception.console_register.ConsoleRegister.get_username">
+<code class="descname">get_username</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#library.reception.console_register.ConsoleRegister.get_username" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prompt and gets the username from the user</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The inputted username</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="library.reception.console_register.ConsoleRegister.invoke">
+<code class="descname">invoke</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#library.reception.console_register.ConsoleRegister.invoke" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to invoke the handler if the user selects the register option</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="library.reception.console_register.ConsoleRegister.register_face">
+<code class="descname">register_face</code><span class="sig-paren">(</span><em>username</em><span class="sig-paren">)</span><a class="headerlink" href="#library.reception.console_register.ConsoleRegister.register_face" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prompt and get the toogle to register face</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>username</strong> (<em>str</em>) – The username of user</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-library.reception.face_login">
+<span id="facial-recognition"></span><h2>Facial Recognition<a class="headerlink" href="#module-library.reception.face_login" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="library.reception.face_login.FaceLogin">
+<em class="property">class </em><code class="descclassname">library.reception.face_login.</code><code class="descname">FaceLogin</code><a class="headerlink" href="#library.reception.face_login.FaceLogin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class for recognising user through facial recognition.
+It is used to recognise based on encoded data</p>
+<dl class="method">
+<dt id="library.reception.face_login.FaceLogin.recognise">
+<code class="descname">recognise</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#library.reception.face_login.FaceLogin.recognise" title="Permalink to this definition">¶</a></dt>
+<dd><p>Starts Video stream and checks detected face againist encoded data
+to recognise user through face.
+:return: The reognised user’s username
+:rtype: str</p>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-library.reception.face_registration"></span><dl class="class">
+<dt id="library.reception.face_registration.FaceRegistration">
+<em class="property">class </em><code class="descclassname">library.reception.face_registration.</code><code class="descname">FaceRegistration</code><a class="headerlink" href="#library.reception.face_registration.FaceRegistration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class for handling the face registration.
+It is used to start video stream and capture user images
+and store into a trained dataset directory</p>
+<dl class="method">
+<dt id="library.reception.face_registration.FaceRegistration.register">
+<code class="descname">register</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#library.reception.face_registration.FaceRegistration.register" title="Permalink to this definition">¶</a></dt>
+<dd><p>Registers user’s face.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – username of the user</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Wheter the face was registered</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-library.reception.facial_recognition_controller"></span><dl class="class">
+<dt id="library.reception.facial_recognition_controller.FacialRecognitionController">
+<em class="property">class </em><code class="descclassname">library.reception.facial_recognition_controller.</code><code class="descname">FacialRecognitionController</code><span class="sig-paren">(</span><em>user_database</em><span class="sig-paren">)</span><a class="headerlink" href="#library.reception.facial_recognition_controller.FacialRecognitionController" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class for handling the face log in.
+It is used to start video stream to recognise face
+and attempting to authenitcate the user into the system</p>
+<dl class="simple">
+<dt>user_database: str</dt><dd><p>File path to the sqlite3 database</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="library.reception.facial_recognition_controller.FacialRecognitionController.invoke">
+<code class="descname">invoke</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#library.reception.facial_recognition_controller.FacialRecognitionController.invoke" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that is called when the user selects the
+“Log in with face” option</p>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-library.reception.image_encoding"></span><dl class="class">
+<dt id="library.reception.image_encoding.ImageEncoding">
+<em class="property">class </em><code class="descclassname">library.reception.image_encoding.</code><code class="descname">ImageEncoding</code><a class="headerlink" href="#library.reception.image_encoding.ImageEncoding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class for encoding new images of user.
+It is used to encode images of user and store to encoding file</p>
+<dl class="method">
+<dt id="library.reception.image_encoding.ImageEncoding.encode">
+<code class="descname">encode</code><span class="sig-paren">(</span><em>encoding_file</em><span class="sig-paren">)</span><a class="headerlink" href="#library.reception.image_encoding.ImageEncoding.encode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Encode’s users images
+:param encoding_file: the fike to encode image data to.
+:type encoding_file: str</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-library.reception.aes_cryptography">
+<span id="aes-cryptography"></span><h2>aes_cryptography<a class="headerlink" href="#module-library.reception.aes_cryptography" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="library.reception.aes_cryptography.AESCryptography">
+<em class="property">class </em><code class="descclassname">library.reception.aes_cryptography.</code><code class="descname">AESCryptography</code><a class="headerlink" href="#library.reception.aes_cryptography.AESCryptography" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class is responsible for handling all AES cryptography operations.
+It is used to both encrypt and decrypt payloads.
+The AES 256 key and IV must be stored in environment variables:
+LMS_AES_256_KEY, LMS_AES_256_IV</p>
+<dl class="method">
+<dt id="library.reception.aes_cryptography.AESCryptography.decrypt">
+<code class="descname">decrypt</code><span class="sig-paren">(</span><em>cyphertext</em><span class="sig-paren">)</span><a class="headerlink" href="#library.reception.aes_cryptography.AESCryptography.decrypt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decrypts the cyphertext using the key and IV</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>cyphertext</strong> (<em>byte</em>) – the cyphertext to decrypt</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the decrypted plaintext</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="library.reception.aes_cryptography.AESCryptography.encrypt">
+<code class="descname">encrypt</code><span class="sig-paren">(</span><em>message</em><span class="sig-paren">)</span><a class="headerlink" href="#library.reception.aes_cryptography.AESCryptography.encrypt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Encrypts the message using the key and IV</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>message</strong> (<em>str</em>) – the message to encrypt</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the encrypted cyphertext</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>byte</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="library.reception.aes_cryptography.AESCryptography.get_secret_from_env">
+<em class="property">static </em><code class="descname">get_secret_from_env</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#library.reception.aes_cryptography.AESCryptography.get_secret_from_env" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves the AES 256 key and IV from environment variables:
+LMS_AES_256_KEY, LMS_AES_256_IV</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>tuple containing the key and IV</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-library.reception.user_credential">
+<span id="user-credential"></span><h2>user_credential<a class="headerlink" href="#module-library.reception.user_credential" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="library.reception.user_credential.UserCredential">
+<em class="property">class </em><code class="descclassname">library.reception.user_credential.</code><code class="descname">UserCredential</code><span class="sig-paren">(</span><em>username</em>, <em>password</em><span class="sig-paren">)</span><a class="headerlink" href="#library.reception.user_credential.UserCredential" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class used to store the user’s credentials</p>
+<dl class="simple">
+<dt>username: str</dt><dd><p>The user’s username</p>
+</dd>
+<dt>password: str</dt><dd><p>The user’s password</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="library.reception.user_credential.UserCredential.get_encrypted_password">
+<code class="descname">get_encrypted_password</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#library.reception.user_credential.UserCredential.get_encrypted_password" title="Permalink to this definition">¶</a></dt>
+<dd><p>Encrypts the user’s hashed password</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the cyphertext of the encrypted hashed password</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>byte</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="library.reception.user_credential.UserCredential.is_compare_cyphertext">
+<code class="descname">is_compare_cyphertext</code><span class="sig-paren">(</span><em>cyphertext</em><span class="sig-paren">)</span><a class="headerlink" href="#library.reception.user_credential.UserCredential.is_compare_cyphertext" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decrypts the cyphertext and checks whether
+it matches the hashed password</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>cyphertext</strong> (<em>byte</em>) – the encrpyted cyphertext</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>true if the decrytped plain text matches the hashed password</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-library.reception.qr_scanner">
+<span id="qr-scanner"></span><h2>qr_scanner<a class="headerlink" href="#module-library.reception.qr_scanner" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="library.reception.qr_scanner.QrScanner">
+<em class="property">class </em><code class="descclassname">library.reception.qr_scanner.</code><code class="descname">QrScanner</code><a class="headerlink" href="#library.reception.qr_scanner.QrScanner" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class for scanning the QR codes on the Reception Pi</p>
+<dl class="staticmethod">
+<dt id="library.reception.qr_scanner.QrScanner.get_qr_codes">
+<em class="property">static </em><code class="descname">get_qr_codes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#library.reception.qr_scanner.QrScanner.get_qr_codes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves Data from QR Code.</p>
+<p>This function acitvates the camera and scans for QR codes
+It then inturpates the codes into a list and returns it</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-library.reception.voice_search">
+<span id="voice-search"></span><h2>voice_search<a class="headerlink" href="#module-library.reception.voice_search" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="library.reception.voice_search.VoiceSearch">
+<em class="property">class </em><code class="descclassname">library.reception.voice_search.</code><code class="descname">VoiceSearch</code><a class="headerlink" href="#library.reception.voice_search.VoiceSearch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to handle all speech to text functionality</p>
+<dl class="method">
+<dt id="library.reception.voice_search.VoiceSearch.speech_to_text">
+<code class="descname">speech_to_text</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#library.reception.voice_search.VoiceSearch.speech_to_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets audio from the microphone and hands off to Google
+for audio processing</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the text in the audio if successful, None otherwise</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Smart Library</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="code.html">Auto Generated Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Reception Pi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="master_pi.html">Master Pi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="common.html">Common</a></li>
+<li class="toctree-l2"><a class="reference internal" href="admin_dashboard.html">Admin DashBoard</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="code.html">Auto Generated Documentation</a><ul>
+      <li>Previous: <a href="code.html" title="previous chapter">Auto Generated Documentation</a></li>
+      <li>Next: <a href="master_pi.html" title="next chapter">Master Pi</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Russell Menezes, Toan Nguyen, Japan Patel.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.0.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/reception_pi.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

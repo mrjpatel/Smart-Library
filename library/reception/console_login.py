@@ -1,10 +1,12 @@
+import json
 import socket
 import pickle
-import json
+import subprocess
 
 from library.common.menu_handler import MenuHandler
 from .user_credential import UserCredential
 from .qr_scanner import QrScanner
+from .voice_search import VoiceSearch
 
 
 class ConsoleLogin(MenuHandler):
@@ -16,6 +18,7 @@ class ConsoleLogin(MenuHandler):
     user_database: str
         File path to the sqlite3 database
     """
+
     def __init__(self, user_database):
         """
         :param user_database: database for storing users on reception pi
@@ -82,8 +85,12 @@ class ConsoleLogin(MenuHandler):
         :param user: The authenticated user
         :type user: dict
         """
-        # TODO: remove hardcoded destination
-        dest = ("localhost", 32674)
+        # get master pi ip and port from config
+        with open("socket.json", "r") as f:
+            config = json.load(f)
+        ip = config["master_pi_ip"]
+        port = config["port"]
+        dest = (ip, port)
 
         # remove password from dict
         if "encrypted_password" in user:
@@ -107,6 +114,11 @@ class ConsoleLogin(MenuHandler):
                     s.send(pickle.dumps(data))
                     print("Please continue on Master Pi")
                 if message == "voice":
-                    # TODO: Voice Searching
-                    pass
+                    voice = VoiceSearch()
+                    # clear screen of errors
+                    subprocess.run("clear")
+                    print("\nPrepare to speak")
+                    search_term = voice.speech_to_text()
+                    s.send(pickle.dumps(search_term))
+                    print("Please continue on Master Pi")
             print(logout_message)

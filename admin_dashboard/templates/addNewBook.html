@@ -1,0 +1,89 @@
+{% extends 'bootstrap/base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block title %}Admin Dashboard{% endblock %}
+
+<!-- Navbar -->
+{% block navbar %}
+<nav class="navbar navbar-inverse">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="{{ url_for('site.dashboard') }}">Admin Dashboard</a>
+    </div>
+    <div id="navbar" class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+          <li><a href="{{ url_for('site.dashboard') }}">Home</a></li>
+          <li class="active"><a href="{{ url_for('site.addNewBook') }}">Add Book</a></li>
+          <li><a href="{{ url_for('site.removeExistingBook') }}">Remove Book</a></li>
+          <li><a href="{{ url_for('site.updateExistingBook') }}">Update Book</a></li>
+          <li><a href="{{ url_for('site.report') }}">Library Report</a></li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+          <li><a href="{{ url_for('site.logout') }}">Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <!-- Success Message -->
+  {% for message in get_flashed_messages() %}
+  <div class="alert alert-success">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      {{ message }}
+  </div>
+  {% endfor %}
+
+  <h1>Add New Book </h1>
+  <br>
+
+  <!-- Form-->
+  <form method="POST" role="form">
+      {{ addBookForm.csrf_token }}
+      {{ wtf.form_field(addBookForm.title) }}
+      {{ wtf.form_field(addBookForm.author) }}
+      {{ wtf.form_field(addBookForm.publishedDate) }}
+      <br>
+      <button class="btn btn-lg btn-primary btn-block" type="button" onclick="onAddBook()">Add Book</button>
+  </form>
+
+  <!-- Flask API Request -->
+  <script>
+      function onAddBook() {
+        var addBook = {};
+        addBook.title = document.getElementById('title').value;
+        addBook.author = document.getElementById('author').value;
+        addBook.publishedDate = document.getElementById('publishedDate').value;
+        
+        if (addBook.title != "" && addBook.author != "" && addBook.publishedDate != ""){
+          $.ajax({
+            type: "POST",
+            url: "/addBook",
+            data: JSON.stringify(addBook),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function(response) {
+                location.reload();
+            }
+          });
+        }
+        else{
+          alert("Please fill all required field");
+        }
+      };
+      </script>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+{% endblock %}

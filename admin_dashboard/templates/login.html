@@ -1,0 +1,47 @@
+{% extends 'bootstrap/base.html' %}
+{% block title %}Admin Login{% endblock %}
+{% block navbar %}
+<nav class="navbar navbar-inverse">
+		<div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">LMS - Admin</a>
+    </div>
+  </div>
+</nav>
+
+{% endblock %}
+
+{% block content %}
+<div class="container">
+	<br><br>
+    <h1>Admin Login</h1>
+	<br><br>
+	{% with messages = get_flashed_messages() %}
+		{% if messages %}
+			<div class="alert alert-danger" role="alert">
+					<button type="button" class="close" data-dismiss="alert">&times;</button>
+					{{ messages[0] }}
+			</div>
+		{% endif %}
+	{% endwith %}
+	<br>
+	<form class="form-group row" action='/adminLogin' method="POST">
+		<!-- Username -->
+		<div class="form-group row">
+		  <label class="col-sm-2 col-form-label col-form-label-lg" for="username">Username</label>
+		  <input type="text" class="form-control form-control-lg" id="username" name="username" placeholder="Enter Username">
+		</div>
+		<br>
+		<!-- Password-->
+		<div class="form-group row">
+		  <label class="col-sm-2 col-form-label col-form-label-lg" for="password">Password</label>
+		   <input type="password" class="form-control form-control-lg" id="password" name="password" placeholder="Password">
+		</div>
+		<br>
+		<!-- Login -->
+		<div class="form-group row">
+			<button class="btn btn-primary btn-lg btn-block">Login</button>
+		</div>
+	</form>
+</div>
+{% endblock %}

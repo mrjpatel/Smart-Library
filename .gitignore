@@ -144,3 +144,7 @@ pip-selfcheck.json
 
 # api token
 token.json
+
+#dataset
+*.jpg
+*code-workspace

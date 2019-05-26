@@ -10,6 +10,7 @@ from .console_search_book import ConsoleSearchBook
 from .console_borrow_book import ConsoleBorrowBook
 from .console_return_book import ConsoleReturnBook
 from .console_qr_return import ConsoleQRReturnBook
+from .voice_search_book import VoiceSearchBook
 
 
 class MasterPi:
@@ -26,7 +27,9 @@ class MasterPi:
 
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             # bind to port
-            addr = ("", 32674)
+            with open("socket.json", "r") as f:
+                config = json.load(f)
+            addr = ("", config["port"])
             s.bind(addr)
             s.listen()
             print("Listening on {}:{}...".format(*addr))
@@ -53,6 +56,7 @@ class MasterPi:
                         # define menu handlers
                         menu_handlers = [
                             ConsoleSearchBook(db_details_file, user),
+                            VoiceSearchBook(db_details_file, cc),
                             ConsoleBorrowBook(db_details_file, user),
                             ConsoleReturnBook(db_details_file, user),
                             ConsoleQRReturnBook(db_details_file, user, cc)

@@ -37,7 +37,7 @@ class ConsoleBorrowBook(MenuHandler):
         Function to get user input for borrow book
         """
         print("\nEnter BookID(s) to borrow.")
-        print("\nYou may enter ID's as comma seperated e.g. '1,2': ", end="")
+        print("You may enter ID's as comma seperated e.g. '1,2': ", end="")
         # get option from user, and strip whitespace
         str_input = input().strip()
 

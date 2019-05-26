@@ -131,7 +131,8 @@ class ConsoleRegister(MenuHandler):
         print("Please wait to register your face")
 
         face_register = FaceRegistration()
-        print(face_register.register(username))
+        face_registered = face_register.register(username)
 
-        image_encode = ImageEncoding()
-        image_encode.encode("encodings.pickle")
+        if face_registered:
+            image_encode = ImageEncoding()
+            image_encode.encode("encodings.pickle")

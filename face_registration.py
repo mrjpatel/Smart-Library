@@ -33,7 +33,7 @@ class FaceRegistration:
         while img_counter <= 4:
             key = input("Press e to exit regstration or ENTER to continue: ")
             if key == "e":
-                break
+                return False
 
             ret, frame = cam.read()
             if not ret:
@@ -54,4 +54,5 @@ class FaceRegistration:
                 img_counter += 1
 
         cam.release()
-        return "Successfully! registered face"
+        print("Successfully! Registered face")
+        return True

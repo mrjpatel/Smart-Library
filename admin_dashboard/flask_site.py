@@ -120,7 +120,8 @@ class UpdateBookForm(FlaskForm):
 def updateExistingBook():
     updateBookForm = UpdateBookForm()
     updateBookForm.bookTitle.choices = [
-        (books.BookID, books.Title + " | " + books.author)
+        (books.BookID, books.Title + " | " + books.Author + " | " +
+            (books.PublishedDate).strftime("%d/%m/%y"))
         for books in Book.query.all()]
 
     return render_template(

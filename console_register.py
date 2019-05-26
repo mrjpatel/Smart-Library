@@ -133,6 +133,5 @@ class ConsoleRegister(MenuHandler):
         face_register = FaceRegistration()
         face_registered = face_register.register(username)
 
-        if face_registered:
-            image_encode = ImageEncoding()
-            image_encode.encode("encodings.pickle")
+        image_encode = ImageEncoding()
+        image_encode.encode("encodings.pickle")

@@ -56,11 +56,7 @@ class MasterPi:
                         # define menu handlers
                         menu_handlers = [
                             ConsoleSearchBook(db_details_file, user),
-<<<<<<< HEAD:library/master/master_pi.py
                             VoiceSearchBook(db_details_file, cc),
-=======
-                            VoiceSearchBook(db_details_file),
->>>>>>> Fix conflicts:master_pi.py
                             ConsoleBorrowBook(db_details_file, user),
                             ConsoleReturnBook(db_details_file, user),
                             ConsoleQRReturnBook(db_details_file, user, cc)

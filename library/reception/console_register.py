@@ -140,4 +140,3 @@ class ConsoleRegister(MenuHandler):
 
         image_encode = ImageEncoding()
         image_encode.encode("encodings.pickle")
-

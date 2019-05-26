@@ -124,7 +124,7 @@ class ConsoleRegister(MenuHandler):
 
     def register_face(self, username):
         """
-        Prompt and get the toogle to register face
+        Prompts facial registration module to register face
         :param username: The username of user
         :type username: str
         """

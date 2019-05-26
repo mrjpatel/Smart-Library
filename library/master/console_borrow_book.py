@@ -1,9 +1,9 @@
 from datetime import datetime
 from datetime import timedelta
 
-from lms_library_database import LMSLibraryDatabase
-from menu_handler import MenuHandler
-from google_calander import GoogleCalanderAPI
+from library.common.lms_library_database import LMSLibraryDatabase
+from library.common.menu_handler import MenuHandler
+from .google_calander import GoogleCalanderAPI
 
 
 class ConsoleBorrowBook(MenuHandler):
@@ -36,16 +36,35 @@ class ConsoleBorrowBook(MenuHandler):
         """
         Function to get user input for borrow book
         """
-        print("\nEnter BookID to borrow: ", end="")
+        print("\nEnter BookID(s) to borrow.")
+        print("You may enter ID's as comma seperated e.g. '1,2': ", end="")
         # get option from user, and strip whitespace
         str_input = input().strip()
+
+        # check for blank input
+        if not str_input:
+            print("Invalid Input!")
+            return
+        # split string into list
+        str_list = str_input.split(",")
+        for str_id in str_list:
+            self.start(str_id)
+    
+    def start(self, book_string):
+        """
+        Fuction to borrow a book from the library
+
+        :param book_string: Book ID of the book to borrow
+        :type book_string: str
+        :return: No return
+        """
         # validate input
-        if (not str_input.isdigit()):
+        if (not book_string.isdigit()):
             # input not a number
-            print("{} is not a valid BookID".format(str_input))
+            print("{} is not a valid BookID".format(book_string))
             return
         # input is a number
-        book_id = int(str_input)
+        book_id = int(book_string)
         # check if book exists
         book_item = self.db.query_book_by_id(book_id)
         if not book_item:
@@ -58,7 +77,9 @@ class ConsoleBorrowBook(MenuHandler):
         print("Borrowing {} by {}...".format(book["Title"], book["Author"]))
         # check if book is borrowed
         if self.is_borrowed(book):
-            print("Cannot borrow book, book is currently borrowed!")
+            print("Cannot borrow book, {} is currently borrowed!".format(
+                book_id
+            ))
             return
         self.borrow_book(book)
 
@@ -104,5 +125,8 @@ class ConsoleBorrowBook(MenuHandler):
         )
         print(
             "Successfully borrowed book: " +
-            "{}, Reminder to return sent!".format(book["Title"])
+            "{}, Reminder to return sent to {}!".format(
+                book["BookID"],
+                self.user["email"]
+            )
         )

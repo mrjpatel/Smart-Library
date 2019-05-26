@@ -2,10 +2,10 @@ from datetime import datetime
 from dateutil.parser import parse
 from prettytable import PrettyTable
 
-from lms_library_database import LMSLibraryDatabase
-from menu_handler import MenuHandler
-from console_menu import ConsoleMenu
-from console_borrow_book import ConsoleBorrowBook
+from library.common.lms_library_database import LMSLibraryDatabase
+from library.common.menu_handler import MenuHandler
+from library.common.console_menu import ConsoleMenu
+from .console_borrow_book import ConsoleBorrowBook
 
 
 class ConsoleSearchBook(MenuHandler):
@@ -48,8 +48,7 @@ class ConsoleSearchBook(MenuHandler):
             menu.display_menu()
             is_exit = menu.prompt_and_invoke_option()
 
-    @staticmethod
-    def display_books(results):
+    def display_books(self, results):
         """
         Function to display the books in a table
 
@@ -68,6 +67,7 @@ class ConsoleSearchBook(MenuHandler):
         for result in results:
             table.add_row(result)
         print("\n{}".format(table))
+        self.prompt_borrow_book()
 
     def prompt_borrow_book(self):
         print("Would you like to borrow a book? (y/n): ", end="")
@@ -109,10 +109,9 @@ class SearchByAuthor(MenuHandler):
         if not str_option:
             print("Invalid Input!")
             return
-        ConsoleSearchBook.display_books(
+        self.sbh.display_books(
             self.db.query_book_by_author(str_option)
         )
-        self.sbh.prompt_borrow_book()
 
 
 class SearchByName(MenuHandler):
@@ -147,10 +146,9 @@ class SearchByName(MenuHandler):
         if not str_option:
             print("Invalid Input!")
             return
-        ConsoleSearchBook.display_books(
+        self.sbh.display_books(
             self.db.query_book_by_title(str_option)
         )
-        self.sbh.prompt_borrow_book()
 
 
 class SearchByPublishedDate(MenuHandler):
@@ -185,10 +183,9 @@ class SearchByPublishedDate(MenuHandler):
         # try parse as datetime object
         try:
             publish_date = parse(str_option)
-            ConsoleSearchBook.display_books(
+            self.sbh.display_books(
                 self.db.query_book_by_publish_date(publish_date)
             )
-            self.sbh.prompt_borrow_book()
         except:
             print("Invalid Input!")
             return

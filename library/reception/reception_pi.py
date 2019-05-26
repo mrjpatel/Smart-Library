@@ -2,10 +2,10 @@
 
 import sys
 
-from console_login import ConsoleLogin
-from reception_pi_menu import ReceptionPiMenu
-from console_register import ConsoleRegister
-from facial_recognition_controller import FacialRecognitionController
+from library.common.console_menu import ConsoleMenu
+from .console_login import ConsoleLogin
+from .console_register import ConsoleRegister
+from .facial_recognition_controller import FacialRecognitionController
 
 
 def main(argv):
@@ -28,7 +28,7 @@ def main(argv):
     # display menu, get selection, and run
     is_exit = False
     while not is_exit:
-        menu = ReceptionPiMenu(menu_handlers)
+        menu = ConsoleMenu(menu_handlers, "Welcome to the library!")
         menu.display_menu()
         is_exit = menu.prompt_and_invoke_option()
 

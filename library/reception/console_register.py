@@ -1,8 +1,8 @@
 import re
 
-from user_credential import UserCredential
-from menu_handler import MenuHandler
-from face_registration import FaceRegistration
+from library.common.menu_handler import MenuHandler
+from .user_credential import UserCredential
+from .face_registration import FaceRegistration
 from image_encoding import ImageEncoding
 
 
@@ -48,7 +48,7 @@ class ConsoleRegister(MenuHandler):
         while not is_valid_username:
             print("Username: ", end="")
             username = input().strip()
-            user_regex = re.compile(r"^\w+$")
+            user_regex = re.compile(r"^[A-z0-9]+$")
             is_valid_username = user_regex.match(username) is not None
             if not is_valid_username:
                 print("{} is not a valid username".format(username))
@@ -68,7 +68,7 @@ class ConsoleRegister(MenuHandler):
         while not is_valid_password:
             print("Password: ", end="")
             password = input().strip()
-            pw_regex = re.compile(r"^\w+$")
+            pw_regex = re.compile(r"^[A-z0-9]+$")
             is_valid_password = pw_regex.match(password) is not None
             if not is_valid_password:
                 print("{} is not a valid password".format(password))
@@ -84,7 +84,7 @@ class ConsoleRegister(MenuHandler):
         while not is_valid_first_name:
             print("First Name: ", end="")
             fname = input().strip()
-            fn_regex = re.compile(r"^[A-Za-z]+$")
+            fn_regex = re.compile(r"^[A-z]+$")
             is_valid_first_name = fn_regex.match(fname) is not None
             if not is_valid_first_name:
                 print("{} is not a valid first name".format(fname))
@@ -116,7 +116,7 @@ class ConsoleRegister(MenuHandler):
         while not is_valid_email:
             print("Email: ", end="")
             email = input().strip()
-            email_regex = re.compile(r"^[A-z0-9\.]+@[A-z\.]+[A-z]$")
+            email_regex = re.compile(r"[^@]+@[^\.]+\..+")
             is_valid_email = email_regex.match(email) is not None
             if not is_valid_email:
                 print("{} is not a valid email".format(email))

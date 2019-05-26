@@ -1,9 +1,9 @@
 from datetime import datetime
 from datetime import timedelta
 
-from lms_library_database import LMSLibraryDatabase
-from menu_handler import MenuHandler
-from google_calander import GoogleCalanderAPI
+from library.common.lms_library_database import LMSLibraryDatabase
+from library.common.menu_handler import MenuHandler
+from .google_calander import GoogleCalanderAPI
 
 
 class ConsoleReturnBook(MenuHandler):
@@ -37,28 +37,37 @@ class ConsoleReturnBook(MenuHandler):
         Function that is called to invoke the return book function.
         Gets the user input and validates if it is in a vaild book id format
         """
-        print("\nEnter BookID to return: ", end="")
+        print("\nEnter BookID(s) to Return.")
+        print("You may enter ID's as comma seperated e.g. '1,2': ", end="")
         # get option from user, and strip whitespace
         str_input = input().strip()
-        # validate input
-        if (not str_input.isdigit()):
-            # input not a number
-            print("{} is not a valid BookID".format(str_input))
-            return
-        # input is a number
-        book_id = int(str_input)
-        self.start(book_id)
 
-    def start(self, book_id):
+        # check for blank input
+        if not str_input:
+            print("Invalid Input!")
+            return
+        # split string into list
+        str_list = str_input.split(",")
+        for str_id in str_list:
+            self.start(str_id)
+
+    def start(self, book_string):
         """
         This fuction is responsible for returning a book.
         It takes the book id given by the user and checks if it is borrowed by
         the user and then returns the book, deleting the calander invite
 
-        :param book_id: Book ID of the book to return
-        :type book_id: int
+        :param book_string: Book ID of the book to return
+        :type book_string: str
         :return: No return
         """
+        # validate input
+        if (not book_string.isdigit()):
+            # input not a number
+            print("{} is not a valid BookID".format(book_string))
+            return
+        # input is a number
+        book_id = int(book_string)
         # check if book exists
         book_item = self.db.query_book_by_id(book_id)[0]
         if not book_item:
@@ -115,6 +124,7 @@ class ConsoleReturnBook(MenuHandler):
         """
         # set date return
         today = datetime.now()
+
         # generate event through google calander api
         GoogleCalanderAPI.delete_due_event(
             book_borrowed["EventID"]
@@ -128,3 +138,8 @@ class ConsoleReturnBook(MenuHandler):
             "Successfully Returned book: " +
             "{}, Reminder Deleted!".format(book_borrowed["BookID"])
         )
+        # print if book is being returned after due date
+        if today.date() > book_borrowed["DueDate"]:
+            print("Book was due on {} and is returned Late!".format(
+                book_borrowed["DueDate"]
+            ))

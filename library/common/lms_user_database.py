@@ -1,5 +1,6 @@
 import sqlite3
 
+
 class LMSUserDatabase:
     """
     Class used to access the locally stored user database
@@ -13,7 +14,7 @@ class LMSUserDatabase:
         """
         self.db = db
         self.create_table()
-    
+
     def create_table(self):
         """
         Reads in the defined schema in the "lms_user.sql" file
@@ -26,7 +27,7 @@ class LMSUserDatabase:
         with sqlite3.connect(self.db) as conn:
             c = conn.cursor()
             c.execute(schema)
-    
+
     def insert_user(self, credentials, first_name, last_name, email):
         """
         Inserts a new user record in the users database
@@ -65,7 +66,7 @@ class LMSUserDatabase:
         with sqlite3.connect(self.db) as conn:
             c = conn.cursor()
             c.execute(insert, data)
-    
+
     def get_user(self, credentials):
         """
         Searches for a user by their username from the database
@@ -78,7 +79,7 @@ class LMSUserDatabase:
         # prepare statement
         select = """SELECT * FROM lms_user
                     WHERE username = :username;"""
-        # sanitize inputs    
+        # sanitize inputs
         data = {
             "username": credentials.username,
         }
@@ -102,11 +103,49 @@ class LMSUserDatabase:
             user = {}
             for i, c in enumerate(columns):
                 user[c] = result_set[i]
-                
+
         # validate password
         encrypted_password = user["encrypted_password"]
         is_valid = credentials.is_compare_cyphertext(encrypted_password)
         return user if is_valid else None
+
+    def get_user_by_username(self, username):
+        """
+        Searches for a user by their username from the database
+        and returns the result as a dictionary
+        :param username: username string to get
+        :type username: str
+        :return: the user details
+        :rtype: dict
+        """
+        # prepare statement
+        select = """SELECT * FROM lms_user
+                    WHERE username = :username;"""
+        # sanitize inputs
+        data = {
+            "username": username,
+        }
+        # get matching row
+        with sqlite3.connect(self.db) as conn:
+            c = conn.cursor()
+            result_set = c.execute(select, data).fetchone()
+            if result_set is None:
+                # username not found
+                return None
+
+            # convert to dictionary for easy iteration
+            columns = [
+                "user_id",
+                "username",
+                "encrypted_password",
+                "first_name",
+                "last_name",
+                "email"
+            ]
+            user = {}
+            for i, c in enumerate(columns):
+                user[c] = result_set[i]
+            return user
 
     def is_username_exists(self, username):
         """

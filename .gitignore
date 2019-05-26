@@ -141,5 +141,10 @@ pip-selfcheck.json
 # sqlite3
 *.db
 *.db-journal
+
+# api token
+token.json
+
+#dataset
 *.jpg
 *code-workspace

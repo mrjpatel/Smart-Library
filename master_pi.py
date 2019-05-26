@@ -55,7 +55,11 @@ class MasterPi:
 
                         # define menu handlers
                         menu_handlers = [
+<<<<<<< HEAD
                             ConsoleSearchBook(db_details_file, user),
+=======
+                            ConsoleSearchBook(db_details_file),
+>>>>>>> ccd3efcc5173717de2f96a9296441c98bc4ff448
                             VoiceSearchBook(db_details_file),
                             ConsoleBorrowBook(db_details_file, user),
                             ConsoleReturnBook(db_details_file, user),

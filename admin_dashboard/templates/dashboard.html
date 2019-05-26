@@ -1,0 +1,68 @@
+{% extends 'bootstrap/base.html' %}
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block navbar %}
+<nav class="navbar navbar-inverse">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="{{ url_for('site.dashboard') }}">Admin Dashboard</a>
+		</div>
+		<div id="navbar" class="collapse navbar-collapse">
+			<ul class="nav navbar-nav">
+					<li class="active"><a href="{{ url_for('site.dashboard') }}">Home</a></li>
+					<li><a href="{{ url_for('site.addNewBook') }}">Add Book</a></li>
+					<li><a href="{{ url_for('site.removeExistingBook') }}">Remove Book</a></li>
+					<li><a href="{{ url_for('site.updateExistingBook') }}">Update Book</a></li>
+					<li><a href="{{ url_for('site.report') }}">Library Report</a></li>
+			</ul>
+
+			<ul class="nav navbar-nav navbar-right">
+					<li><a href="{{ url_for('site.logout') }}">Logout</a></li>
+			</ul>
+		</div>
+	</div>
+</nav>
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+	<div class="row">
+		<div class="col-xs-8 col-xs-offset-1">
+			<!-- General Books Statistics -->
+			<h1>
+				Today's Report
+			</h1>
+			<iframe width="600" height="206" src="https://datastudio.google.com/embed/reporting/1xalWozjArXnjN2A1_ad8d64eRI1igC9J/page/Hfjq" frameborder="0" style="border:0" allowfullscreen>
+			</iframe>
+			<hr/>
+			
+			<!-- Borrowed Books -->
+			<h1>
+				Borrowed Books Report
+			</h1>
+			<iframe width="900" height="563" src="https://datastudio.google.com/embed/reporting/1GAkbUbubfd1l4VMmiSm2fKTGPeoOMRsN/page/nbjq" frameborder="0" style="border:0" allowfullscreen>
+			</iframe>
+			<hr/>
+			
+			<!-- Returned Books -->
+			<h1>
+				Returned Books Report
+			</h1>
+			<iframe width="900" height="563" src="https://datastudio.google.com/embed/reporting/1at8hoPcLyAvE-hhFxmgBShJnf_ODSPCt/page/0djq" frameborder="0" style="border:0" allowfullscreen>
+			</iframe>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+{% endblock %}

@@ -37,4 +37,5 @@ app.register_blueprint(api)
 app.register_blueprint(site)
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0")
+    host = os.popen('hostname -I').read()
+    app.run(host=host, port=5000, debug=False)

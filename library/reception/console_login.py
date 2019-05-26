@@ -1,11 +1,12 @@
 import json
 import socket
 import pickle
-import json
+import subprocess
 
 from library.common.menu_handler import MenuHandler
 from .user_credential import UserCredential
 from .qr_scanner import QrScanner
+from .voice_search import VoiceSearch
 
 
 class ConsoleLogin(MenuHandler):
@@ -113,6 +114,11 @@ class ConsoleLogin(MenuHandler):
                     s.send(pickle.dumps(data))
                     print("Please continue on Master Pi")
                 if message == "voice":
-                    # TODO: Voice Searching
-                    pass
+                    voice = VoiceSearch()
+                    # clear screen of errors
+                    subprocess.run("clear")
+                    print("\nPrepare to speak")
+                    search_term = voice.speech_to_text()
+                    s.send(pickle.dumps(search_term))
+                    print("Please continue on Master Pi")
             print(logout_message)
